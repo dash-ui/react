@@ -88,11 +88,11 @@ describe('useGlobal', () => {
   it('sets global styles with a function value', async () => {
     const myStyles = styles.create()
     myStyles.variables({color: {blue: '#09a'}})
-    const {result, unmount, rerender} = renderHookWithProvider(
+    const {unmount, rerender} = renderHookWithProvider(
       () => useGlobal(({color}) => `body { background: ${color.blue}; }`),
       {styles: myStyles}
     )
-    console.log(result.error)
+
     rerender()
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(2)
     expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot(
