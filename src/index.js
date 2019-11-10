@@ -24,12 +24,9 @@ export const useGlobal = value => {
   // in the browser we want useEffect to handle the insertion, but on the
   // server we need this memo because ssr doesn't call useEffect
   useMemo(() => !IS_BROWSER && styles.global(value), [value, styles])
-  useEffect(() => {
-    // inserts global styles in the browser
-    let remove = styles.global(value)
-    // cleans up its global tags on unmount
-    if (remove) return remove
-  }, [value, styles])
+  // inserts global styles in the browser and cleans up its
+  // styles on unmount
+  useEffect(() => styles.global(value), [value, styles])
 }
 
 export const useVariables = () => useDash().variables
