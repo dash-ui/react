@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useContext} from 'react'
-import defaultStyles, {serializeStyles, styleSheet} from '@-ui/styles'
+import defaultStyles from '@-ui/styles'
 
 export const DashContext = React.createContext(defaultStyles)
 export const useDash = () => useStyles().dash
@@ -19,30 +19,18 @@ export const DashProvider = ({
 }
 
 export const useGlobal = value => {
+  const styles = useStyles()
   const dash = useDash()
   // eslint-disable-next-line
-  const sheet = useMemo(() => {
-    let styles = typeof value === 'function' ? value(dash.variables) : value
-    styles = serializeStyles(styles, dash.variables)
-
-    if (styles) {
-      const name = `${dash.hash(styles)}-global`
-      const options = Object.assign({}, dash.sheet, {key: name})
-      const sheet = styleSheet(options)
-      dash.insert('', name, styles, sheet)
-      return sheet
-    }
-  }, [value, dash.sheet, dash.hash])
+  const removeSheet = useMemo(() => styles.global(value), [
+    value,
+    dash.sheet,
+    dash.hash,
+  ])
   // cleans up its global tags on unmount
   useEffect(() => {
-    if (sheet) {
-      const currentSheet = sheet
-      return () => {
-        delete dash.insertCache[currentSheet.key]
-        currentSheet.flush()
-      }
-    }
-  }, [sheet])
+    if (removeSheet) return removeSheet
+  }, [removeSheet])
 }
 
 export const useVariables = () => useDash().variables

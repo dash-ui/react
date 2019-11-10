@@ -1,6 +1,6 @@
 {
   "name": "@-ui/react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -45,7 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@-ui/styles": "^1.0.14",
+    "@-ui/styles": "^1.0.15",
     "@babel/preset-react": "latest",
     "@lunde/babel-preset-es": "latest",
     "@testing-library/jest-dom": "latest",
@@ -70,7 +70,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "@-ui/styles": ">=1.1",
+    "@-ui/styles": ">=1",
     "prop-types": ">= 15.6",
     "react": ">= 16.8"
   }
