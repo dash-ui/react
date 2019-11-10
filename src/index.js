@@ -20,14 +20,7 @@ export const DashProvider = ({
 
 export const useGlobal = value => {
   const styles = useStyles()
-  const dash = useDash()
-  // eslint-disable-next-line
-  const removeSheet = useMemo(() => styles.global(value), [
-    value,
-    dash.sheet,
-    dash.hash,
-  ])
-  // cleans up its global tags on unmount
+  const removeSheet = useMemo(() => styles.global(value), [value, styles])
   useEffect(() => {
     if (removeSheet) return removeSheet
   }, [removeSheet])
