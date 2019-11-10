@@ -19,14 +19,14 @@ export const DashProvider = ({
   return <DashContext.Provider value={styles} children={children} />
 }
 
-export const useGlobal = value => {
+export const useGlobal = (value, deps = [value]) => {
   const styles = useStyles()
   // in the browser we want useEffect to handle the insertion, but on the
   // server we need this memo because ssr doesn't call useEffect
-  useMemo(() => !IS_BROWSER && styles.global(value), [value, styles])
+  useMemo(() => !IS_BROWSER && styles.global(value), [styles].concat(deps))
   // inserts global styles in the browser and cleans up its
   // styles on unmount
-  useEffect(() => styles.global(value), [value, styles])
+  useEffect(() => styles.global(value), [styles].concat(deps))
 }
 
 export const useVariables = () => useDash().variables
