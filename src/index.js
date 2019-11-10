@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useContext} from 'react'
 import defaultStyles from '@-ui/styles'
 
+const IS_BROWSER = typeof document !== 'undefined'
 export const DashContext = React.createContext(defaultStyles)
 export const useDash = () => useStyles().dash
 export const useStyles = () => useContext(DashContext)
@@ -20,10 +21,15 @@ export const DashProvider = ({
 
 export const useGlobal = value => {
   const styles = useStyles()
-  const removeSheet = useMemo(() => styles.global(value), [value, styles])
+  // in the browser we want useEffect to handle the insertion, but on the
+  // server we need this memo because ssr doesn't call useEffect
+  useMemo(() => !IS_BROWSER && styles.global(value), [value, styles])
   useEffect(() => {
-    if (removeSheet) return removeSheet
-  }, [removeSheet])
+    // inserts global styles in the browser
+    let remove = styles.global(value)
+    // cleans up its global tags on unmount
+    if (remove) return remove
+  }, [value, styles])
 }
 
 export const useVariables = () => useDash().variables
