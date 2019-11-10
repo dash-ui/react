@@ -1,8 +1,8 @@
-import React, {useEffect, useMemo, useContext} from 'react'
+import React, {createContext, useEffect, useMemo, useContext} from 'react'
 import defaultStyles from '@-ui/styles'
 
 const IS_BROWSER = typeof document !== 'undefined'
-export const DashContext = React.createContext(defaultStyles)
+export const DashContext = createContext(defaultStyles)
 export const useDash = () => useStyles().dash
 export const useStyles = () => useContext(DashContext)
 export const DashProvider = ({
