@@ -8,7 +8,10 @@ module.exports = {
     path.join(__dirname, 'test'),
   ],
   // moduleNameMapper: {},
-  setupFilesAfterEnv: [require.resolve('./test/setup.js')],
+  setupFilesAfterEnv: [
+    '@testing-library/react-hooks/dont-cleanup-after-each.js',
+    require.resolve('./test/setup.js'),
+  ],
   snapshotResolver: require.resolve('./test/resolve-snapshot.js'),
   collectCoverageFrom: ['**/src/**/*.{js,jsx}'],
   // coverageThreshold: {

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Theme allows additional props and class names: span 1`] = `
+<DocumentFragment>
+  <div
+    class="foo bar dash-light-theme"
+    role="button"
+  />
+</DocumentFragment>
+`;
+
+exports[`Theme renders \`as\` prop: span 1`] = `
+<DocumentFragment>
+  <span
+    class="dash-dark-theme"
+  />
+</DocumentFragment>
+`;
+
+exports[`Theme throws when theme name wasn't found 1`] = `"Theme not found: \\"medium\\""`;
+
+exports[`Theme uses name prop to derive className: span 1`] = `
+<DocumentFragment>
+  <div
+    class="dash-light-theme"
+  />
+</DocumentFragment>
+`;
+
+exports[`useGlobal sets global styles with a function value: global 1`] = `
+<style
+  data-dash="zp25ar-global"
+>
+  
+  body{background:var(--dash-color-blue);}
+</style>
+`;
+
+exports[`useGlobal sets global styles with a function value: variables 1`] = `
+<style
+  data-dash="dash"
+>
+  
+  :root{--dash-color-blue:#09a;}
+</style>
+`;
+
+exports[`useGlobal sets global styles with a string value: :root 1`] = `
+<style
+  data-dash="1vwo4d5-global"
+>
+  
+  :root{--blue:#09a;}
+</style>
+`;
+
+exports[`useVariables provides dash variables via DashProvider 1`] = `
+Object {
+  "blue": "var(--dash-blue)",
+  "red": "var(--dash-red)",
+}
+`;
+
+exports[`useVariables provides dash variables via styles() 1`] = `
+Object {
+  "blue": "var(--dash-blue)",
+  "red": "var(--dash-red)",
+}
+`;

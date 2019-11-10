@@ -1,16 +1,18 @@
 {
   "name": "@-ui/react",
   "version": "1.0.0",
-  "homepage": "https://github.com/ui-js/-ui#readme",
-  "repository": "github:ui-js/-ui",
-  "bugs": "https://github.com/ui-js/-ui/issues",
-  "author": "Jared Lunde <jared@BeStellar.co> (https://jaredLunde.com)",
+  "homepage": "https://github.com/dash-ui/react#readme",
+  "repository": "github:dash-ui/react",
+  "bugs": "https://github.com/dash-ui/react/issues",
+  "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
   "license": "MIT",
-  "description": "",
+  "description": "React components and hooks for @-ui/styles",
   "keywords": [
     "react",
     "react component",
-    "react"
+    "css-in-js",
+    "css-in-react",
+    "dash-ui"
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -43,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@-ui/styles": "^1.0.14",
     "@babel/preset-react": "latest",
     "@lunde/babel-preset-es": "latest",
     "@testing-library/jest-dom": "latest",
@@ -59,11 +62,16 @@
     "jest": "latest",
     "lint-staged": "latest",
     "prettier": "latest",
-    "react": "latest",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
     "react-dom": "latest",
     "react-test-renderer": "latest",
     "rimraf": "^2.6.3"
   },
   "dependencies": {},
-  "peerDependencies": {}
+  "peerDependencies": {
+    "@-ui/styles": ">=1.1",
+    "prop-types": ">= 15.6",
+    "react": ">= 16.8"
+  }
 }
