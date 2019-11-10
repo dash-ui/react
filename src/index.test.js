@@ -106,28 +106,16 @@ describe('useGlobal', () => {
 
   it('handles falsy values', async () => {
     const myStyles = styles.create()
-    renderHookWithProvider(
-      () => useGlobal(false),
-      {styles: myStyles}
-    )
+    renderHookWithProvider(() => useGlobal(false), {styles: myStyles})
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(
-      () => useGlobal(0),
-      {styles: myStyles}
-    )
+    renderHookWithProvider(() => useGlobal(0), {styles: myStyles})
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(
-      () => useGlobal(null),
-      {styles: myStyles}
-    )
+    renderHookWithProvider(() => useGlobal(null), {styles: myStyles})
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(
-      () => useGlobal(''),
-      {styles: myStyles}
-    )
+    renderHookWithProvider(() => useGlobal(''), {styles: myStyles})
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
     await cleanup()
   })
@@ -181,7 +169,7 @@ describe('Theme', () => {
         styles: myStyles,
         themes: {
           dark: {color: {blue: '#09a'}},
-          light: {color: {blue: '#0aa'}}
+          light: {color: {blue: '#0aa'}},
         },
       })
     ).toMatchSnapshot('span')
@@ -194,7 +182,7 @@ describe('Theme', () => {
         styles: myStyles,
         themes: {
           dark: {color: {blue: '#09a'}},
-          light: {color: {blue: '#0aa'}}
+          light: {color: {blue: '#0aa'}},
         },
       })
     ).toMatchSnapshot('span')
@@ -203,11 +191,11 @@ describe('Theme', () => {
   it('allows additional props and class names', () => {
     const myStyles = styles.create()
     expect(
-      renderFragment(<Theme name="light" className='foo bar' role='button'/>, {
+      renderFragment(<Theme name="light" className="foo bar" role="button" />, {
         styles: myStyles,
         themes: {
           dark: {color: {blue: '#09a'}},
-          light: {color: {blue: '#0aa'}}
+          light: {color: {blue: '#0aa'}},
         },
       })
     ).toMatchSnapshot('span')
@@ -222,7 +210,7 @@ describe('Theme', () => {
         styles: myStyles,
         themes: {
           dark: {color: {blue: '#09a'}},
-          light: {color: {blue: '#0aa'}}
+          light: {color: {blue: '#0aa'}},
         },
       })
     }).toThrowErrorMatchingSnapshot()
