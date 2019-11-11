@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useMemo, useContext} from 'react'
 import defaultStyles from '@-ui/styles'
 
-const IS_BROWSER = typeof document !== 'undefined'
+// const IS_BROWSER = typeof document !== 'undefined'
 export const DashContext = createContext(defaultStyles)
 export const useDash = () => useStyles().dash
 export const useStyles = () => useContext(DashContext)
@@ -20,13 +20,11 @@ export const DashProvider = ({
 }
 
 export const useGlobal = (value, deps = [value]) => {
+  // inserts global styles into the dom and cleans up its
+  // styles when the component is unmounted
   const styles = useStyles()
-  // in the browser we want useEffect to handle the insertion, but on the
-  // server we need this memo because ssr doesn't call useEffect
-  useMemo(() => !IS_BROWSER && styles.global(value), [styles].concat(deps))
-  // inserts global styles in the browser and cleans up its
-  // styles on unmount
-  useEffect(() => styles.global(value), [styles].concat(deps))
+  const eject = useMemo(() => styles.global(value), [styles].concat(deps))
+  useEffect(() => eject, [eject])
 }
 
 export const useVariables = () => useDash().variables
