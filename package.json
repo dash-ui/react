@@ -1,6 +1,6 @@
 {
   "name": "@-ui/react",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -77,7 +77,7 @@
     "rollup-plugin-terser": "^5.1.2"
   },
   "dependencies": {
-    "@-ui/styles": "^1.0.26"
+    "@-ui/styles": "^1.0.27"
   },
   "peerDependencies": {
     "prop-types": ">= 15.6",
