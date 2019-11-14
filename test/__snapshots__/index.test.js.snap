@@ -70,33 +70,6 @@ exports[`Theme uses name prop to derive className: span 1`] = `
 </DocumentFragment>
 `;
 
-exports[`useGlobal sets global styles with a function value: global 1`] = `
-<style
-  data-dash="dash"
->
-  
-  body{background:var(--dash-color-blue);}
-</style>
-`;
-
-exports[`useGlobal sets global styles with a function value: variables 1`] = `
-<style
-  data-dash="dash"
->
-  
-  :root{--dash-color-blue:#09a;}
-</style>
-`;
-
-exports[`useGlobal sets global styles with a string value: :root 1`] = `
-<style
-  data-dash="dash"
->
-  
-  :root{--blue:#09a;}
-</style>
-`;
-
 exports[`useVariables provides dash variables via DashProvider 1`] = `
 Object {
   "blue": "var(--dash-blue)",

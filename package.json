@@ -1,6 +1,6 @@
 {
   "name": "@-ui/react",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -24,9 +24,10 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "npm run build:cjs && npm run build:es && npm run build:umd",
+    "build": "npm run build:cjs && npm run build:es && npm run build:umd && npm run build:server",
     "build:cjs": "babel src -d dist/cjs -x .js --ignore \"**/*.test.js\",\"**/test.js\" --delete-dir-on-start",
     "build:es": "cross-env BABEL_ENV=es babel src -d dist/es -x .js --ignore \"**/*.test.js\",\"**/test.js\" --delete-dir-on-start",
+    "build:server": "babel server-src -d server -x .js --ignore \"**/*.test.js\",\"**/test.js\" --delete-dir-on-start",
     "build:umd": "rollup -c",
     "format": "prettier --write \"**/*.{js,jsx,md,yml,json,babelrc,eslintrc,prettierrc}\"",
     "lint": "eslint .",
@@ -78,7 +79,7 @@
     "rollup-plugin-terser": "^5.1.2"
   },
   "dependencies": {
-    "@-ui/styles": "^1.0.34"
+    "@-ui/styles": "^1.0.35"
   },
   "peerDependencies": {
     "prop-types": ">= 15.6",

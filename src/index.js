@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useMemo, useContext} from 'react'
+import React, {createContext, useMemo, useContext} from 'react'
 import defaultStyles, {normalizeStyles} from '@-ui/styles'
 
 // const IS_BROWSER = typeof document !== 'undefined'
@@ -14,13 +14,12 @@ export const DashProvider = ({
   useMemo(() => {
     variables && styles.variables(variables)
     themes && styles.themes(themes)
-  }, [variables, themes])
+  }, [styles, variables, themes])
 
   return <DashContext.Provider value={styles} children={children} />
 }
 
 export const Global = ({css}) => {
-  // this pattern is necessary for server rendering
   const dash = useDash()
   const variables = useVariables()
   css = typeof css === 'function' ? css(variables) : css
@@ -35,20 +34,13 @@ export const Global = ({css}) => {
   )
 }
 
-export const useGlobal = (value, deps = [value]) => {
-  // inserts global styles into the dom and cleans up its
-  // styles when the component is unmounted
-  const styles = useStyles()
-  const eject = useMemo(() => styles.global(value), [styles].concat(deps))
-  useEffect(() => eject, [eject])
-}
-
 export const useVariables = () => useDash().variables
 
 export const Theme = ({as = 'div', name, children, className, ...props}) => {
   const styles = useStyles()
+  const themes = useDash().themes
+
   if (__DEV__) {
-    const themes = useDash().themes
     if (themes[name] === void 0) throw new Error(`Theme not found: "${name}"`)
   }
   const themeClass = styles.theme(name)
