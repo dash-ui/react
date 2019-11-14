@@ -1,5 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Global doesn't write falsy css callback 1`] = `<DocumentFragment />`;
+
+exports[`Global writes css 1`] = `
+<DocumentFragment>
+  <style
+    data-dash="1abu38z-global"
+  >
+    display:block;
+  </style>
+</DocumentFragment>
+`;
+
+exports[`Global writes css callback 1`] = `
+<DocumentFragment>
+  <style
+    data-dash="1saj6jl-global"
+  >
+    color:var(--dash-black);
+  </style>
+</DocumentFragment>
+`;
+
+exports[`Global writes css object 1`] = `
+<DocumentFragment>
+  <style
+    data-dash="1abu38z-global"
+  >
+    display:block;
+  </style>
+</DocumentFragment>
+`;
+
+exports[`Global writes css w/ nonce 1`] = `
+<DocumentFragment>
+  <style
+    data-dash="1abu38z-global"
+    nonce="E8gagwlWEGlgwel"
+  >
+    display:block;
+  </style>
+</DocumentFragment>
+`;
+
 exports[`Theme allows additional props and class names: span 1`] = `
 <DocumentFragment>
   <div

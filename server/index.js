@@ -1,3 +1,3 @@
 'use strict'
 
-exports = require('@-ui/styles/server')
+module.exports = require('@-ui/styles/server')

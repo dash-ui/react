@@ -6,6 +6,7 @@ import styles from '@-ui/styles'
 import {
   DashProvider,
   Theme,
+  Global,
   useStyles,
   useDash,
   useGlobal,
@@ -64,6 +65,63 @@ describe('useDash', () => {
     const myStyles = styles.create()
     const {result} = renderHookWithProvider(() => useDash(), {styles: myStyles})
     expect(result.current).toBe(myStyles.dash)
+  })
+})
+
+describe('Global', () => {
+  afterEach(cleanup)
+
+  it('writes css', () => {
+    expect(
+      renderFragment(
+        <Global
+          css={`
+            display: block;
+          `}
+        />,
+        {styles}
+      )
+    ).toMatchSnapshot()
+  })
+
+  it('writes css w/ nonce', () => {
+    const myStyles = styles.create({nonce: 'E8gagwlWEGlgwel'})
+    expect(
+      renderFragment(
+        <Global
+          css={`
+            display: block;
+          `}
+        />,
+        {styles: myStyles}
+      )
+    ).toMatchSnapshot()
+  })
+
+  it('writes css object', () => {
+    expect(
+      renderFragment(<Global css={{display: 'block'}} />, {styles})
+    ).toMatchSnapshot()
+  })
+
+  it('writes css callback', () => {
+    const myStyles = styles.create()
+    myStyles.variables({black: '#0y00'})
+    expect(
+      renderFragment(<Global css={vars => `color: ${vars.black};`} />, {
+        styles: myStyles,
+      })
+    ).toMatchSnapshot()
+  })
+
+  it(`doesn't write falsy css callback`, () => {
+    const myStyles = styles.create()
+    myStyles.variables({black: '#000'})
+    expect(
+      renderFragment(<Global css={''} />, {
+        styles: myStyles,
+      })
+    ).toMatchSnapshot()
   })
 })
 

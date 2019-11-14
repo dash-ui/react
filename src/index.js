@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useMemo, useContext} from 'react'
-import defaultStyles from '@-ui/styles'
+import defaultStyles, {normalizeStyles} from '@-ui/styles'
 
 // const IS_BROWSER = typeof document !== 'undefined'
 export const DashContext = createContext(defaultStyles)
@@ -17,6 +17,22 @@ export const DashProvider = ({
   }, [variables, themes])
 
   return <DashContext.Provider value={styles} children={children} />
+}
+
+export const Global = ({css}) => {
+  // this pattern is necessary for server rendering
+  const dash = useDash()
+  const variables = useVariables()
+  css = typeof css === 'function' ? css(variables) : css
+  const styles = normalizeStyles(css, dash.variables)
+  if (!styles) return null
+  return (
+    <style
+      nonce={dash.sheet.nonce ? dash.sheet.nonce : void 0}
+      {...{[`data-${dash.key}`]: `${dash.hash(styles)}-global`}}
+      dangerouslySetInnerHTML={{__html: styles}}
+    />
+  )
 }
 
 export const useGlobal = (value, deps = [value]) => {
@@ -56,5 +72,13 @@ if (__DEV__) {
     as: PropTypes.elementType,
     name: PropTypes.string.isRequired,
     className: PropTypes.string,
+  }
+
+  Global.propTypes = {
+    css: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+      PropTypes.func,
+    ]).isRequired,
   }
 }
