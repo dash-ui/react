@@ -1,10 +1,10 @@
 import React from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
 import defaultStyles from '@-ui/styles'
-import {createStylesFromString} from '../../styles/server'
+import {createStylesFromString} from '@-ui/styles/server'
 export * from '@-ui/styles/server'
 
-export const toComponent = (string, styles = defaultStyles, options = {}) => {
+export const toComponent = (string, styles = defaultStyles, options) => {
   const {dash} = styles
   const {names, css} = createStylesFromString(string, styles, options)
   return React.createElement('style', {

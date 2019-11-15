@@ -8,12 +8,10 @@ module.exports = {
     path.join(__dirname, 'test'),
   ],
   // moduleNameMapper: {},
-  setupFilesAfterEnv: [
-    '@testing-library/react-hooks/dont-cleanup-after-each.js',
-    require.resolve('./test/setup.js'),
-  ],
+  setupFilesAfterEnv: [require.resolve('./test/setup.js')],
   snapshotResolver: require.resolve('./test/resolve-snapshot.js'),
-  collectCoverageFrom: ['**/src/**/*.{js,jsx}'],
+  collectCoverageFrom: ['**/src/**/*.js'],
+  // collectCoverageFrom: ['**/{src,server-src}/**/*.js'],
   // coverageThreshold: {
   //   global: {
   //     statements:17,
@@ -25,4 +23,5 @@ module.exports = {
   globals: {
     __DEV__: true,
   },
+  verbose: true,
 }

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Style> renders a style tag 1`] = `
+<Style
+  html="
+    <div class=dash-1ut9bc3>
+      <div class=dash-1i986zm>
+        Hello
+      </div>
+    </div>
+  "
+  styles={[Function]}
+/>
+`;
