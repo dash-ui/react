@@ -10,7 +10,8 @@ export const toComponent = (string, styles = defaultStyles, options) => {
   return React.createElement('style', {
     key: dash.key,
     nonce: dash.sheet.nonce ? dash.sheet.nonce : void 0,
-    [`data-${dash.key}`]: names.join(' '),
+    [`data-dash`]: names.join(' '),
+    [`data-cache`]: dash.key,
     dangerouslySetInnerHTML: {__html: css},
   })
 }
