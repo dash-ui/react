@@ -5,6 +5,7 @@ exports[`Global doesn't write falsy css callback 1`] = `<DocumentFragment />`;
 exports[`Global writes css 1`] = `
 <DocumentFragment>
   <style
+    data-cache="dash"
     data-dash="1abu38z-global"
   >
     display:block;
@@ -15,6 +16,7 @@ exports[`Global writes css 1`] = `
 exports[`Global writes css callback 1`] = `
 <DocumentFragment>
   <style
+    data-cache="dash"
     data-dash="1saj6jl-global"
   >
     color:var(--dash-black);
@@ -25,6 +27,7 @@ exports[`Global writes css callback 1`] = `
 exports[`Global writes css object 1`] = `
 <DocumentFragment>
   <style
+    data-cache="dash"
     data-dash="1abu38z-global"
   >
     display:block;
@@ -35,6 +38,7 @@ exports[`Global writes css object 1`] = `
 exports[`Global writes css w/ nonce 1`] = `
 <DocumentFragment>
   <style
+    data-cache="dash"
     data-dash="1abu38z-global"
     nonce="E8gagwlWEGlgwel"
   >

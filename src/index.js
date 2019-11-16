@@ -21,17 +21,18 @@ export const DashProvider = ({
 
 export const Global = ({css}) => {
   const dash = useDash()
-  const variables = useVariables()
-  css = typeof css === 'function' ? css(variables) : css
-  const styles = normalizeStyles(css, dash.variables)
-  if (!styles) return null
-  return (
-    <style
-      nonce={dash.sheet.nonce ? dash.sheet.nonce : void 0}
-      {...{[`data-${dash.key}`]: `${dash.hash(styles)}-global`}}
-      dangerouslySetInnerHTML={{__html: styles}}
-    />
+  const styles = normalizeStyles(
+    typeof css === 'function' ? css(useVariables()) : css,
+    dash.variables
   )
+  return !styles
+    ? null
+    : React.createElement('style', {
+        dangerouslySetInnerHTML: {__html: styles},
+        nonce: dash.sheet.nonce ? dash.sheet.nonce : void 0,
+        'data-dash': `${dash.hash(styles)}-global`,
+        'data-cache': dash.key,
+      })
 }
 
 export const useVariables = () => useDash().variables
