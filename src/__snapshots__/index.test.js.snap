@@ -5,7 +5,7 @@ exports[`Global doesn't write falsy css callback 1`] = `<DocumentFragment />`;
 exports[`Global writes css 1`] = `
 <DocumentFragment>
   <style
-    data-cache="dash"
+    data-cache="-ui"
     data-dash="1abu38z-global"
   >
     display:block;
@@ -16,10 +16,10 @@ exports[`Global writes css 1`] = `
 exports[`Global writes css callback 1`] = `
 <DocumentFragment>
   <style
-    data-cache="dash"
-    data-dash="1saj6jl-global"
+    data-cache="-ui"
+    data-dash="1d3rnff-global"
   >
-    color:var(--dash-black);
+    color:var(--ui-black);
   </style>
 </DocumentFragment>
 `;
@@ -27,7 +27,7 @@ exports[`Global writes css callback 1`] = `
 exports[`Global writes css object 1`] = `
 <DocumentFragment>
   <style
-    data-cache="dash"
+    data-cache="-ui"
     data-dash="1abu38z-global"
   >
     display:block;
@@ -38,7 +38,7 @@ exports[`Global writes css object 1`] = `
 exports[`Global writes css w/ nonce 1`] = `
 <DocumentFragment>
   <style
-    data-cache="dash"
+    data-cache="-ui"
     data-dash="1abu38z-global"
     nonce="E8gagwlWEGlgwel"
   >
@@ -50,7 +50,7 @@ exports[`Global writes css w/ nonce 1`] = `
 exports[`Theme allows additional props and class names: span 1`] = `
 <DocumentFragment>
   <div
-    class="foo bar dash-light-theme"
+    class="foo bar -ui-light-theme"
     role="button"
   />
 </DocumentFragment>
@@ -59,7 +59,7 @@ exports[`Theme allows additional props and class names: span 1`] = `
 exports[`Theme renders \`as\` prop: span 1`] = `
 <DocumentFragment>
   <span
-    class="dash-dark-theme"
+    class="-ui-dark-theme"
   />
 </DocumentFragment>
 `;
@@ -69,21 +69,21 @@ exports[`Theme throws when theme name wasn't found 1`] = `"Theme not found: \\"m
 exports[`Theme uses name prop to derive className: span 1`] = `
 <DocumentFragment>
   <div
-    class="dash-light-theme"
+    class="-ui-light-theme"
   />
 </DocumentFragment>
 `;
 
 exports[`useVariables provides dash variables via DashProvider 1`] = `
 Object {
-  "blue": "var(--dash-blue)",
-  "red": "var(--dash-red)",
+  "blue": "var(--ui-blue)",
+  "red": "var(--ui-red)",
 }
 `;
 
 exports[`useVariables provides dash variables via styles() 1`] = `
 Object {
-  "blue": "var(--dash-blue)",
-  "red": "var(--dash-red)",
+  "blue": "var(--ui-blue)",
+  "red": "var(--ui-red)",
 }
 `;
