@@ -1,4 +1,4 @@
-import React, {createContext, useMemo, useContext} from 'react'
+import React, {createContext, useMemo, useEffect, useContext} from 'react'
 import defaultStyles, {normalizeStyles} from '@-ui/styles'
 
 // const IS_BROWSER = typeof document !== 'undefined'
@@ -33,6 +33,14 @@ export const Global = ({css}) => {
         'data-dash': `${dash.hash(styles)}-global`,
         'data-cache': dash.key,
       })
+}
+
+export const useGlobal = (value, deps = [value]) => {
+  // inserts global styles into the dom and cleans up its
+  // styles when the component is unmounted
+  const styles = useStyles()
+  const eject = useMemo(() => styles.global(value), [styles].concat(deps))
+  useEffect(() => eject, [eject])
 }
 
 export const useVariables = () => useDash().variables

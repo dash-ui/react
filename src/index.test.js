@@ -9,6 +9,7 @@ import {
   Global,
   useStyles,
   useDash,
+  useGlobal,
   useVariables,
 } from 'index'
 
@@ -121,6 +122,62 @@ describe('Global', () => {
         styles: myStyles,
       })
     ).toMatchSnapshot()
+  })
+})
+
+describe('useGlobal', () => {
+  it('sets global styles with a string value', async () => {
+    const myStyles = styles.create()
+    const {unmount, rerender} = renderHookWithProvider(
+      () => useGlobal(`:root { --blue: #09a; }`),
+      {styles: myStyles}
+    )
+
+    rerender()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(1)
+    expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot(
+      ':root'
+    )
+    unmount()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
+    await cleanup()
+  })
+
+  it('sets global styles with a function value', async () => {
+    const myStyles = styles.create()
+    myStyles.variables({color: {blue: '#09a'}})
+    const {unmount, rerender} = renderHookWithProvider(
+      () => useGlobal(({color}) => `body { background: ${color.blue}; }`),
+      {styles: myStyles}
+    )
+
+    rerender()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(2)
+    expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot(
+      'variables'
+    )
+    expect(document.querySelectorAll(`style[data-dash]`)[1]).toMatchSnapshot(
+      'global'
+    )
+    unmount()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(1)
+    await cleanup()
+  })
+
+  it('handles falsy values', async () => {
+    const myStyles = styles.create()
+    renderHookWithProvider(() => useGlobal(false), {styles: myStyles})
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
+
+    renderHookWithProvider(() => useGlobal(0), {styles: myStyles})
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
+
+    renderHookWithProvider(() => useGlobal(null), {styles: myStyles})
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
+
+    renderHookWithProvider(() => useGlobal(''), {styles: myStyles})
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
+    await cleanup()
   })
 })
 
