@@ -35,7 +35,7 @@ export const Global = ({css}) => {
       })
 }
 
-export const useGlobal = (value, deps = [value]) => {
+export const useGlobal = (value, deps = value) => {
   // inserts global styles into the dom and cleans up its
   // styles when the component is unmounted
   const styles = useStyles()
