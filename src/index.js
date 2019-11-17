@@ -22,7 +22,7 @@ export const DashProvider = ({
 export const Global = ({css}) => {
   const dash = useDash()
   const styles = normalizeStyles(
-    typeof css === 'function' ? css(useVariables()) : css,
+    typeof css === 'function' ? css(dash.variables) : css,
     dash.variables
   )
   return !styles
