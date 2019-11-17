@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@-ui/styles@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.0.39.tgz#01f81b4c88af2719a2f9566786aead32b2e38dab"
-  integrity sha512-+PEGA85Vrt0m6YteyAypnY4D4OE+wqTV23jAh1gRQJdvJLutLd3ce588NrHMhR6oYvpTFojXwv+2oVckKuVtwg==
+"@-ui/styles@^1.0.40":
+  version "1.0.40"
+  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.0.40.tgz#42bce402a11f31b49675ff0ba291bb64e95750f1"
+  integrity sha512-71HgUWhxLBUeXkhVjwime6miJbmOml9CCiLck8DEeLyhKju6AS+5d7H0VASz5+iWBYm+6ObWoGYf2dqqTU3v2A==
   dependencies:
     "@emotion/stylis" "^0.8.4"
     "@emotion/unitless" "^0.7.4"
