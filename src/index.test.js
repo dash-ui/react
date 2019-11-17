@@ -6,7 +6,7 @@ import styles from '@-ui/styles'
 import {
   DashProvider,
   Theme,
-  Global,
+  Inline,
   useStyles,
   useDash,
   useGlobal,
@@ -68,13 +68,13 @@ describe('useDash', () => {
   })
 })
 
-describe('Global', () => {
+describe('Inline', () => {
   afterEach(cleanup)
 
   it('writes css', () => {
     expect(
       renderFragment(
-        <Global
+        <Inline
           css={`
             display: block;
           `}
@@ -88,7 +88,7 @@ describe('Global', () => {
     const myStyles = styles.create({nonce: 'E8gagwlWEGlgwel'})
     expect(
       renderFragment(
-        <Global
+        <Inline
           css={`
             display: block;
           `}
@@ -100,7 +100,7 @@ describe('Global', () => {
 
   it('writes css object', () => {
     expect(
-      renderFragment(<Global css={{display: 'block'}} />, {styles})
+      renderFragment(<Inline css={{display: 'block'}} />, {styles})
     ).toMatchSnapshot()
   })
 
@@ -108,7 +108,7 @@ describe('Global', () => {
     const myStyles = styles.create()
     myStyles.variables({black: '#0y00'})
     expect(
-      renderFragment(<Global css={vars => `color: ${vars.black};`} />, {
+      renderFragment(<Inline css={vars => `color: ${vars.black};`} />, {
         styles: myStyles,
       })
     ).toMatchSnapshot()
@@ -118,7 +118,7 @@ describe('Global', () => {
     const myStyles = styles.create()
     myStyles.variables({black: '#000'})
     expect(
-      renderFragment(<Global css={''} />, {
+      renderFragment(<Inline css={''} />, {
         styles: myStyles,
       })
     ).toMatchSnapshot()

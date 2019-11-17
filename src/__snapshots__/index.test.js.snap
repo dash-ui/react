@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global doesn't write falsy css callback 1`] = `<DocumentFragment />`;
+exports[`Inline doesn't write falsy css callback 1`] = `<DocumentFragment />`;
 
-exports[`Global writes css 1`] = `
+exports[`Inline writes css 1`] = `
 <DocumentFragment>
   <style
     data-cache="-ui"
@@ -13,7 +13,7 @@ exports[`Global writes css 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Global writes css callback 1`] = `
+exports[`Inline writes css callback 1`] = `
 <DocumentFragment>
   <style
     data-cache="-ui"
@@ -24,7 +24,7 @@ exports[`Global writes css callback 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Global writes css object 1`] = `
+exports[`Inline writes css object 1`] = `
 <DocumentFragment>
   <style
     data-cache="-ui"
@@ -35,7 +35,7 @@ exports[`Global writes css object 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Global writes css w/ nonce 1`] = `
+exports[`Inline writes css w/ nonce 1`] = `
 <DocumentFragment>
   <style
     data-cache="-ui"

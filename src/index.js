@@ -19,7 +19,7 @@ export const DashProvider = ({
   return <DashContext.Provider value={styles} children={children} />
 }
 
-export const Global = ({css}) => {
+export const Inline = ({css}) => {
   const dash = useDash()
   const styles = normalizeStyles(
     typeof css === 'function' ? css(dash.variables) : css,
@@ -75,7 +75,7 @@ if (__DEV__) {
     className: PropTypes.string,
   }
 
-  Global.propTypes = {
+  Inline.propTypes = {
     css: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string,
