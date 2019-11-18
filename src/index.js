@@ -11,10 +11,21 @@ export const DashProvider = ({
   themes,
   children,
 }) => {
-  useMemo(() => {
-    variables && styles.variables(variables)
+  const [ejectVariables, ejectTheme] = useMemo(() => [
+    variables && styles.variables(variables),
     themes && styles.themes(themes)
-  }, [styles, variables, themes])
+  ], [styles, variables, themes])
+
+  useEffect(() => {
+    const current = [ejectVariables, ejectTheme]
+    const currentThemes = themes
+    return () => {
+      current[0]?.()
+      if (currentThemes) {
+        for (let name in currentThemes) current[1](name)
+      }
+    }
+  }, [ejectVariables, ejectTheme])
 
   return <DashContext.Provider value={styles} children={children} />
 }
