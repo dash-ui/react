@@ -5,11 +5,10 @@ import {render as renderComponent} from '@testing-library/react'
 import styles from '@-ui/styles'
 import {
   DashProvider,
-  Theme,
   Inline,
-  useStyles,
   useDash,
   useGlobal,
+  useThemes,
   useVariables,
 } from 'index'
 
@@ -35,36 +34,21 @@ describe('DashProvider', () => {
   afterEach(cleanup)
 
   it('provides the default styles() configuration', () => {
-    const {result} = renderHookWithProvider(() => useStyles())
+    const {result} = renderHookWithProvider(() => useDash())
     expect(result.current).toBe(styles)
   })
 
   it('provides a custom styles() configuration', () => {
     const myStyles = styles.create()
-    const {result} = renderHookWithProvider(() => useStyles(), {
-      styles: myStyles,
+    const {result} = renderHookWithProvider(() => useDash(), {
+      dash: myStyles,
     })
     expect(result.current).toBe(myStyles)
   })
 
   it('works without a provider', () => {
-    const {result} = renderHookWithoutProvider(() => useStyles())
+    const {result} = renderHookWithoutProvider(() => useDash())
     expect(result.current).toBe(styles)
-  })
-})
-
-describe('useDash', () => {
-  afterEach(cleanup)
-
-  it('provides default dash context', () => {
-    const {result} = renderHookWithProvider(() => useDash(), {styles})
-    expect(result.current).toBe(styles.dash)
-  })
-
-  it('provides custom dash context', () => {
-    const myStyles = styles.create()
-    const {result} = renderHookWithProvider(() => useDash(), {styles: myStyles})
-    expect(result.current).toBe(myStyles.dash)
   })
 })
 
@@ -93,7 +77,7 @@ describe('Inline', () => {
             display: block;
           `}
         />,
-        {styles: myStyles}
+        {dash: myStyles}
       )
     ).toMatchSnapshot()
   })
@@ -109,7 +93,7 @@ describe('Inline', () => {
     myStyles.variables({black: '#0y00'})
     expect(
       renderFragment(<Inline css={vars => `color: ${vars.black};`} />, {
-        styles: myStyles,
+        dash: myStyles,
       })
     ).toMatchSnapshot()
   })
@@ -119,7 +103,7 @@ describe('Inline', () => {
     myStyles.variables({black: '#000'})
     expect(
       renderFragment(<Inline css={''} />, {
-        styles: myStyles,
+        dash: myStyles,
       })
     ).toMatchSnapshot()
   })
@@ -130,7 +114,7 @@ describe('useGlobal', () => {
     const myStyles = styles.create()
     const {unmount, rerender} = renderHookWithProvider(
       () => useGlobal(`:root { --blue: #09a; }`),
-      {styles: myStyles}
+      {dash: myStyles}
     )
 
     rerender()
@@ -148,7 +132,7 @@ describe('useGlobal', () => {
     myStyles.variables({color: {blue: '#09a'}})
     const {unmount, rerender} = renderHookWithProvider(
       () => useGlobal(({color}) => `body { background: ${color.blue}; }`),
-      {styles: myStyles}
+      {dash: myStyles}
     )
 
     rerender()
@@ -166,16 +150,16 @@ describe('useGlobal', () => {
 
   it('handles falsy values', async () => {
     const myStyles = styles.create()
-    renderHookWithProvider(() => useGlobal(false), {styles: myStyles})
+    renderHookWithProvider(() => useGlobal(false), {dash: myStyles})
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(() => useGlobal(0), {styles: myStyles})
+    renderHookWithProvider(() => useGlobal(0), {dash: myStyles})
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(() => useGlobal(null), {styles: myStyles})
+    renderHookWithProvider(() => useGlobal(null), {dash: myStyles})
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(() => useGlobal(''), {styles: myStyles})
+    renderHookWithProvider(() => useGlobal(''), {dash: myStyles})
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
     await cleanup()
   })
@@ -184,96 +168,48 @@ describe('useGlobal', () => {
 describe('useVariables', () => {
   afterEach(cleanup)
 
-  it('provides dash variables via DashProvider', () => {
+  it('adds variables then cleans up', async () => {
     const myStyles = styles.create()
+    const {unmount, rerender} = renderHookWithProvider(
+      () => useVariables({blue: '#09a'}),
+      {dash: myStyles}
+    )
 
-    const {result} = renderHookWithProvider(() => useVariables(), {
-      styles: myStyles,
-      variables: {
-        blue: '#09a',
-      },
-      themes: {
-        default: {
-          red: '#c12',
-        },
-      },
-    })
-
-    expect(result.current).toMatchSnapshot()
-  })
-
-  it('provides dash variables via styles()', () => {
-    const myStyles = styles.create()
-    myStyles.variables({
-      blue: '#09a',
-    })
-    myStyles.themes({
-      default: {
-        red: '#c12',
-      },
-    })
-    const {result} = renderHookWithProvider(() => useVariables(), {
-      styles: myStyles,
-    })
-    expect(result.current).toMatchSnapshot()
+    rerender()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(1)
+    expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot(
+      ':root'
+    )
+    unmount()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
+    await cleanup()
   })
 })
 
-describe('Theme', () => {
+describe('useThemes', () => {
   afterEach(cleanup)
 
-  it('renders `as` prop', () => {
+  it('adds variables then cleans up', async () => {
     const myStyles = styles.create()
-    expect(
-      renderFragment(<Theme as="span" name="dark" />, {
-        styles: myStyles,
-        themes: {
-          dark: {color: {blue: '#09a'}},
-          light: {color: {blue: '#0aa'}},
-        },
-      })
-    ).toMatchSnapshot('span')
-  })
+    const {unmount, rerender} = renderHookWithProvider(
+      () =>
+        useThemes({
+          dark: {
+            bg: '#000',
+          },
+          light: {
+            bg: '#fff',
+          },
+        }),
+      {dash: myStyles}
+    )
 
-  it('uses name prop to derive className', () => {
-    const myStyles = styles.create()
-    expect(
-      renderFragment(<Theme name="light" />, {
-        styles: myStyles,
-        themes: {
-          dark: {color: {blue: '#09a'}},
-          light: {color: {blue: '#0aa'}},
-        },
-      })
-    ).toMatchSnapshot('span')
-  })
-
-  it('allows additional props and class names', () => {
-    const myStyles = styles.create()
-    expect(
-      renderFragment(<Theme name="light" className="foo bar" role="button" />, {
-        styles: myStyles,
-        themes: {
-          dark: {color: {blue: '#09a'}},
-          light: {color: {blue: '#0aa'}},
-        },
-      })
-    ).toMatchSnapshot('span')
-  })
-
-  it(`throws when theme name wasn't found`, () => {
-    const originalError = console.error
-    console.error = () => {}
-    const myStyles = styles.create()
-    expect(() => {
-      renderFragment(<Theme name="medium" />, {
-        styles: myStyles,
-        themes: {
-          dark: {color: {blue: '#09a'}},
-          light: {color: {blue: '#0aa'}},
-        },
-      })
-    }).toThrowErrorMatchingSnapshot()
-    console.error = originalError
+    rerender()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(2)
+    expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot()
+    expect(document.querySelectorAll(`style[data-dash]`)[1]).toMatchSnapshot()
+    unmount()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
+    await cleanup()
   })
 })

@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@-ui/styles@^1.0.42":
-  version "1.0.42"
-  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.0.42.tgz#6d0ec197f39600b4277021503be626d0782299d8"
-  integrity sha512-DrpeYCO6BJhXcW1uQoiLNwW9D8OKfe7W6nOB8z3w0a5RqUiQDKjUx6Lt5WgXNkp17hVoPN5NLXuxdkgq+ySx1Q==
+"@-ui/styles@^1.0.44":
+  version "1.0.44"
+  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.0.44.tgz#930c7572a6765b94a3943e4de91d148ba3a2f27f"
+  integrity sha512-bH5GRi2mB/6ilvk2LskQMfZstYZ01puJynzDBzDHoX8a6qJJ0UVAYZb3PvwJy6EjMXKi5rPjBnI+5DM8Hvy0Mg==
   dependencies:
     "@emotion/stylis" "^0.8.4"
     "@emotion/unitless" "^0.7.4"
@@ -5946,6 +5946,11 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
+
+use-memo-one@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/use-memo-one/-/use-memo-one-1.1.1.tgz#39e6f08fe27e422a7d7b234b5f9056af313bd22c"
+  integrity sha512-oFfsyun+bP7RX8X2AskHNTxu+R3QdE/RC5IefMbqptmACAA/gfol1KDD5KRzPsGMa62sWxGZw+Ui43u6x4ddoQ==
 
 use@^3.1.0:
   version "3.1.1"

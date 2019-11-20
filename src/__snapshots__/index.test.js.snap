@@ -17,9 +17,9 @@ exports[`Inline writes css callback 1`] = `
 <DocumentFragment>
   <style
     data-cache="-ui"
-    data-dash="1d3rnff-global"
+    data-dash="18nnvke-global"
   >
-    color:var(--ui-black);
+    color:var(--black);
   </style>
 </DocumentFragment>
 `;
@@ -47,39 +47,12 @@ exports[`Inline writes css w/ nonce 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Theme allows additional props and class names: span 1`] = `
-<DocumentFragment>
-  <div
-    class="foo bar -ui-light-theme"
-    role="button"
-  />
-</DocumentFragment>
-`;
-
-exports[`Theme renders \`as\` prop: span 1`] = `
-<DocumentFragment>
-  <span
-    class="-ui-dark-theme"
-  />
-</DocumentFragment>
-`;
-
-exports[`Theme throws when theme name wasn't found 1`] = `"Theme not found: \\"medium\\""`;
-
-exports[`Theme uses name prop to derive className: span 1`] = `
-<DocumentFragment>
-  <div
-    class="-ui-light-theme"
-  />
-</DocumentFragment>
-`;
-
 exports[`useGlobal sets global styles with a function value: global 1`] = `
 <style
   data-dash="-ui"
 >
   
-  body{background:var(--ui-color-blue);}
+  body{background:var(--color-blue);}
 </style>
 `;
 
@@ -88,7 +61,7 @@ exports[`useGlobal sets global styles with a function value: variables 1`] = `
   data-dash="-ui"
 >
   
-  :root{--ui-color-blue:#09a;}
+  :root{--color-blue:#09a;}
 </style>
 `;
 
@@ -101,16 +74,29 @@ exports[`useGlobal sets global styles with a string value: :root 1`] = `
 </style>
 `;
 
-exports[`useVariables provides dash variables via DashProvider 1`] = `
-Object {
-  "blue": "var(--ui-blue)",
-  "red": "var(--ui-red)",
-}
+exports[`useThemes adds variables then cleans up 1`] = `
+<style
+  data-dash="-ui"
+>
+  
+  .-ui-dark-theme{--bg:#000;}
+</style>
 `;
 
-exports[`useVariables provides dash variables via styles() 1`] = `
-Object {
-  "blue": "var(--ui-blue)",
-  "red": "var(--ui-red)",
-}
+exports[`useThemes adds variables then cleans up 2`] = `
+<style
+  data-dash="-ui"
+>
+  
+  .-ui-light-theme{--bg:#fff;}
+</style>
+`;
+
+exports[`useVariables adds variables then cleans up: :root 1`] = `
+<style
+  data-dash="-ui"
+>
+  
+  :root{--blue:#09a;}
+</style>
 `;
