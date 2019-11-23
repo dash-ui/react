@@ -4,11 +4,12 @@
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
-  "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
   "license": "MIT",
-  "description": "React components and hooks for @-ui/styles",
+  "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
+  "description": "React components and hooks for -ui",
   "keywords": [
     "react",
+    "react hook",
     "react component",
     "css-in-js",
     "css-in-react",
@@ -24,24 +25,26 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "npm run build:cjs && npm run build:es && npm run build:umd && npm run build:server",
-    "build:cjs": "babel src -d dist/cjs -x .js --ignore \"**/*.test.js\",\"**/test.js\" --delete-dir-on-start",
-    "build:es": "cross-env BABEL_ENV=es babel src -d dist/es -x .js --ignore \"**/*.test.js\",\"**/test.js\" --delete-dir-on-start",
-    "build:server": "babel server-src -d server -x .js --ignore \"**/*.test.js\",\"**/test.js\" --delete-dir-on-start",
+    "build": "npm run build:cjs && npm run build:es && npm run build:server && npm run build:umd && npm run build:types",
+    "build:cjs": "babel src -d dist/cjs -x .ts,.tsx --ignore \"**/*.test.ts\",\"**/*.test.tsx\",\"**/*.d.ts\" --delete-dir-on-start",
+    "build:es": "cross-env BABEL_ENV=es babel src -d dist/es -x .ts,.tsx --ignore \"**/*.test.ts\",\"**/*.test.tsx\",\"**/*.d.ts\" --delete-dir-on-start",
+    "build:server": "babel server-src -d server -x .ts,.tsx --ignore \"**/*.test.tsx\",\"**/*.test.tsx\" --delete-dir-on-start",
     "build:umd": "rollup -c",
-    "format": "prettier --write \"**/*.{js,jsx,md,yml,json,babelrc,eslintrc,prettierrc}\"",
-    "lint": "eslint .",
+    "build:types": "tsc -p tsconfig.json -d --outDir dist/es --emitDeclarationOnly && mkdir -p dist/cjs && cp -R dist/es/**.d.ts dist/cjs && tsc -p tsconfig.server.json -d --outDir server --emitDeclarationOnly && rimraf {dist,server}/**/*.test.d.ts",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,yml,json,babelrc,eslintrc,prettierrc}\"",
+    "lint": "eslint . --ext .ts,.tsx",
     "prepublishOnly": "npm run lint && npm run test && npm run build && npm run format",
     "test": "jest",
-    "validate": "npm run lint && npm run test -- --coverage"
+    "validate": "npm run check-types && npm run build:cjs && npm run lint && npm run test -- --coverage"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && npm run build:types"
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx}": [
+    "**/*.{ts,tsx,js,jsx}": [
       "eslint",
       "prettier --write"
     ],
@@ -52,10 +55,16 @@
   "devDependencies": {
     "@babel/preset-react": "latest",
     "@lunde/babel-preset-es": "latest",
+    "@rollup/plugin-replace": "^2.2.1",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "latest",
     "@testing-library/react-hooks": "latest",
-    "babel-eslint": "latest",
+    "@types/jest": "latest",
+    "@types/jsdom": "^12.2.4",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
     "cross-env": "latest",
     "eslint": "latest",
     "eslint-import-resolver-jest": "latest",
@@ -66,24 +75,23 @@
     "jest": "latest",
     "lint-staged": "latest",
     "prettier": "latest",
-    "prop-types": "^15.7.2",
-    "react": "^16.11.0",
+    "react": "latest",
     "react-dom": "latest",
     "react-test-renderer": "latest",
     "rimraf": "^2.6.3",
-    "rollup": "^1.26.4",
+    "rollup": "^1.27.3",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-terser": "^5.1.2"
+    "rollup-plugin-terser": "^5.1.2",
+    "ts-jest": "latest",
+    "typescript": "latest"
   },
   "dependencies": {
-    "@-ui/styles": "^1.0.44",
-    "use-memo-one": "^1.1.1"
+    "@-ui/styles": "^1.0.48"
   },
   "peerDependencies": {
-    "prop-types": ">= 15.6",
-    "react": ">= 16.8"
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
   }
 }

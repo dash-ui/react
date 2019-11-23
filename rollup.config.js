@@ -1,5 +1,5 @@
 import babel from 'rollup-plugin-babel'
-import replace from 'rollup-plugin-replace'
+import replace from '@rollup/plugin-replace'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import {terser} from 'rollup-plugin-terser'
@@ -7,7 +7,7 @@ import pkg from './package.json'
 
 process.env.BABEL_ENV = 'umd'
 const config = (filename, env, plugins = []) => ({
-  input: 'src/index.js',
+  input: 'src/index.tsx',
   output: {
     file: filename,
     format: 'umd',
@@ -20,7 +20,7 @@ const config = (filename, env, plugins = []) => ({
   external: ['react'],
   plugins: [
     resolve(),
-    babel(),
+    babel({extensions: ['.ts', '.tsx']}),
     commonjs(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),

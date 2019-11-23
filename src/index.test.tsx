@@ -10,7 +10,7 @@ import {
   useGlobal,
   useThemes,
   useVariables,
-} from 'index'
+} from './index'
 
 afterEach(() => {
   document.getElementsByTagName('html')[0].innerHTML = ''
@@ -21,7 +21,7 @@ const renderHookWithProvider = (children, props = {}) =>
     wrapper: ({children}) => <DashProvider {...props} children={children} />,
   })
 
-const renderHookWithoutProvider = (children = null, ...options) =>
+const renderHookWithoutProvider = (children = null, options = {}) =>
   renderHook(children, {...options})
 
 const renderFragment = (children = null, props = {}, options = {}) =>
