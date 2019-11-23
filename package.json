@@ -26,9 +26,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "npm run build:cjs && npm run build:es && npm run build:server && npm run build:umd && npm run build:types",
-    "build:cjs": "babel src -d dist/cjs -x .ts,.tsx --ignore \"**/*.test.ts\",\"**/*.test.tsx\",\"**/*.d.ts\" --delete-dir-on-start",
-    "build:es": "cross-env BABEL_ENV=es babel src -d dist/es -x .ts,.tsx --ignore \"**/*.test.ts\",\"**/*.test.tsx\",\"**/*.d.ts\" --delete-dir-on-start",
-    "build:server": "babel server-src -d server -x .ts,.tsx --ignore \"**/*.test.tsx\",\"**/*.test.tsx\" --delete-dir-on-start",
+    "build:cjs": "babel src -d dist/cjs -x .ts,.tsx --env-name cjs --ignore \"**/*.test.ts\",\"**/*.test.tsx\",\"**/*.d.ts\" --delete-dir-on-start",
+    "build:es": "babel src -d dist/es -x .ts,.tsx --env-name es --ignore \"**/*.test.ts\",\"**/*.test.tsx\",\"**/*.d.ts\" --delete-dir-on-start",
+    "build:server": "babel server-src -d server -x .ts,.tsx --env-name cjs --ignore \"**/*.test.tsx\",\"**/*.test.tsx\" --delete-dir-on-start",
     "build:umd": "rollup -c",
     "build:types": "tsc -p tsconfig.json -d --outDir dist/es --emitDeclarationOnly && mkdir -p dist/cjs && cp -R dist/es/**.d.ts dist/cjs && tsc -p tsconfig.server.json -d --outDir server --emitDeclarationOnly && rimraf {dist,server}/**/*.test.d.ts",
     "check-types": "tsc --noEmit -p tsconfig.json",
@@ -88,7 +88,7 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@-ui/styles": "^1.0.48"
+    "@-ui/styles": "^1.0.49"
   },
   "peerDependencies": {
     "react": ">=16.8",
