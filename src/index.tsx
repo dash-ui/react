@@ -68,8 +68,9 @@ export const Inline: React.FC<InlineProps> = ({css}): ReactElement => {
     : React.createElement('style', {
         dangerouslySetInnerHTML: {__html: styles},
         nonce: dash.sheet.nonce ? dash.sheet.nonce : void 0,
-        'data-dash': `${dash.hash(styles)}-global`,
-        'data-cache': dash.key,
+        // We don't want data-cache, data-dash props here because
+        // we don't want this to be moved into the head of the document
+        // during SSR hydration
       })
 }
 

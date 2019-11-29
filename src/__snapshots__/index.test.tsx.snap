@@ -4,10 +4,7 @@ exports[`Inline doesn't write falsy css callback 1`] = `<DocumentFragment />`;
 
 exports[`Inline writes css 1`] = `
 <DocumentFragment>
-  <style
-    data-cache="-ui"
-    data-dash="1abu38z-global"
-  >
+  <style>
     display:block;
   </style>
 </DocumentFragment>
@@ -15,10 +12,7 @@ exports[`Inline writes css 1`] = `
 
 exports[`Inline writes css callback 1`] = `
 <DocumentFragment>
-  <style
-    data-cache="-ui"
-    data-dash="18nnvke-global"
-  >
+  <style>
     color:var(--black);
   </style>
 </DocumentFragment>
@@ -26,10 +20,7 @@ exports[`Inline writes css callback 1`] = `
 
 exports[`Inline writes css object 1`] = `
 <DocumentFragment>
-  <style
-    data-cache="-ui"
-    data-dash="1abu38z-global"
-  >
+  <style>
     display:block;
   </style>
 </DocumentFragment>
@@ -38,8 +29,6 @@ exports[`Inline writes css object 1`] = `
 exports[`Inline writes css w/ nonce 1`] = `
 <DocumentFragment>
   <style
-    data-cache="-ui"
-    data-dash="1abu38z-global"
     nonce="E8gagwlWEGlgwel"
   >
     display:block;
