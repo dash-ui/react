@@ -1,5 +1,5 @@
 /* jest */
-import React from 'react'
+import * as React from 'react'
 import {renderHook, cleanup} from '@testing-library/react-hooks'
 import {render as renderComponent} from '@testing-library/react'
 import styles from '@-ui/styles'
