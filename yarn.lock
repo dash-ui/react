@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-"@-ui/styles@^1.0.49":
-  version "1.0.49"
-  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.0.49.tgz#e45872a8965bfba13491e0cf70eaecaa2383979d"
-  integrity sha512-ZY5fFAd/PLimgBajkoUiJh8OHi2tfLg4QIk/uZcN+jCTK3Y0+wMNCCC42CcKcEtAvOsOnOEqHUqkvUUgv5arLw==
+"@-ui/styles@^1.0.50":
+  version "1.0.50"
+  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.0.50.tgz#a51a1ea10a82c8f035bb38c4bca61ebcd6e68eba"
+  integrity sha512-beM1LuMUJnkF2kYd/Mjj91D/o39X6h26Kv9URGkr1dFdor3f3Wp0mqkhwCZ6xi6TXvKHCybsmny5STW0rUrhrA==
   dependencies:
     "@emotion/stylis" "^0.8.4"
     "@emotion/unitless" "^0.7.4"
-    trie-memoize "^1.0.15"
+    trie-memoize "^1.0.16"
 
 "@babel/cli@latest":
   version "7.7.0"
@@ -3363,13 +3363,6 @@ is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   dependencies:
     isobject "^3.0.1"
 
-is-plain-object@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-3.0.0.tgz#47bfc5da1b5d50d64110806c199359482e75a928"
-  integrity sha512-tZIpofR+P05k8Aocp7UI/2UTa9lTJSebCXpFFoR9aibpokDj/uXBsJ8luUu0tTVYKkMU6URDUuOfJZ7koewXvg==
-  dependencies:
-    isobject "^4.0.0"
-
 is-promise@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
@@ -3447,11 +3440,6 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
-
-isobject@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/isobject/-/isobject-4.0.0.tgz#3f1c9155e73b192022a80819bacd0343711697b0"
-  integrity sha512-S/2fF5wH8SJA/kmwr6HYhK/RI/OkhD84k8ntalo0iJjZikgq1XFvR5M8NPT1x5F7fBwCG3qHfnzeP/Vh/ZxCUA==
 
 isstream@~0.1.2:
   version "0.1.2"
@@ -5929,12 +5917,10 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-trie-memoize@^1.0.15:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/trie-memoize/-/trie-memoize-1.0.15.tgz#8ec37ef35e6a97b1d17ea187e149f7a1f4357c99"
-  integrity sha512-E7tizcEO4fGHB8qfSQqsDt3bujphHF/wwGq+4/zEo7tc1iVQT7BavLvg+n8+8FXTdtnonkKIPyq7KN4C6oj6sg==
-  dependencies:
-    is-plain-object "^3.0.0"
+trie-memoize@^1.0.16:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/trie-memoize/-/trie-memoize-1.0.19.tgz#f2be8cb86e1ba5e4b65a2653b8c84a5b6e5c49ed"
+  integrity sha512-06htp1U35e9BNruPW24dIOyZJ271NBpjktX9wWi+c/zIkJvrt/VjTBEMTttHw5GloXxi7RG6oc7YoQ59caE3EQ==
 
 ts-jest@latest:
   version "24.2.0"
