@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react'
+import * as React from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
 import defaultStyles, {Styles} from '@-ui/styles'
 import {createStylesFromString, CreateStylesOptions} from '@-ui/styles/server'
@@ -8,7 +8,7 @@ export const toComponent = (
   html: string,
   styles: Styles = defaultStyles,
   options?: CreateStylesOptions
-): ReactElement => {
+): React.ReactElement => {
   const {dash} = styles
   const {names, css} = createStylesFromString(html, styles, options)
   return React.createElement('style', {
