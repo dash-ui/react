@@ -1,6 +1,6 @@
 {
   "name": "@-ui/react",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -17,6 +17,7 @@
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
+  "types": "dist/cjs/index.d.ts",
   "umd:main": "dist/umd/-ui-react.min.js",
   "unpkg": "dist/umd/-ui-react.min.js",
   "files": [
@@ -88,7 +89,7 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@-ui/styles": "^1.0.50"
+    "@-ui/styles": "^1.0.51"
   },
   "peerDependencies": {
     "react": ">=16.8",
