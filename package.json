@@ -1,6 +1,6 @@
 {
   "name": "@-ui/react",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -89,7 +89,7 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@-ui/styles": "^1.0.51"
+    "@-ui/styles": "^1.0.53"
   },
   "peerDependencies": {
     "react": ">=16.8",
