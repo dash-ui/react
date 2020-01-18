@@ -76,10 +76,17 @@ export const Inline: React.FC<InlineProps> = ({css}): ReactElement => {
 
 const noop = (): void => {}
 
-export const useGlobal = (
-  value: string | StyleGetter | StyleObject | null | 0 | undefined | false,
+export function useGlobal<Vars = any>(
+  value:
+    | string
+    | StyleGetter<Vars>
+    | StyleObject
+    | null
+    | 0
+    | undefined
+    | false,
   deps: any | any[] = value
-): void => {
+): void {
   // inserts global styles into the dom and cleans up its
   // styles when the component is unmounted
   const styles = useDash()
@@ -88,20 +95,20 @@ export const useGlobal = (
   useMemo(() => !IS_BROWSER && value && styles.global(value), deps)
 }
 
-export const useVariables = (
-  value: Variables | null | 0 | undefined | false,
+export function useVariables<Vars = any>(
+  value: Vars | null | 0 | undefined | false,
   deps: any | any[] = value
-): void => {
+): void {
   const styles = useDash()
   deps = [styles].concat(deps)
   useEffect(() => (value ? styles.variables(value) : noop), deps)
   useMemo(() => !IS_BROWSER && value && styles.variables(value), deps)
 }
 
-export const useThemes = (
-  value: Themes | null | 0 | undefined | false,
+export function useThemes<ThemeNames extends string = any, Vars = any>(
+  value: Themes<ThemeNames, Vars> | null | 0 | undefined | false,
   deps: any | any[] = value
-): void => {
+): void {
   const styles = useDash()
   deps = [styles].concat(deps)
   useEffect(() => (value ? styles.themes(value) : noop), deps)

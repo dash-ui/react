@@ -1,6 +1,6 @@
 {
   "name": "@-ui/react",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -54,27 +54,27 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-react": "latest",
+    "@babel/preset-react": "^7.8.3",
     "@lunde/babel-preset-es": "latest",
     "@rollup/plugin-replace": "^2.2.1",
-    "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
+    "@testing-library/jest-dom": "^5.0.0",
+    "@testing-library/react": "^9.4.0",
     "@testing-library/react-hooks": "latest",
-    "@types/jest": "latest",
+    "@types/jest": "^24.9.0",
     "@types/jsdom": "^12.2.4",
-    "@types/react": "latest",
+    "@types/react": "^16.9.17",
     "@types/react-dom": "latest",
-    "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest",
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
     "cross-env": "latest",
-    "eslint": "latest",
+    "eslint": "^6.8.0",
     "eslint-import-resolver-jest": "latest",
-    "eslint-plugin-jest": "latest",
-    "eslint-plugin-react": "latest",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "latest",
-    "husky": "latest",
+    "husky": "^4.0.10",
     "jest": "latest",
-    "lint-staged": "latest",
+    "lint-staged": "^9.5.0",
     "prettier": "latest",
     "react": "latest",
     "react-dom": "latest",
@@ -85,11 +85,11 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
-    "ts-jest": "latest",
-    "typescript": "latest"
+    "ts-jest": "^24.3.0",
+    "typescript": "^3.7.5"
   },
   "dependencies": {
-    "@-ui/styles": "^1.0.53"
+    "@-ui/styles": "^1.0.55"
   },
   "peerDependencies": {
     "react": ">=16.8",

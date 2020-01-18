@@ -128,10 +128,16 @@ describe('useGlobal', () => {
   })
 
   it('sets global styles with a function value', async () => {
-    const myStyles = styles.create()
+    type CSSVariables = {
+      color: {blue: string}
+    }
+    const myStyles = styles.create<CSSVariables>()
     myStyles.variables({color: {blue: '#09a'}})
     const {unmount, rerender} = renderHookWithProvider(
-      () => useGlobal(({color}) => `body { background: ${color.blue}; }`),
+      () =>
+        useGlobal<CSSVariables>(
+          ({color}) => `body { background: ${color.blue}; }`
+        ),
       {dash: myStyles}
     )
 
@@ -169,9 +175,12 @@ describe('useVariables', () => {
   afterEach(cleanup)
 
   it('adds variables then cleans up', async () => {
-    const myStyles = styles.create()
+    type CSSVariables = {
+      blue: string
+    }
+    const myStyles = styles.create<CSSVariables>()
     const {unmount, rerender} = renderHookWithProvider(
-      () => useVariables({blue: '#09a'}),
+      () => useVariables<CSSVariables>({blue: '#09a'}),
       {dash: myStyles}
     )
 
@@ -190,10 +199,13 @@ describe('useThemes', () => {
   afterEach(cleanup)
 
   it('adds variables then cleans up', async () => {
+    type CSSVariables = {
+      bg: string
+    }
     const myStyles = styles.create()
     const {unmount, rerender} = renderHookWithProvider(
       () =>
-        useThemes({
+        useThemes<'dark' | 'light', CSSVariables>({
           dark: {
             bg: '#000',
           },
