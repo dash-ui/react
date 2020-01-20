@@ -202,10 +202,10 @@ describe('useThemes', () => {
     type CSSVariables = {
       bg: string
     }
-    const myStyles = styles.create()
+
     const {unmount, rerender} = renderHookWithProvider(
       () =>
-        useThemes<'dark' | 'light', CSSVariables>({
+        useThemes<'light' | 'dark', CSSVariables>({
           dark: {
             bg: '#000',
           },
@@ -213,7 +213,7 @@ describe('useThemes', () => {
             bg: '#fff',
           },
         }),
-      {dash: myStyles}
+      {dash: styles.create()}
     )
 
     rerender()

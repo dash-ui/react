@@ -89,7 +89,7 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "@-ui/styles": "^1.0.55"
+    "@-ui/styles": "^1.0.58"
   },
   "peerDependencies": {
     "react": ">=16.8",
