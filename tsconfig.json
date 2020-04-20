@@ -1,11 +1,6 @@
 {
-  "include": ["src"],
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/**/test.ts",
-    "src/**/*.test.tsx",
-    "src/**/test.tsx"
-  ],
+  "include": ["src", "server/src"],
+  "exclude": ["src/**/*.test.ts", "server/src/**/*.test.ts"],
   "compilerOptions": {
     "target": "es5",
     "lib": ["esnext", "dom", "dom.iterable"],
@@ -18,6 +13,11 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true,
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "baseUrl": ".",
+    "paths": {
+      "@-ui/react": ["."],
+      "@-ui/react/server": ["./server"]
+    }
   }
 }

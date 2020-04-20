@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-"@-ui/styles@^1.0.58":
-  version "1.0.58"
-  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.0.58.tgz#0c571767d222ca56dd99ec37fabe78ba56f75cde"
-  integrity sha512-A0rwFuwmoanTz0gfB2+orfcKVy074smNnIBOVSwT66hKI340zE4jz6PReQ2g9XHY5lu/36kEcfCDN5+FpvWcQg==
+"@-ui/styles@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.1.1.tgz#03f86e7040d3f46dd61243aef766768eb53ad108"
+  integrity sha512-EzLqI2PyuOQ5ZiP8kdVDcfv7haE9CO9HC6iMtWWjDX+4ic6gLD8bUS4WcxfD0q8GO/kOVDWGnsXoDlJvQRK5iw==
   dependencies:
-    "@emotion/stylis" "^0.8.4"
-    "@emotion/unitless" "^0.7.4"
-    trie-memoize "^1.1.0"
+    "@emotion/stylis" "^0.8.5"
+    "@emotion/unitless" "^0.7.5"
+    trie-memoize "^1.1.2"
 
 "@babel/cli@latest":
   version "7.8.3"
@@ -816,13 +816,15 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@emotion/stylis@^0.8.4":
+"@emotion/stylis@^0.8.5":
   version "0.8.5"
   resolved "https://registry.yarnpkg.com/@emotion/stylis/-/stylis-0.8.5.tgz#deacb389bd6ee77d1e7fcaccce9e16c5c7e78e04"
+  integrity sha512-h6KtPihKFn3T9fuIrwvXXUOwlx3rfUvfZIcP5a6rh8Y7zjE3O06hT5Ss4S/YI1AYhuZ1kjaE/5EaOOI2NqSylQ==
 
-"@emotion/unitless@^0.7.4":
+"@emotion/unitless@^0.7.5":
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
+  integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
@@ -1510,6 +1512,11 @@ babel-plugin-macros@latest:
     "@babel/runtime" "^7.7.2"
     cosmiconfig "^6.0.0"
     resolve "^1.12.0"
+
+babel-plugin-optimize-react@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-optimize-react/-/babel-plugin-optimize-react-0.0.4.tgz#6326ac8f0f77e3fa3e8195b4d998287d47877c65"
+  integrity sha512-I3o7GW66dIpXraND0ZAYXEDQ/wOiuefUQqn1PZZcub2flREANb2NXejL52iTMUWtKM++lu5OasVtZewn+WvkNg==
 
 babel-preset-jest@^24.9.0:
   version "24.9.0"
@@ -5009,9 +5016,10 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-trie-memoize@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/trie-memoize/-/trie-memoize-1.1.0.tgz#2244ac75701b93585fc8c4a1a2f85ca132d4b5f3"
+trie-memoize@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/trie-memoize/-/trie-memoize-1.1.2.tgz#94ad8ff5b288819b62fd6f29eade2c84af435721"
+  integrity sha512-I9tAnQCriR/qd9ab4h+fUBOAa9qy2FlDOvKbPsbsj4n9+GdszyHVOSg/slUQFhAp80G7y+ze1sln37x7E/7GHA==
 
 ts-jest@^24.3.0:
   version "24.3.0"

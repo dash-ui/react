@@ -1,7 +1,0 @@
-{
-  "name": "@-ui/react-server",
-  "private": true,
-  "main": "index.js",
-  "types": "index.d.ts",
-  "license": "MIT"
-}

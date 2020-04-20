@@ -1,0 +1,17 @@
+{
+  "name": "@-ui/react-server",
+  "version": "1.0.0",
+  "homepage": "https://github.com/dash-ui/react/tree/master/server#readme",
+  "repository": "github:dash-ui/react",
+  "bugs": "https://github.com/dash-ui/react/issues",
+  "license": "MIT",
+  "main": "dist/main/index.js",
+  "module": "dist/module/index.js",
+  "source": "src/index.ts",
+  "types": "src/index.d.ts",
+  "files": [
+    "/src",
+    "/dist"
+  ],
+  "sideEffects": false
+}

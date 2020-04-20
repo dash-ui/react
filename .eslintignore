@@ -1,7 +1,5 @@
 node_modules
 /coverage
-/dist
-/server
+dist
+test
 *.config.js
-*.test.ts
-*.test.tsx
