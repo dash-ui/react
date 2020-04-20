@@ -1,6 +1,6 @@
 {
   "name": "@-ui/react",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -19,7 +19,7 @@
   "module": "dist/module/index.js",
   "umd:main": "dist/umd/-ui-react.min.js",
   "unpkg": "dist/umd/-ui-react.min.js",
-  "source": "src/index.ts",
+  "source": "src/index.tsx",
   "types": "src/index.d.ts",
   "exports": {
     ".": {
