@@ -1,6 +1,6 @@
 {
   "name": "@-ui/react",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -86,6 +86,7 @@
     "@typescript-eslint/eslint-plugin": "^2.16.0",
     "@typescript-eslint/parser": "^2.16.0",
     "babel-plugin-optimize-react": "^0.0.4",
+    "crc": "^3.8.0",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-import-resolver-jest": "latest",
@@ -109,7 +110,7 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "@-ui/styles": "^1.1.1"
+    "@-ui/styles": "^1.2.3"
   },
   "peerDependencies": {
     "react": ">=16.8",

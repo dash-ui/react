@@ -6,13 +6,15 @@ import React, {
   ReactElement,
   ReactNode,
 } from 'react'
-import defaultStyles, {
-  normalizeStyles,
-  Variables,
-  Styles,
-  StyleGetter,
+import defaultStyles, {normalizeStyles, OneCallback} from '@-ui/styles'
+import type {
+  Style,
+  StyleDefs,
   StyleObject,
+  StyleGetter,
+  Styles,
   Themes,
+  DefaultVars,
 } from '@-ui/styles'
 
 const IS_BROWSER = typeof document !== 'undefined'
@@ -21,7 +23,7 @@ export const useDash = (): Styles => useContext<Styles>(DashContext)
 
 export interface DashProviderProps {
   dash?: Styles
-  variables?: Variables
+  variables?: DefaultVars
   themes?: Themes
   children?: ReactNode
 }
@@ -57,12 +59,13 @@ export interface InlineProps {
   css: CSSValue
 }
 
-export const Inline: React.FC<InlineProps> = ({css}): ReactElement => {
+export const Inline: React.FC<InlineProps> = ({css}) => {
   const dash = useDash().dash
   const styles = normalizeStyles(
     typeof css === 'function' ? css(dash.variables) : css,
     dash.variables
   )
+
   return !styles
     ? null
     : React.createElement('style', {
@@ -76,15 +79,8 @@ export const Inline: React.FC<InlineProps> = ({css}): ReactElement => {
 
 const noop = (): void => {}
 
-export function useGlobal<Vars = any>(
-  value:
-    | string
-    | StyleGetter<Vars>
-    | StyleObject
-    | null
-    | 0
-    | undefined
-    | false,
+export function useGlobal(
+  value: string | StyleGetter | StyleObject | null | 0 | undefined | false,
   deps: any | any[] = value
 ): void {
   // inserts global styles into the dom and cleans up its
@@ -95,8 +91,8 @@ export function useGlobal<Vars = any>(
   useMemo(() => !IS_BROWSER && value && styles.global(value), deps)
 }
 
-export function useVariables<Vars = any>(
-  value: Vars | null | 0 | undefined | false,
+export function useVariables(
+  value: DefaultVars | null | 0 | undefined | false,
   deps: any | any[] = value
 ): void {
   const styles = useDash()
@@ -105,8 +101,8 @@ export function useVariables<Vars = any>(
   useMemo(() => !IS_BROWSER && value && styles.variables(value), deps)
 }
 
-export function useThemes<ThemeNames extends string = any, Vars = any>(
-  value: Themes<ThemeNames, Vars> | null | 0 | undefined | false,
+export function useThemes(
+  value: Themes | null | 0 | undefined | false,
   deps: any | any[] = value
 ): void {
   const styles = useDash()
@@ -114,6 +110,30 @@ export function useThemes<ThemeNames extends string = any, Vars = any>(
   useEffect(() => (value ? styles.themes(value) : noop), deps)
   useMemo(() => !IS_BROWSER && value && styles.themes(value), deps)
 }
+
+const noopString = () => ''
+const noopOne: OneCallback = noopString
+noopString.toString = noopString
+noopString.css = noopString
+
+export const useStyle = (
+  literals:
+    | TemplateStringsArray
+    | string
+    | StyleObject
+    | StyleGetter
+    | undefined
+    | false
+    | null,
+  ...placeholders: string[]
+) => {
+  const styles = useDash()
+  return literals ? styles.one(literals, ...placeholders) : noopOne
+}
+
+export const useStyles = <Names extends string>(
+  defs: StyleDefs<Names, DefaultVars> | undefined | false | null
+): Style<Names> => useDash()(defs || {})
 
 export default defaultStyles
 export * from '@-ui/styles'

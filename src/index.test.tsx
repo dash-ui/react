@@ -10,19 +10,17 @@ import {
   useGlobal,
   useThemes,
   useVariables,
+  useStyle,
+  useStyles,
 } from './index'
 
 afterEach(() => {
   document.getElementsByTagName('html')[0].innerHTML = ''
 })
 
-const renderHookWithProvider = (children, props = {}) =>
-  renderHook(children, {
-    wrapper: ({children}) => <DashProvider {...props} children={children} />,
-  })
-
-const renderHookWithoutProvider = (children = null, options = {}) =>
-  renderHook(children, {...options})
+const opt = (props = {}) => ({
+  wrapper: (other) => <DashProvider {...props} {...other} />,
+})
 
 const renderFragment = (children = null, props = {}, options = {}) =>
   renderComponent(children, {
@@ -30,29 +28,41 @@ const renderFragment = (children = null, props = {}, options = {}) =>
     ...options,
   }).asFragment()
 
-describe('DashProvider', () => {
+declare module '@-ui/styles' {
+  interface DefaultVars {
+    color: {
+      primary: string
+      secondary?: string
+    }
+  }
+
+  interface DefaultThemes {
+    light: DefaultVars
+    dark: DefaultVars
+  }
+}
+
+describe('<DashProvider>', () => {
   afterEach(cleanup)
 
   it('provides the default styles() configuration', () => {
-    const {result} = renderHookWithProvider(() => useDash())
+    const {result} = renderHook(() => useDash(), opt())
     expect(result.current).toBe(styles)
   })
 
   it('provides a custom styles() configuration', () => {
     const myStyles = styles.create()
-    const {result} = renderHookWithProvider(() => useDash(), {
-      dash: myStyles,
-    })
+    const {result} = renderHook(() => useDash(), opt({dash: myStyles}))
     expect(result.current).toBe(myStyles)
   })
 
   it('works without a provider', () => {
-    const {result} = renderHookWithoutProvider(() => useDash())
+    const {result} = renderHook(() => useDash())
     expect(result.current).toBe(styles)
   })
 })
 
-describe('Inline', () => {
+describe('<Inline>', () => {
   afterEach(cleanup)
 
   it('writes css', () => {
@@ -89,10 +99,10 @@ describe('Inline', () => {
   })
 
   it('writes css callback', () => {
-    const myStyles = styles.create()
-    myStyles.variables({black: '#0y00'})
+    const myStyles = styles.create({variables: {color: {primary: '#000'}}})
+
     expect(
-      renderFragment(<Inline css={vars => `color: ${vars.black};`} />, {
+      renderFragment(<Inline css={({color}) => `color: ${color.primary};`} />, {
         dash: myStyles,
       })
     ).toMatchSnapshot()
@@ -100,7 +110,8 @@ describe('Inline', () => {
 
   it(`doesn't write falsy css callback`, () => {
     const myStyles = styles.create()
-    myStyles.variables({black: '#000'})
+    myStyles.variables({color: {primary: '#000'}})
+
     expect(
       renderFragment(<Inline css={''} />, {
         dash: myStyles,
@@ -109,12 +120,12 @@ describe('Inline', () => {
   })
 })
 
-describe('useGlobal', () => {
+describe('useGlobal()', () => {
   it('sets global styles with a string value', async () => {
     const myStyles = styles.create()
-    const {unmount, rerender} = renderHookWithProvider(
+    const {unmount, rerender} = renderHook(
       () => useGlobal(`:root { --blue: #09a; }`),
-      {dash: myStyles}
+      opt({dash: myStyles})
     )
 
     rerender()
@@ -128,17 +139,11 @@ describe('useGlobal', () => {
   })
 
   it('sets global styles with a function value', async () => {
-    type CSSVariables = {
-      color: {blue: string}
-    }
-    const myStyles = styles.create<CSSVariables>()
-    myStyles.variables({color: {blue: '#09a'}})
-    const {unmount, rerender} = renderHookWithProvider(
-      () =>
-        useGlobal<CSSVariables>(
-          ({color}) => `body { background: ${color.blue}; }`
-        ),
-      {dash: myStyles}
+    const myStyles = styles.create()
+    myStyles.variables({color: {primary: '#000', secondary: '#fff'}})
+    const {unmount, rerender} = renderHook(
+      () => useGlobal(({color}) => `body { background: ${color.primary}; }`),
+      opt({dash: myStyles})
     )
 
     rerender()
@@ -156,32 +161,32 @@ describe('useGlobal', () => {
 
   it('handles falsy values', async () => {
     const myStyles = styles.create()
-    renderHookWithProvider(() => useGlobal(false), {dash: myStyles})
+    renderHook(() => useGlobal(false), opt({dash: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(() => useGlobal(0), {dash: myStyles})
+    renderHook(() => useGlobal(0), opt({dash: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(() => useGlobal(null), {dash: myStyles})
+    renderHook(() => useGlobal(null), opt({dash: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHookWithProvider(() => useGlobal(''), {dash: myStyles})
+    renderHook(() => useGlobal(''), opt({dash: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
     await cleanup()
   })
 })
 
-describe('useVariables', () => {
+describe('useVariables()', () => {
   afterEach(cleanup)
 
   it('adds variables then cleans up', async () => {
-    type CSSVariables = {
-      blue: string
-    }
-    const myStyles = styles.create<CSSVariables>()
-    const {unmount, rerender} = renderHookWithProvider(
-      () => useVariables<CSSVariables>({blue: '#09a'}),
-      {dash: myStyles}
+    const myStyles = styles.create()
+    const {unmount, rerender} = renderHook(
+      () =>
+        useVariables({
+          color: {primary: '#000', secondary: '#fff'},
+        }),
+      opt({dash: myStyles})
     )
 
     rerender()
@@ -195,25 +200,21 @@ describe('useVariables', () => {
   })
 })
 
-describe('useThemes', () => {
+describe('useThemes()', () => {
   afterEach(cleanup)
 
   it('adds variables then cleans up', async () => {
-    type CSSVariables = {
-      bg: string
-    }
-
-    const {unmount, rerender} = renderHookWithProvider(
+    const {unmount, rerender} = renderHook(
       () =>
-        useThemes<'light' | 'dark', CSSVariables>({
+        useThemes({
           dark: {
-            bg: '#000',
+            color: {primary: '#000', secondary: '#fff'},
           },
           light: {
-            bg: '#fff',
+            color: {primary: '#fff', secondary: '#000'},
           },
         }),
-      {dash: styles.create()}
+      opt({dash: styles.create()})
     )
 
     rerender()
@@ -222,6 +223,61 @@ describe('useThemes', () => {
     expect(document.querySelectorAll(`style[data-dash]`)[1]).toMatchSnapshot()
     unmount()
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
+    await cleanup()
+  })
+})
+
+describe('useStyle()', () => {
+  afterEach(cleanup)
+
+  it('creates a style and class', async () => {
+    const {result} = renderHook(
+      () => useStyle(({color}) => `color: ${color.primary};`),
+      opt({
+        dash: styles.create({
+          variables: {
+            color: {
+              primary: '#000',
+            },
+          },
+        }),
+      })
+    )
+
+    expect(result.current()).toMatchSnapshot()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(2)
+    expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot()
+    expect(document.querySelectorAll(`style[data-dash]`)[1]).toMatchSnapshot()
+    await cleanup()
+  })
+})
+
+describe('useStyles()', () => {
+  afterEach(cleanup)
+
+  it('creates styles and class', async () => {
+    const {result} = renderHook(
+      () =>
+        useStyles({
+          primary: ({color}) => `color: ${color.primary};`,
+          secondary: ({color}) => `color: ${color.secondary};`,
+        }),
+      opt({
+        dash: styles.create({
+          variables: {
+            color: {
+              primary: '#000',
+              secondary: '#fff',
+            },
+          },
+        }),
+      })
+    )
+
+    expect(result.current('primary', 'secondary')).toMatchSnapshot()
+    expect(document.querySelectorAll(`style[data-dash]`).length).toBe(2)
+    expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot()
+    expect(document.querySelectorAll(`style[data-dash]`)[1]).toMatchSnapshot()
     await cleanup()
   })
 })
