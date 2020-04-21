@@ -118,7 +118,13 @@ noopString.toString = noopString
 noopString.css = noopString
 
 export const useStyle = (
-  literals: TemplateStringsArray | string | StyleObject | StyleGetter | Falsy,
+  literals:
+    | TemplateStringsArray
+    | string
+    | StyleObject
+    | StyleGetter
+    | Falsy
+    | null,
   ...placeholders: string[]
 ) => {
   const styles = useDash()
@@ -126,7 +132,7 @@ export const useStyle = (
 }
 
 export const useStyles = <Names extends string>(
-  defs: StyleDefs<Names, DefaultVars> | Falsy
+  defs: StyleDefs<Names, DefaultVars> | Falsy | null
 ): Style<Names> => useDash()(defs || {})
 
 export default defaultStyles
