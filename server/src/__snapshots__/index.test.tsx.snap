@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<Style> renders a custom key 1`] = `"<style data-dash=\\"1ut9bc3 1i986zm\\" data-cache=\\"css\\">.css-1ut9bc3{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}.css-1i986zm{border-radius:1000px;background:blue;color:white;}</style>"`;
-
-exports[`<Style> renders a nonce string 1`] = `"<style nonce=\\"E8kfWlfa8bwke\\" data-dash=\\"1ut9bc3 1i986zm\\" data-cache=\\"-ui\\">.-ui-1ut9bc3{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}.-ui-1i986zm{border-radius:1000px;background:blue;color:white;}</style>"`;
-
-exports[`<Style> renders a style tag 1`] = `"<style data-dash=\\"1ut9bc3 1i986zm\\" data-cache=\\"-ui\\">.-ui-1ut9bc3{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}.-ui-1i986zm{border-radius:1000px;background:blue;color:white;}</style>"`;
-
-exports[`<Style> renders w/ default styles 1`] = `"<style data-dash=\\"1ut9bc3 1i986zm\\" data-cache=\\"-ui\\">.-ui-1ut9bc3{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}.-ui-1i986zm{border-radius:1000px;background:blue;color:white;}</style>"`;
