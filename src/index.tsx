@@ -35,7 +35,7 @@ export const DashProvider: React.FC<DashProviderProps> = ({
   themes,
   children,
 }): ReactElement => {
-  const [ejectVariables, ejectTheme] = useMemo(
+  const eject = useMemo(
     () => [
       variables && dash.variables(variables),
       themes && dash.themes(themes),
@@ -43,13 +43,13 @@ export const DashProvider: React.FC<DashProviderProps> = ({
     [dash, variables, themes]
   )
 
-  useEffect(() => {
-    const current = [ejectVariables, ejectTheme]
-    return (): void => {
-      current[0] && current[0]()
-      current[1] && current[1]()
-    }
-  }, [ejectVariables, ejectTheme])
+  useEffect(
+    () => () => {
+      eject[0] && eject[0]()
+      eject[1] && eject[1]()
+    },
+    eject
+  )
 
   return <DashContext.Provider value={dash} children={children} />
 }
@@ -80,10 +80,10 @@ export const Inline: React.FC<InlineProps> = ({css}) => {
 
 const noop = (): void => {}
 
-export function useGlobal(
+export const useGlobal = (
   value: string | StyleGetter | StyleObject | null | 0 | undefined | false,
   deps: any | any[] = value
-): void {
+): void => {
   // inserts global styles into the dom and cleans up its
   // styles when the component is unmounted
   const styles = useDash()
@@ -92,20 +92,20 @@ export function useGlobal(
   useMemo(() => !IS_BROWSER && value && styles.global(value), deps)
 }
 
-export function useVariables(
+export const useVariables = (
   value: DefaultVars | null | 0 | undefined | false,
   deps: any | any[] = value
-): void {
+): void => {
   const styles = useDash()
   deps = [styles].concat(deps)
   useEffect(() => (value ? styles.variables(value) : noop), deps)
   useMemo(() => !IS_BROWSER && value && styles.variables(value), deps)
 }
 
-export function useThemes(
+export const useThemes = (
   value: Themes | null | 0 | undefined | false,
   deps: any | any[] = value
-): void {
+): void => {
   const styles = useDash()
   deps = [styles].concat(deps)
   useEffect(() => (value ? styles.themes(value) : noop), deps)
