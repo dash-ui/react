@@ -6,7 +6,7 @@ import React, {
   ReactElement,
   ReactNode,
 } from 'react'
-import defaultStyles, {normalizeStyles, OneCallback} from '@-ui/styles'
+import defaultStyles, {compileStyles, OneCallback} from '@dash-ui/styles'
 import type {
   Style,
   StyleDefs,
@@ -16,7 +16,7 @@ import type {
   Themes,
   DefaultVars,
   Falsy,
-} from '@-ui/styles'
+} from '@dash-ui/styles'
 
 const IS_BROWSER = typeof document !== 'undefined'
 export const DashContext = createContext(defaultStyles)
@@ -62,7 +62,7 @@ export interface InlineProps {
 
 export const Inline: React.FC<InlineProps> = ({css}) => {
   const dash = useDash().dash
-  const styles = normalizeStyles(
+  const styles = compileStyles(
     typeof css === 'function' ? css(dash.variables) : css,
     dash.variables
   )
@@ -130,4 +130,4 @@ export const useStyles = <Names extends string>(
 ): Style<Names> => useDash()(defs || {})
 
 export default defaultStyles
-export * from '@-ui/styles'
+export * from '@dash-ui/styles'

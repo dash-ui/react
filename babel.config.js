@@ -24,13 +24,14 @@ module.exports = (api) => {
               node: '10',
             },
       },
+      restSpread: false,
       devExpression: false,
       objectAssign: umd,
     },
   ]
 
   return {
-    presets: ['@babel/preset-react', presetEnv],
+    presets: [['@babel/preset-react', {useSpread: true}], presetEnv],
     plugins: ['optimize-react', 'annotate-pure-calls'],
   }
 }

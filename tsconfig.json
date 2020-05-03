@@ -16,8 +16,8 @@
     "noEmitOnError": true,
     "baseUrl": ".",
     "paths": {
-      "@-ui/react": ["."],
-      "@-ui/react/server": ["./server"]
+      "@dash-ui/react": ["."],
+      "@dash-ui/react/server": ["./server"]
     }
   }
 }

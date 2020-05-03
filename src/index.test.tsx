@@ -2,7 +2,7 @@
 import * as React from 'react'
 import {renderHook, cleanup} from '@testing-library/react-hooks'
 import {render as renderComponent} from '@testing-library/react'
-import styles from '@-ui/styles'
+import styles from '@dash-ui/styles'
 import {
   DashProvider,
   Inline,
@@ -28,7 +28,7 @@ const renderFragment = (children = null, props = {}, options = {}) =>
     ...options,
   }).asFragment()
 
-declare module '@-ui/styles' {
+declare module '@dash-ui/styles' {
   interface DefaultVars {
     color: {
       primary: string
