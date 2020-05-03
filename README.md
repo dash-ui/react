@@ -31,7 +31,7 @@
 <pre align="center">npm i @dash-ui/react</pre>
 <hr>
 
-React components and hooks for @dash-ui
+React components and hooks for [**dash-ui**](https://github.com/dash-ui/styles)
 
 ## Quick Start
 
