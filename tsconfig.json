@@ -5,8 +5,8 @@
     "target": "es5",
     "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "react",
+    "strict": true,
     "moduleResolution": "node",
-    "strictNullChecks": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
@@ -16,7 +16,7 @@
     "noEmitOnError": true,
     "baseUrl": ".",
     "paths": {
-      "@dash-ui/react": ["."],
+      "@dash-ui/react": ["./src"],
       "@dash-ui/react/server": ["./server"]
     }
   }
