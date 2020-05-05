@@ -1,6 +1,6 @@
 import babel from 'rollup-plugin-babel'
 import replace from '@rollup/plugin-replace'
-import resolve from 'rollup-plugin-node-resolve'
+import resolve from '@rollup/plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import {terser} from 'rollup-plugin-terser'
 import pkg from './package.json'
@@ -19,7 +19,7 @@ const config = (filename, env, plugins = []) => ({
   },
   external: ['react'],
   plugins: [
-    resolve(),
+    resolve({mainFields: ['browser', 'module', 'main']}),
     babel({extensions: ['.ts', '.tsx']}),
     commonjs(),
     replace({
