@@ -19,7 +19,10 @@ const config = (filename, env, plugins = []) => ({
   },
   external: ['react'],
   plugins: [
-    resolve({mainFields: ['browser', 'module', 'main']}),
+    resolve({
+      mainFields: ['source', 'browser', 'module', 'main'],
+      extensions: ['.mjs', '.js', '.ts', '.tsx'],
+    }),
     babel({extensions: ['.ts', '.tsx']}),
     commonjs(),
     replace({
