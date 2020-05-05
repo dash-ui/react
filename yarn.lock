@@ -985,10 +985,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@dash-ui/styles@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@dash-ui/styles/-/styles-0.1.5.tgz#e64bb4bcc1587818c25bc42f796199870e3e63f3"
-  integrity sha512-P2wdRvx/RyVVwKcJJ8+E+XJrK9MJ34S9unLyg5L4pr7UJzzMASzk5j8H5hGejiyytRhuG3fqF6h3h24cxRD5NA==
+"@dash-ui/styles@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@dash-ui/styles/-/styles-0.2.1.tgz#c05f4cb1f35a365698a5be69d84140cad1d6f829"
+  integrity sha512-ZJsvAo8j2g8sk01K0WSKzzBKCT+3o1oBwpfyJSgznYAr5LC+HlxkWl9UYIiL4qZnZQ/4udv9PYB05KoEGCiJIw==
   dependencies:
     "@dash-ui/unitless" "^1.0.0"
     "@emotion/stylis" "^0.8.5"
