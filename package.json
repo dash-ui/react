@@ -1,6 +1,6 @@
 {
   "name": "@dash-ui/react",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -88,6 +88,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.8.3",
+    "@dash-ui/styles": "^0.3.0",
     "@lunde/babel-preset-es": "latest",
     "@rollup/plugin-babel": "^5.0.0",
     "@rollup/plugin-commonjs": "^11.1.0",
@@ -125,10 +126,8 @@
     "ts-jest": "^24.3.0",
     "typescript": "^3.7.5"
   },
-  "dependencies": {
-    "@dash-ui/styles": "^0.3.0"
-  },
   "peerDependencies": {
+    "@dash-ui/styles": ">=0.3.0",
     "react": ">=16.8",
     "react-dom": ">=16.8"
   }

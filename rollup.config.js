@@ -17,9 +17,10 @@ const config = (filename, env, plugins = []) => ({
     name: 'Dash',
     globals: {
       react: 'React',
+      '@dash-ui/styles': 'Dash',
     },
   },
-  external: ['react'],
+  external: ['react', '@dash-ui/styles'],
   plugins: [
     resolve({
       mainFields: ['source', 'browser', 'module', 'main'],
