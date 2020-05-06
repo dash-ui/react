@@ -29,16 +29,16 @@ const renderFragment = (children = null, props = {}, options = {}) =>
   }).asFragment()
 
 declare module '@dash-ui/styles' {
-  interface DefaultVars {
+  interface DashVariables {
     color: {
       primary: string
       secondary?: string
     }
   }
 
-  interface DefaultThemes {
-    light: DefaultVars
-    dark: DefaultVars
+  interface DashThemes {
+    light: DashVariables
+    dark: DashVariables
   }
 }
 
@@ -244,7 +244,7 @@ describe('useStyle()', () => {
       })
     )
 
-    expect(result.current()).toMatchSnapshot()
+    expect(result.current).toMatchSnapshot()
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(2)
     expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot()
     expect(document.querySelectorAll(`style[data-dash]`)[1]).toMatchSnapshot()
