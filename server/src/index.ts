@@ -1,11 +1,11 @@
 import * as React from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
-import defaultStyles, {Styles} from '@dash-ui/styles'
+import defaultStyles from '@dash-ui/styles'
 import {
   createStylesFromString,
   CreateStylesOptions,
 } from '@dash-ui/styles/server'
-export * from '@dash-ui/styles/server'
+import type {Styles} from '@dash-ui/styles'
 
 export const toComponent = (
   html: string,
@@ -43,3 +43,5 @@ export const createGatsbyRenderer = (
     return props
   }
 }
+
+export * from '@dash-ui/styles/server'
