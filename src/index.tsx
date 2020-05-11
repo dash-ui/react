@@ -80,7 +80,7 @@ export const useGlobal = (
 }
 
 export const useVariables = (
-  value: DashVariables | Falsy,
+  value: Partial<DashVariables> | Falsy,
   deps: React.DependencyList = [value]
 ): void => {
   const styles = useDash()
@@ -90,7 +90,7 @@ export const useVariables = (
 }
 
 export const useThemes = (
-  value: Dash['themes'] | Falsy,
+  value: Partial<Dash['themes']> | Falsy,
   deps: React.DependencyList = [value]
 ): void => {
   const styles = useDash()
