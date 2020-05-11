@@ -1,6 +1,6 @@
 {
   "name": "@dash-ui/react",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "homepage": "https://github.com/dash-ui/react#readme",
   "repository": "github:dash-ui/react",
   "bugs": "https://github.com/dash-ui/react/issues",
@@ -130,5 +130,8 @@
     "@dash-ui/styles": ">=0.3.0",
     "react": ">=16.8",
     "react-dom": ">=16.8"
+  },
+  "dependencies": {
+    "@react-hook/passive-layout-effect": "^1.0.3"
   }
 }

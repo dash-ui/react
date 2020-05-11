@@ -1,12 +1,7 @@
-import React, {
-  createContext,
-  useMemo,
-  useEffect,
-  useContext,
-  ReactElement,
-  ReactNode,
-} from 'react'
+import React, {createContext, useMemo, useContext} from 'react'
 import defaultStyles, {compileStyles} from '@dash-ui/styles'
+import useLayoutEffect from '@react-hook/passive-layout-effect'
+import type {ReactElement, ReactNode} from 'react'
 import type {
   Dash,
   Style,
@@ -36,8 +31,7 @@ export const DashProvider: React.FC<DashProviderProps> = ({
     [dash, variables, themes]
   )
 
-  useEffect(() => () => eject.forEach((e) => e && e()), eject)
-
+  useLayoutEffect(() => () => eject.forEach((e) => e && e()), eject)
   return <DashContext.Provider value={dash} children={children} />
 }
 
@@ -75,7 +69,7 @@ export const useGlobal = (
   // styles when the component is unmounted
   const styles = useDash()
   deps = deps.concat(styles)
-  useEffect(() => (value ? styles.global(value) : noop), deps)
+  useLayoutEffect(() => (value ? styles.global(value) : noop), deps)
   useMemo(() => !IS_BROWSER && value && styles.global(value), deps)
 }
 
@@ -85,7 +79,7 @@ export const useVariables = (
 ): void => {
   const styles = useDash()
   deps = deps.concat(styles)
-  useEffect(() => (value ? styles.variables(value) : noop), deps)
+  useLayoutEffect(() => (value ? styles.variables(value) : noop), deps)
   useMemo(() => !IS_BROWSER && value && styles.variables(value), deps)
 }
 
@@ -95,7 +89,7 @@ export const useThemes = (
 ): void => {
   const styles = useDash()
   deps = deps.concat(styles)
-  useEffect(() => (value ? styles.themes(value) : noop), deps)
+  useLayoutEffect(() => (value ? styles.themes(value) : noop), deps)
   useMemo(() => !IS_BROWSER && value && styles.themes(value), deps)
 }
 
