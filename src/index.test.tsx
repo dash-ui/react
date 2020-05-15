@@ -2,7 +2,7 @@
 import * as React from 'react'
 import {renderHook, cleanup} from '@testing-library/react-hooks'
 import {render as renderComponent} from '@testing-library/react'
-import styles from '@dash-ui/styles'
+import styles, {createStyles} from '@dash-ui/styles'
 import {
   DashProvider,
   Inline,
@@ -51,7 +51,7 @@ describe('<DashProvider>', () => {
   })
 
   it('provides a custom styles() configuration', () => {
-    const myStyles = styles.create()
+    const myStyles = createStyles()
     const {result} = renderHook(() => useDash(), opt({dash: myStyles}))
     expect(result.current).toBe(myStyles)
   })
@@ -79,7 +79,7 @@ describe('<Inline>', () => {
   })
 
   it('writes css w/ nonce', () => {
-    const myStyles = styles.create({nonce: 'E8gagwlWEGlgwel'})
+    const myStyles = createStyles({nonce: 'E8gagwlWEGlgwel'})
     expect(
       renderFragment(
         <Inline
@@ -99,7 +99,7 @@ describe('<Inline>', () => {
   })
 
   it('writes css callback', () => {
-    const myStyles = styles.create({variables: {color: {primary: '#000'}}})
+    const myStyles = createStyles({variables: {color: {primary: '#000'}}})
 
     expect(
       renderFragment(<Inline css={({color}) => `color: ${color.primary};`} />, {
@@ -109,7 +109,7 @@ describe('<Inline>', () => {
   })
 
   it(`doesn't write falsy css callback`, () => {
-    const myStyles = styles.create()
+    const myStyles = createStyles()
     myStyles.variables({color: {primary: '#000'}})
 
     expect(
@@ -122,7 +122,7 @@ describe('<Inline>', () => {
 
 describe('useGlobal()', () => {
   it('sets global styles with a string value', async () => {
-    const myStyles = styles.create()
+    const myStyles = createStyles()
     const {unmount, rerender} = renderHook(
       () => useGlobal(`:root { --blue: #09a; }`),
       opt({dash: myStyles})
@@ -139,7 +139,7 @@ describe('useGlobal()', () => {
   })
 
   it('sets global styles with a function value', async () => {
-    const myStyles = styles.create()
+    const myStyles = createStyles()
     myStyles.variables({color: {primary: '#000', secondary: '#fff'}})
     const {unmount, rerender} = renderHook(
       () => useGlobal(({color}) => `body { background: ${color.primary}; }`),
@@ -160,7 +160,7 @@ describe('useGlobal()', () => {
   })
 
   it('handles falsy values', async () => {
-    const myStyles = styles.create()
+    const myStyles = createStyles()
     renderHook(() => useGlobal(false), opt({dash: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
@@ -180,7 +180,7 @@ describe('useVariables()', () => {
   afterEach(cleanup)
 
   it('adds variables then cleans up', async () => {
-    const myStyles = styles.create()
+    const myStyles = createStyles()
     const {unmount, rerender} = renderHook(
       () =>
         useVariables({
@@ -214,7 +214,7 @@ describe('useThemes()', () => {
             color: {primary: '#fff', secondary: '#000'},
           },
         }),
-      opt({dash: styles.create()})
+      opt({dash: createStyles()})
     )
 
     rerender()
@@ -234,7 +234,7 @@ describe('useStyle()', () => {
     const {result} = renderHook(
       () => useStyle(({color}) => `color: ${color.primary};`),
       opt({
-        dash: styles.create({
+        dash: createStyles({
           variables: {
             color: {
               primary: '#000',
@@ -263,7 +263,7 @@ describe('useStyles()', () => {
           secondary: ({color}) => `color: ${color.secondary};`,
         }),
       opt({
-        dash: styles.create({
+        dash: createStyles({
           variables: {
             color: {
               primary: '#000',
