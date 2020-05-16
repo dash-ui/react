@@ -27,6 +27,7 @@ module.exports = (api) => {
       restSpread: false,
       devExpression: false,
       objectAssign: umd,
+      closureElimination: false,
     },
   ]
 

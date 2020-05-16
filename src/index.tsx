@@ -31,7 +31,7 @@ export const DashProvider: React.FC<DashProviderProps> = ({
     [dash, variables, themes]
   )
 
-  useLayoutEffect(() => () => eject.forEach((e) => e && e()), eject)
+  useLayoutEffect(() => () => eject.forEach((e) => e?.()), eject)
   return <DashContext.Provider value={dash} children={children} />
 }
 
@@ -46,15 +46,15 @@ export const Inline: React.FC<InlineProps> = ({css}) => {
   const dash = useDash().dash
   const styles = compileStyles(css, dash.variables)
 
-  return !styles
-    ? null
-    : React.createElement('style', {
-        dangerouslySetInnerHTML: {__html: styles},
-        nonce: dash.sheet.nonce ? dash.sheet.nonce : void 0,
-        // We don't want data-cache, data-dash props here because
-        // we don't want this to be moved into the head of the document
-        // during SSR hydration
-      })
+  return !styles ? null : (
+    // We don't want data-cache, data-dash props here because
+    // we don't want this to be moved into the head of the document
+    // during SSR hydration
+    <style
+      dangerouslySetInnerHTML={{__html: styles}}
+      nonce={dash.sheet.nonce ? dash.sheet.nonce : void 0}
+    />
+  )
 }
 
 export interface InlineProps {
@@ -68,8 +68,10 @@ export const useGlobal = (
   // inserts global styles into the dom and cleans up its
   // styles when the component is unmounted
   const styles = useDash()
-  deps = deps.concat(styles)
-  useLayoutEffect(() => (value ? styles.global(value) : noop), deps)
+  useLayoutEffect(
+    () => (value ? styles.global(value) : noop),
+    (deps = deps.concat(styles))
+  )
   useMemo(() => !IS_BROWSER && value && styles.global(value), deps)
 }
 
@@ -78,8 +80,10 @@ export const useVariables = (
   deps: React.DependencyList = [value]
 ): void => {
   const styles = useDash()
-  deps = deps.concat(styles)
-  useLayoutEffect(() => (value ? styles.variables(value) : noop), deps)
+  useLayoutEffect(
+    () => (value ? styles.variables(value) : noop),
+    (deps = deps.concat(styles))
+  )
   useMemo(() => !IS_BROWSER && value && styles.variables(value), deps)
 }
 
@@ -88,8 +92,10 @@ export const useThemes = (
   deps: React.DependencyList = [value]
 ): void => {
   const styles = useDash()
-  deps = deps.concat(styles)
-  useLayoutEffect(() => (value ? styles.themes(value) : noop), deps)
+  useLayoutEffect(
+    () => (value ? styles.themes(value) : noop),
+    (deps = deps.concat(styles))
+  )
   useMemo(() => !IS_BROWSER && value && styles.themes(value), deps)
 }
 
@@ -106,6 +112,3 @@ export const useStyles = <Names extends string>(
 ): Style<Names> => useDash()(styleMap || {})
 
 function noop() {}
-
-export default defaultStyles
-export * from '@dash-ui/styles'
