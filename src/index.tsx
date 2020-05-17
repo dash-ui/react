@@ -37,8 +37,8 @@ export const DashProvider: React.FC<DashProviderProps> = ({
 
 export interface DashProviderProps {
   dash?: Styles
-  variables?: DashVariables
-  themes?: Dash['themes']
+  variables?: DeepPartial<DashVariables>
+  themes?: DeepPartial<Dash['themes']>
   children?: ReactNode
 }
 
@@ -76,7 +76,7 @@ export const useGlobal = (
 }
 
 export const useVariables = (
-  value: Partial<DashVariables> | Falsy,
+  value: DeepPartial<DashVariables> | Falsy,
   deps: React.DependencyList = [value]
 ): void => {
   const styles = useDash()
@@ -88,7 +88,7 @@ export const useVariables = (
 }
 
 export const useThemes = (
-  value: Partial<Dash['themes']> | Falsy,
+  value: DeepPartial<Dash['themes']> | Falsy,
   deps: React.DependencyList = [value]
 ): void => {
   const styles = useDash()
@@ -112,3 +112,9 @@ export const useStyles = <Names extends string>(
 ): Style<Names> => useDash()(styleMap || {})
 
 function noop() {}
+
+type DeepPartial<T> = T extends Function
+  ? T
+  : T extends object
+  ? {[P in keyof T]?: DeepPartial<T[P]>}
+  : T
