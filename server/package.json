@@ -8,10 +8,27 @@
   "main": "dist/main/index.js",
   "module": "dist/module/index.js",
   "source": "src/index.tsx",
-  "types": "src/index.d.ts",
+  "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "browser": "./dist/module/index.js",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/main/index.js",
+      "source": "./src/index.tsx",
+      "types": "./types/index.d.ts",
+      "default": "./dist/main/index.js"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
   "files": [
     "/src",
     "/dist"
   ],
-  "sideEffects": false
+  "sideEffects": false,
+  "peerDependencies": {
+    "@dash-ui/styles": ">=0.4.0",
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
+  }
 }

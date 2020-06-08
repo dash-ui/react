@@ -1,14 +1,18 @@
 {
   "include": ["src", "server/src"],
-  "exclude": ["src/**/*.test.tsx", "server/src/**/*.test.tsx"],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "server/src/**/*.test.ts",
+    "server/src/**/*.test.tsx"
+  ],
   "compilerOptions": {
     "target": "es5",
     "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "react",
-    "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "downlevelIteration": true,
+    "strict": true,
     "baseUrl": ".",
     "paths": {
       "@dash-ui/react": ["./src"],

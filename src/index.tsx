@@ -1,21 +1,21 @@
-import React, {createContext, useMemo, useContext} from 'react'
+import * as React from 'react'
 import defaultStyles, {compileStyles} from '@dash-ui/styles'
 import useLayoutEffect from '@react-hook/passive-layout-effect'
 import type {ReactElement, ReactNode} from 'react'
 import type {
-  Dash,
   Style,
   StyleMap,
   StyleObject,
   StyleCallback,
   Styles,
   DashVariables,
+  DashThemes,
   Falsy,
 } from '@dash-ui/styles'
 
 const IS_BROWSER = typeof document !== 'undefined'
-export const DashContext = createContext(defaultStyles)
-export const useDash = (): Styles => useContext<Styles>(DashContext)
+export const DashContext = React.createContext(defaultStyles)
+export const useDash = (): Styles => React.useContext<Styles>(DashContext)
 
 export const DashProvider: React.FC<DashProviderProps> = ({
   dash = defaultStyles,
@@ -23,7 +23,7 @@ export const DashProvider: React.FC<DashProviderProps> = ({
   themes,
   children,
 }): ReactElement => {
-  const eject = useMemo(
+  const eject = React.useMemo(
     () => [
       variables && dash.variables(variables),
       themes && dash.themes(themes),
@@ -38,7 +38,11 @@ export const DashProvider: React.FC<DashProviderProps> = ({
 export interface DashProviderProps {
   dash?: Styles
   variables?: DeepPartial<DashVariables>
-  themes?: DeepPartial<Dash['themes']>
+  themes?: DeepPartial<
+    {
+      [Name in keyof DashThemes]: DashThemes[Name]
+    }
+  >
   children?: ReactNode
 }
 
@@ -63,40 +67,46 @@ export interface InlineProps {
 
 export const useGlobal = (
   value: string | StyleCallback | StyleObject | null | 0 | undefined | false,
-  deps: React.DependencyList = [value]
+  deps?: React.DependencyList
 ): void => {
   // inserts global styles into the dom and cleans up its
   // styles when the component is unmounted
   const styles = useDash()
   useLayoutEffect(
     () => (value ? styles.global(value) : noop),
-    (deps = deps.concat(styles))
+    (deps = deps && deps.concat(styles))
   )
-  useMemo(() => !IS_BROWSER && value && styles.global(value), deps)
+  React.useMemo(() => !IS_BROWSER && value && styles.global(value), deps)
 }
 
 export const useVariables = (
   value: DeepPartial<DashVariables> | Falsy,
-  deps: React.DependencyList = [value]
+  deps?: React.DependencyList
 ): void => {
   const styles = useDash()
   useLayoutEffect(
     () => (value ? styles.variables(value) : noop),
-    (deps = deps.concat(styles))
+    (deps = deps && deps.concat(styles))
   )
-  useMemo(() => !IS_BROWSER && value && styles.variables(value), deps)
+  React.useMemo(() => !IS_BROWSER && value && styles.variables(value), deps)
 }
 
 export const useThemes = (
-  value: DeepPartial<Dash['themes']> | Falsy,
-  deps: React.DependencyList = [value]
+  value:
+    | DeepPartial<
+        {
+          [Name in keyof DashThemes]: DashThemes[Name]
+        }
+      >
+    | Falsy,
+  deps?: React.DependencyList
 ): void => {
   const styles = useDash()
   useLayoutEffect(
     () => (value ? styles.themes(value) : noop),
-    (deps = deps.concat(styles))
+    (deps = deps && deps.concat(styles))
   )
-  useMemo(() => !IS_BROWSER && value && styles.themes(value), deps)
+  React.useMemo(() => !IS_BROWSER && value && styles.themes(value), deps)
 }
 
 export const useStyle = (
@@ -113,8 +123,8 @@ export const useStyles = <Names extends string>(
 
 function noop() {}
 
-type DeepPartial<T> = T extends Function
+type DeepPartial<T> = T extends (...args: any[]) => any
   ? T
-  : T extends object
+  : T extends Record<string, unknown>
   ? {[P in keyof T]?: DeepPartial<T[P]>}
   : T

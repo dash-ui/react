@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-manual-cleanup */
 /* jest */
 import * as React from 'react'
 import {renderHook, cleanup} from '@testing-library/react-hooks'

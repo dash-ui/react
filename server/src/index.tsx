@@ -14,13 +14,16 @@ export const toComponent = (
 ): React.ReactElement => {
   const {dash} = styles
   const {names, css} = createStylesFromString(html, styles, options)
-  return React.createElement('style', {
-    key: dash.key,
-    nonce: dash.sheet.nonce ? dash.sheet.nonce : void 0,
-    'data-dash': names.join(' '),
-    'data-cache': dash.key,
-    dangerouslySetInnerHTML: {__html: css},
-  })
+
+  return (
+    <style
+      key={dash.key}
+      nonce={dash.sheet.nonce ? dash.sheet.nonce : void 0}
+      data-dash={names.join(' ')}
+      data-cache={dash.key}
+      dangerouslySetInnerHTML={{__html: css}}
+    />
+  )
 }
 
 export interface StyleProps {
