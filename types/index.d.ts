@@ -1,5 +1,4 @@
 import * as React from 'react'
-import type {ReactNode} from 'react'
 import type {
   Style,
   StyleMap,
@@ -11,8 +10,13 @@ import type {
   Falsy,
 } from '@dash-ui/styles'
 export declare const DashContext: React.Context<Styles<DashVariables, never>>
-export declare const useDash: () => Styles
-export declare const DashProvider: React.FC<DashProviderProps>
+export declare function useDash(): Styles
+export declare function DashProvider({
+  dash,
+  variables,
+  themes,
+  children,
+}: DashProviderProps): JSX.Element
 export interface DashProviderProps {
   dash?: Styles
   variables?: DeepPartial<DashVariables>
@@ -21,31 +25,37 @@ export interface DashProviderProps {
       [Name in keyof DashThemes]: DashThemes[Name]
     }
   >
-  children?: ReactNode
+  children?: React.ReactNode
 }
-export declare const Inline: React.FC<InlineProps>
+export declare function Inline({css}: InlineProps): JSX.Element | null
 export interface InlineProps {
   css: string | StyleCallback | StyleObject
 }
-export declare const useGlobal: (
+export declare function useGlobal(
   value: string | StyleCallback | StyleObject | null | 0 | undefined | false,
-  deps?: React.DependencyList | undefined
-) => void
-export declare const useVariables: (
+  deps?: React.DependencyList
+): void
+export declare function useVariables(
   value: DeepPartial<DashVariables> | Falsy,
-  deps?: React.DependencyList | undefined
-) => void
-export declare const useThemes: (
-  value: false | 0 | {} | null | undefined,
-  deps?: React.DependencyList | undefined
-) => void
-export declare const useStyle: (
+  deps?: React.DependencyList
+): void
+export declare function useThemes(
+  value:
+    | DeepPartial<
+        {
+          [Name in keyof DashThemes]: DashThemes[Name]
+        }
+      >
+    | Falsy,
+  deps?: React.DependencyList
+): void
+export declare function useStyle(
   literals: TemplateStringsArray | string | StyleObject | StyleCallback | Falsy,
   ...placeholders: string[]
-) => string
-export declare const useStyles: <Names extends string>(
-  styleMap: false | 0 | StyleMap<Names, DashVariables> | null | undefined
-) => Style<Names, DashVariables>
+): string
+export declare function useStyles<Names extends string>(
+  styleMap: StyleMap<Names, DashVariables> | Falsy
+): Style<Names>
 declare type DeepPartial<T> = T extends (...args: any[]) => any
   ? T
   : T extends Record<string, unknown>
