@@ -3,7 +3,7 @@
 import * as React from 'react'
 import {renderHook, cleanup} from '@testing-library/react-hooks'
 import {render as renderComponent} from '@testing-library/react'
-import styles, {createStyles} from '@dash-ui/styles'
+import {styles, createStyles, createDash} from '@dash-ui/styles'
 import {
   DashProvider,
   Inline,
@@ -80,7 +80,9 @@ describe('<Inline>', () => {
   })
 
   it('writes css w/ nonce', () => {
-    const myStyles = createStyles({nonce: 'E8gagwlWEGlgwel'})
+    const myStyles = createStyles({
+      dash: createDash({nonce: 'E8gagwlWEGlgwel'}),
+    })
     expect(
       renderFragment(
         <Inline
@@ -111,7 +113,7 @@ describe('<Inline>', () => {
 
   it(`doesn't write falsy css callback`, () => {
     const myStyles = createStyles()
-    myStyles.variables({color: {primary: '#000'}})
+    myStyles.insertVariables({color: {primary: '#000'}})
 
     expect(
       renderFragment(<Inline css={''} />, {
@@ -141,7 +143,7 @@ describe('useGlobal()', () => {
 
   it('sets global styles with a function value', async () => {
     const myStyles = createStyles()
-    myStyles.variables({color: {primary: '#000', secondary: '#fff'}})
+    myStyles.insertVariables({color: {primary: '#000', secondary: '#fff'}})
     const {unmount, rerender} = renderHook(
       () => useGlobal(({color}) => `body { background: ${color.primary}; }`),
       opt({dash: myStyles})

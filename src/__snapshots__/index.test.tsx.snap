@@ -40,7 +40,6 @@ exports[`useGlobal() sets global styles with a function value: global 1`] = `
 <style
   data-dash="ui"
 >
-  
   body{background:var(--color-primary);}
 </style>
 `;
@@ -49,7 +48,6 @@ exports[`useGlobal() sets global styles with a function value: variables 1`] = `
 <style
   data-dash="ui"
 >
-  
   :root{--color-primary:#000;--color-secondary:#fff;}
 </style>
 `;
@@ -58,7 +56,6 @@ exports[`useGlobal() sets global styles with a string value: :root 1`] = `
 <style
   data-dash="ui"
 >
-  
   :root{--blue:#09a;}
 </style>
 `;
@@ -69,7 +66,6 @@ exports[`useStyle() creates a style and class 2`] = `
 <style
   data-dash="ui"
 >
-  
   :root{--color-primary:#000;}
 </style>
 `;
@@ -78,7 +74,6 @@ exports[`useStyle() creates a style and class 3`] = `
 <style
   data-dash="ui"
 >
-  
   .ui-7y43y9{color:var(--color-primary);}
 </style>
 `;
@@ -89,7 +84,6 @@ exports[`useStyles() creates styles and class 2`] = `
 <style
   data-dash="ui"
 >
-  
   :root{--color-primary:#000;--color-secondary:#fff;}
 </style>
 `;
@@ -98,7 +92,6 @@ exports[`useStyles() creates styles and class 3`] = `
 <style
   data-dash="ui"
 >
-  
   .ui-ga4wf1{color:var(--color-primary);color:var(--color-secondary);}
 </style>
 `;
@@ -107,7 +100,6 @@ exports[`useThemes() adds variables then cleans up 1`] = `
 <style
   data-dash="ui"
 >
-  
   .ui-dark-theme{--color-primary:#000;--color-secondary:#fff;}
 </style>
 `;
@@ -116,7 +108,6 @@ exports[`useThemes() adds variables then cleans up 2`] = `
 <style
   data-dash="ui"
 >
-  
   .ui-light-theme{--color-primary:#fff;--color-secondary:#000;}
 </style>
 `;
@@ -125,7 +116,6 @@ exports[`useVariables() adds variables then cleans up: :root 1`] = `
 <style
   data-dash="ui"
 >
-  
   :root{--color-primary:#000;--color-secondary:#fff;}
 </style>
 `;

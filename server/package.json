@@ -23,7 +23,8 @@
   },
   "files": [
     "/src",
-    "/dist"
+    "/dist",
+    "/types"
   ],
   "sideEffects": false,
   "peerDependencies": {

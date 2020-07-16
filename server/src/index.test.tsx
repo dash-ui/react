@@ -3,7 +3,7 @@
  */
 import * as React from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
-import styles, {createStyles} from '@dash-ui/styles'
+import {styles, createStyles, createDash} from '@dash-ui/styles'
 import {Style} from './index'
 
 describe('<Style>', () => {
@@ -22,7 +22,7 @@ describe('<Style>', () => {
   })
 
   it('creates <style> tag with nonce', () => {
-    const styles = createStyles({nonce: 'abc'})
+    const styles = createStyles({dash: createDash({nonce: 'abc'})})
     const style = styles({
       default: 'display: block;',
     })
@@ -35,7 +35,7 @@ describe('<Style>', () => {
   })
 
   it('creates <style> tag with cache key', () => {
-    const styles = createStyles({key: 'abc'})
+    const styles = createStyles({dash: createDash({key: 'abc'})})
     const style = styles({
       default: 'display: block;',
     })
