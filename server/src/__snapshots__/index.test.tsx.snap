@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Style> creates <style> tag based on html string 1`] = `"<style data-dash=\\"1abu38z\\" data-cache=\\"ui\\">.ui-1abu38z{display:block;}</style>"`;
+exports[`<Style> creates <style> tag based on html string 1`] = `"<style data-dash=\\"dft1zt\\" data-cache=\\"ui\\">.ui-dft1zt{display:block;}</style>"`;
 
-exports[`<Style> creates <style> tag with cache key 1`] = `"<style data-dash=\\"1abu38z\\" data-cache=\\"abc\\">.abc-1abu38z{display:block;}</style>"`;
+exports[`<Style> creates <style> tag with cache key 1`] = `"<style data-dash=\\"dft1zt\\" data-cache=\\"abc\\">.abc-dft1zt{display:block;}</style>"`;
 
-exports[`<Style> creates <style> tag with default styles function 1`] = `"<style data-dash=\\"1abu38z\\" data-cache=\\"ui\\">.ui-1abu38z{display:block;}</style>"`;
+exports[`<Style> creates <style> tag with default styles function 1`] = `"<style data-dash=\\"dft1zt\\" data-cache=\\"ui\\">.ui-dft1zt{display:block;}</style>"`;
 
-exports[`<Style> creates <style> tag with nonce 1`] = `"<style nonce=\\"abc\\" data-dash=\\"1abu38z\\" data-cache=\\"ui\\">.ui-1abu38z{display:block;}</style>"`;
+exports[`<Style> creates <style> tag with nonce 1`] = `"<style nonce=\\"abc\\" data-dash=\\"dft1zt\\" data-cache=\\"ui\\">.ui-dft1zt{display:block;}</style>"`;
