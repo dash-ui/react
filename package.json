@@ -6,7 +6,7 @@
   "bugs": "https://github.com/dash-ui/react/issues",
   "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
   "license": "MIT",
-  "description": "React components and hooks for -ui",
+  "description": "React components and hooks for dash-ui",
   "keywords": [
     "react",
     "react hook",
