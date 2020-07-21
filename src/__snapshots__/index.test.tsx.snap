@@ -5,7 +5,9 @@ exports[`<Inline> doesn't write falsy css callback 1`] = `<DocumentFragment />`;
 exports[`<Inline> writes css 1`] = `
 <DocumentFragment>
   <style>
-    display: block;
+    
+            display: block;
+          
   </style>
 </DocumentFragment>
 `;
@@ -31,7 +33,9 @@ exports[`<Inline> writes css w/ nonce 1`] = `
   <style
     nonce="E8gagwlWEGlgwel"
   >
-    display: block;
+    
+            display: block;
+          
   </style>
 </DocumentFragment>
 `;
@@ -60,7 +64,7 @@ exports[`useGlobal() sets global styles with a string value: :root 1`] = `
 </style>
 `;
 
-exports[`useStyle() creates a style and class 1`] = `"ui-9clm9x"`;
+exports[`useStyle() creates a style and class 1`] = `"ui-7y43y9"`;
 
 exports[`useStyle() creates a style and class 2`] = `
 <style
@@ -74,11 +78,11 @@ exports[`useStyle() creates a style and class 3`] = `
 <style
   data-dash="ui"
 >
-  .ui-9clm9x{color:var(--color-primary);}
+  .ui-7y43y9{color:var(--color-primary);}
 </style>
 `;
 
-exports[`useStyles() creates styles and class 1`] = `"ui-yyz30l"`;
+exports[`useStyles() creates styles and class 1`] = `"ui-ga4wf1"`;
 
 exports[`useStyles() creates styles and class 2`] = `
 <style
@@ -92,7 +96,7 @@ exports[`useStyles() creates styles and class 3`] = `
 <style
   data-dash="ui"
 >
-  .ui-yyz30l{color:var(--color-primary);color:var(--color-secondary);}
+  .ui-ga4wf1{color:var(--color-primary);color:var(--color-secondary);}
 </style>
 `;
 
