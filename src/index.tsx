@@ -2,8 +2,6 @@ import * as React from 'react'
 import {styles as defaultStyles} from '@dash-ui/styles'
 import useLayoutEffect from '@react-hook/passive-layout-effect'
 import type {
-  Style,
-  StyleMap,
   StyleObject,
   StyleCallback,
   Styles,
@@ -172,60 +170,6 @@ export function useThemes(
     (deps = deps && deps.concat(styles))
   )
   React.useMemo(() => !IS_BROWSER && value && styles.insertThemes(value), deps)
-}
-
-/**
- * A hook that accepts a tagged template literal, style object, or style callback,
- * and returns a class name.
- *
- * @example
- * const Component = () => {
- *   const className = useStyle`
- *     background-color: aliceblue;
- *   `
- *
- *   return <div className={className}/>
- * }
- */
-export function useStyle(
-  literals: TemplateStringsArray | string | StyleObject | StyleCallback | Falsy,
-  ...placeholders: string[]
-) {
-  const styles = useDash()
-  return literals ? styles.cls(literals, ...placeholders) : ''
-}
-
-/**
- * This is a hook for composing style definitions in a
- * deterministic way. It returns a function which when called will insert
- * your styles into the DOM and create a unique class name.
- *
- * @example
- * const Component = () => {
- *   const bg = useStyles({
- *     // Define styles using an object
- *     blue: {
- *       backgroundColor: 'blue'
- *     },
- *     // Access stored CSS variables when a callback is provided as
- *     // the value
- *     red: ({colors}) => `
- *       background-color: ${colors.red};
- *     `,
- *     // Define styles using a string
- *     green: `
- *       background-color: green;
- *     `
- *   })
- *
- *   // This will have a red background
- *   return <div className={bg('blue', 'red')}/>
- * }
- */
-export function useStyles<Names extends string>(
-  styleMap: StyleMap<Names, DashVariables> | Falsy
-): Style<Names> {
-  return useDash()(styleMap || {})
 }
 
 function noop() {}

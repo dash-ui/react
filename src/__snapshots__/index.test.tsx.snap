@@ -64,42 +64,6 @@ exports[`useGlobal() sets global styles with a string value: :root 1`] = `
 </style>
 `;
 
-exports[`useStyle() creates a style and class 1`] = `"ui-7y43y9"`;
-
-exports[`useStyle() creates a style and class 2`] = `
-<style
-  data-dash="ui"
->
-  :root{--color-primary:#000;}
-</style>
-`;
-
-exports[`useStyle() creates a style and class 3`] = `
-<style
-  data-dash="ui"
->
-  .ui-7y43y9{color:var(--color-primary);}
-</style>
-`;
-
-exports[`useStyles() creates styles and class 1`] = `"ui-ga4wf1"`;
-
-exports[`useStyles() creates styles and class 2`] = `
-<style
-  data-dash="ui"
->
-  :root{--color-primary:#000;--color-secondary:#fff;}
-</style>
-`;
-
-exports[`useStyles() creates styles and class 3`] = `
-<style
-  data-dash="ui"
->
-  .ui-ga4wf1{color:var(--color-primary);color:var(--color-secondary);}
-</style>
-`;
-
 exports[`useThemes() adds variables then cleans up 1`] = `
 <style
   data-dash="ui"

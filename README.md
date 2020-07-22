@@ -37,7 +37,7 @@
 
 ```jsx harmony
 import {createStyles} from '@dash-ui/styles'
-import {DashProvider, useStyle} from '@dash-ui/react'
+import {DashProvider, useGlobal} from '@dash-ui/react'
 
 const styles = createStyles({
   variables: {
@@ -54,15 +54,18 @@ export const App = () => (
 )
 
 const Heading = () => {
-  const headingCls = useStyle(
+  useGlobal(
     ({color}) => `
-      font-size: 2rem;
-      font-family: -apple-system, sans-serif;
-      color: ${color.primary};
-    `
+      h1 {
+        font-size: 2rem;
+        font-family: -apple-system, sans-serif;
+        color: ${color.primary};
+      }
+    `,
+    []
   )
 
-  return <h1 className={headingCls}>Hello world</h1>
+  return <h1>Hello world</h1>
 }
 ```
 
@@ -77,14 +80,12 @@ const Heading = () => {
 
 ### Hooks
 
-| Hook                              | Description                                                                                                                                                                         |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`useDash()`](#usedash)           | A hook that returns the Dash `styles()` instance from the nearest provider.                                                                                                         |
-| [`useGlobal()`](#useglobal)       | A hook for inserting transient global styles into the DOM. These styles will be injected when the hook mounts and flushed when the hook unmounts.                                   |
-| [`useVariables()`](#usevariables) | A hook for inserting transient CSS variables into the DOM. These variables will be injected when the hook mounts and flushed when the hook unmounts.                                |
-| [`useThemes()`](#usethemes)       | A hook for inserting transient CSS theme variables into the DOM. These variables will be injected when the hook mounts and flushed when the hook unmounts.                          |
-| [`useStyle()`](#usestyle)         | A hook that accepts a tagged template literal, style object, or style callback, inserts the style into the DOM, and returns a class name.                                           |
-| [`useStyles()`](#usestyles)       | This is a hook for composing style definitions in a deterministic way. It returns a function which when called will insert your styles into the DOM and create a unique class name. |
+| Hook                              | Description                                                                                                                                                |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`useDash()`](#usedash)           | A hook that returns the Dash `styles()` instance from the nearest provider.                                                                                |
+| [`useGlobal()`](#useglobal)       | A hook for inserting transient global styles into the DOM. These styles will be injected when the hook mounts and flushed when the hook unmounts.          |
+| [`useVariables()`](#usevariables) | A hook for inserting transient CSS variables into the DOM. These variables will be injected when the hook mounts and flushed when the hook unmounts.       |
+| [`useThemes()`](#usethemes)       | A hook for inserting transient CSS theme variables into the DOM. These variables will be injected when the hook mounts and flushed when the hook unmounts. |
 
 ### Server rendering
 
@@ -434,88 +435,6 @@ function useThemes(
 ```typescript
 void
 ```
-
----
-
-### useStyle()
-
-A hook that accepts a tagged template literal, style object, or style callback,
-inserts the style into the DOM, and returns a class name.
-
-#### Example
-
-[Play with an example on **CodeSandbox**](https://codesandbox.io/s/dash-uireact-example-tkly3?file=/src/App.tsx)
-
-```tsx
-import {useStyle} from '@dash-ui/react'
-
-const Heading = () => {
-  const headingCls = useStyle(
-    ({color}) => `
-      font-size: 2rem;
-      font-family: -apple-system, sans-serif;
-      color: ${color.primary};
-    `
-  )
-
-  return <h1 className={headingCls}>Hello world</h1>
-}
-```
-
-#### Returns
-
-```typescript
-string // A class name
-```
-
----
-
-### useStyles()
-
-This is a hook for composing style definitions in a deterministic way. It returns a
-function which when called will insert your styles into the DOM and create a
-unique class name.
-
-#### Example
-
-[Play with an example on **CodeSandbox**](https://codesandbox.io/s/dash-uireact-usestyles-example-s4cxd?file=/src/App.tsx)
-
-```tsx
-import {useStyles} from '@dash-ui/react'
-
-const Component = () => {
-  const box = useStyles({
-    default: {
-      width: 200,
-      height: 200,
-    },
-    // Define styles using an object
-    blue: {
-      backgroundColor: 'blue',
-    },
-    // Access stored CSS variables when a callback is provided as
-    // the value
-    red: ({colors}) => `
-     background-color: ${colors.red};
-   `,
-    // Define styles using a string
-    green: `
-     background-color: green;
-   `,
-  })
-
-  // This will have a red background
-  return <div className={box('blue', 'red')} />
-}
-```
-
-#### Returns
-
-```typescript
-Style<Names> // A style() callback
-```
-
----
 
 ### &lt;Style&gt;
 
