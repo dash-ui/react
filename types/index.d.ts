@@ -1,7 +1,5 @@
 import * as React from 'react'
 import type {
-  Style,
-  StyleMap,
   StyleObject,
   StyleCallback,
   Styles,
@@ -117,53 +115,6 @@ export declare function useThemes(
     | Falsy,
   deps?: React.DependencyList
 ): void
-/**
- * A hook that accepts a tagged template literal, style object, or style callback,
- * and returns a class name.
- *
- * @example
- * const Component = () => {
- *   const className = useStyle`
- *     background-color: aliceblue;
- *   `
- *
- *   return <div className={className}/>
- * }
- */
-export declare function useStyle(
-  literals: TemplateStringsArray | string | StyleObject | StyleCallback | Falsy,
-  ...placeholders: string[]
-): string
-/**
- * This is a hook for composing style definitions in a
- * deterministic way. It returns a function which when called will insert
- * your styles into the DOM and create a unique class name.
- *
- * @example
- * const Component = () => {
- *   const bg = useStyles({
- *     // Define styles using an object
- *     blue: {
- *       backgroundColor: 'blue'
- *     },
- *     // Access stored CSS variables when a callback is provided as
- *     // the value
- *     red: ({colors}) => `
- *       background-color: ${colors.red};
- *     `,
- *     // Define styles using a string
- *     green: `
- *       background-color: green;
- *     `
- *   })
- *
- *   // This will have a red background
- *   return <div className={bg('blue', 'red')}/>
- * }
- */
-export declare function useStyles<Names extends string>(
-  styleMap: StyleMap<Names, DashVariables> | Falsy
-): Style<Names>
 declare type DeepPartial<T> = T extends (...args: any[]) => any
   ? T
   : T extends Record<string, unknown>
