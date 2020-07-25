@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/dash-ui/react/compare/v0.7.0...v0.8.0) (2020-07-25)
+
+### ⚠ BREAKING CHANGES
+
+- The `dash` prop in `<DashProvider>` has been renamed to `styles` and `useDash()`
+  now returns an object instead of just the styles instance
+
+- refactor context ([cf6052a](https://github.com/dash-ui/react/commit/cf6052aa3c88a6f424b5967b2e2698e86fc12dcb))
+
 ## [0.7.0](https://github.com/dash-ui/react/compare/v0.6.1...v0.7.0) (2020-07-22)
 
 ### ⚠ BREAKING CHANGES

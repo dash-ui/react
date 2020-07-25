@@ -10,27 +10,33 @@ import type {
 /**
  * A hook for consuming dash context from the provider
  */
-export declare function useDash(): Styles
+export declare function useDash(): DashContextValue
+export interface DashContextValue {
+  /**
+   * A `styles()` instance
+   */
+  styles: Styles
+}
 /**
  * The Dash context provider. Use this to control the `styles()` instance
  * your app is using.
  */
 export declare function DashProvider({
-  dash,
+  styles,
   children,
 }: DashProviderProps): JSX.Element
 export interface DashProviderProps {
   /**
    * A `styles()` instance. Defaults to the default instance in `@dash-ui/styles`
    */
-  dash?: Styles
+  styles?: Styles
   children?: React.ReactNode
 }
 /**
  * A component for creating an inline `<style>` tag that is unmounted when
  * the component unmounts.
  */
-export declare function Inline({css}: InlineProps): JSX.Element | null
+export declare function Inline({css: input}: InlineProps): JSX.Element | null
 export interface InlineProps {
   /**
    * The CSS you want to inline in the DOM.
