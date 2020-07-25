@@ -11,13 +11,22 @@ import type {
 } from '@dash-ui/styles'
 
 const IS_BROWSER = typeof document !== 'undefined'
-const DashContext = React.createContext(defaultStyles)
+const DashContext = React.createContext<DashContextValue>({
+  styles: defaultStyles,
+})
 
 /**
  * A hook for consuming dash context from the provider
  */
-export function useDash(): Styles {
-  return React.useContext<Styles>(DashContext)
+export function useDash() {
+  return React.useContext(DashContext)
+}
+
+export interface DashContextValue {
+  /**
+   * A `styles()` instance
+   */
+  styles: Styles
 }
 
 /**
@@ -25,17 +34,22 @@ export function useDash(): Styles {
  * your app is using.
  */
 export function DashProvider({
-  dash = defaultStyles,
+  styles = defaultStyles,
   children,
 }: DashProviderProps) {
-  return <DashContext.Provider value={dash} children={children} />
+  return (
+    <DashContext.Provider
+      value={React.useMemo(() => ({styles}), [styles])}
+      children={children}
+    />
+  )
 }
 
 export interface DashProviderProps {
   /**
    * A `styles()` instance. Defaults to the default instance in `@dash-ui/styles`
    */
-  dash?: Styles
+  styles?: Styles
   children?: React.ReactNode
 }
 
@@ -43,17 +57,17 @@ export interface DashProviderProps {
  * A component for creating an inline `<style>` tag that is unmounted when
  * the component unmounts.
  */
-export function Inline({css}: InlineProps) {
-  const {dash, one} = useDash()
-  const styles = one(css).css()
+export function Inline({css: input}: InlineProps) {
+  const {styles} = useDash()
+  const css = styles.one(input).css()
 
-  return !styles ? null : (
+  return !css ? null : (
     // We don't want data-cache, data-dash props here because
     // we don't want this to be moved into the head of the document
     // during SSR hydration
     <style
-      dangerouslySetInnerHTML={{__html: styles}}
-      nonce={dash.sheet.nonce ? dash.sheet.nonce : void 0}
+      dangerouslySetInnerHTML={{__html: css}}
+      nonce={styles.dash.sheet.nonce ? styles.dash.sheet.nonce : void 0}
     />
   )
 }
@@ -95,7 +109,7 @@ export function useGlobal(
 ) {
   // inserts global styles into the dom and cleans up its
   // styles when the component is unmounted
-  const styles = useDash()
+  const {styles} = useDash()
   useLayoutEffect(
     () => (value ? styles.insertGlobal(value) : noop),
     (deps = deps && deps.concat(styles))
@@ -124,7 +138,7 @@ export function useVariables(
   value: DeepPartial<DashVariables> | Falsy,
   deps?: React.DependencyList
 ) {
-  const styles = useDash()
+  const {styles} = useDash()
   useLayoutEffect(
     () => (value ? styles.insertVariables(value) : noop),
     (deps = deps && deps.concat(styles))
@@ -164,7 +178,7 @@ export function useThemes(
     | Falsy,
   deps?: React.DependencyList
 ) {
-  const styles = useDash()
+  const {styles} = useDash()
   useLayoutEffect(
     () => (value ? styles.insertThemes(value) : noop),
     (deps = deps && deps.concat(styles))

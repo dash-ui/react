@@ -11,8 +11,6 @@ import {
   useGlobal,
   useThemes,
   useVariables,
-  useStyle,
-  useStyles,
 } from './index'
 
 afterEach(() => {
@@ -48,18 +46,18 @@ describe('<DashProvider>', () => {
 
   it('provides the default styles() configuration', () => {
     const {result} = renderHook(() => useDash(), opt())
-    expect(result.current).toBe(styles)
+    expect(result.current.styles).toBe(styles)
   })
 
   it('provides a custom styles() configuration', () => {
     const myStyles = createStyles()
-    const {result} = renderHook(() => useDash(), opt({dash: myStyles}))
-    expect(result.current).toBe(myStyles)
+    const {result} = renderHook(() => useDash(), opt({styles: myStyles}))
+    expect(result.current.styles).toBe(myStyles)
   })
 
   it('works without a provider', () => {
     const {result} = renderHook(() => useDash())
-    expect(result.current).toBe(styles)
+    expect(result.current.styles).toBe(styles)
   })
 })
 
@@ -90,7 +88,7 @@ describe('<Inline>', () => {
             display: block;
           `}
         />,
-        {dash: myStyles}
+        {styles: myStyles}
       )
     ).toMatchSnapshot()
   })
@@ -106,7 +104,7 @@ describe('<Inline>', () => {
 
     expect(
       renderFragment(<Inline css={({color}) => `color: ${color.primary};`} />, {
-        dash: myStyles,
+        styles: myStyles,
       })
     ).toMatchSnapshot()
   })
@@ -117,7 +115,7 @@ describe('<Inline>', () => {
 
     expect(
       renderFragment(<Inline css={''} />, {
-        dash: myStyles,
+        styles: myStyles,
       })
     ).toMatchSnapshot()
   })
@@ -128,7 +126,7 @@ describe('useGlobal()', () => {
     const myStyles = createStyles()
     const {unmount, rerender} = renderHook(
       () => useGlobal(`:root { --blue: #09a; }`),
-      opt({dash: myStyles})
+      opt({styles: myStyles})
     )
 
     rerender()
@@ -146,7 +144,7 @@ describe('useGlobal()', () => {
     myStyles.insertVariables({color: {primary: '#000', secondary: '#fff'}})
     const {unmount, rerender} = renderHook(
       () => useGlobal(({color}) => `body { background: ${color.primary}; }`),
-      opt({dash: myStyles})
+      opt({styles: myStyles})
     )
 
     rerender()
@@ -164,16 +162,16 @@ describe('useGlobal()', () => {
 
   it('handles falsy values', async () => {
     const myStyles = createStyles()
-    renderHook(() => useGlobal(false), opt({dash: myStyles}))
+    renderHook(() => useGlobal(false), opt({styles: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHook(() => useGlobal(0), opt({dash: myStyles}))
+    renderHook(() => useGlobal(0), opt({styles: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHook(() => useGlobal(null), opt({dash: myStyles}))
+    renderHook(() => useGlobal(null), opt({styles: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
 
-    renderHook(() => useGlobal(''), opt({dash: myStyles}))
+    renderHook(() => useGlobal(''), opt({styles: myStyles}))
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0)
     await cleanup()
   })
@@ -189,7 +187,7 @@ describe('useVariables()', () => {
         useVariables({
           color: {primary: '#000', secondary: '#fff'},
         }),
-      opt({dash: myStyles})
+      opt({styles: myStyles})
     )
 
     rerender()
@@ -217,7 +215,7 @@ describe('useThemes()', () => {
             color: {primary: '#fff', secondary: '#000'},
           },
         }),
-      opt({dash: createStyles()})
+      opt({styles: createStyles()})
     )
 
     rerender()

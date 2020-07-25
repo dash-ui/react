@@ -48,7 +48,7 @@ const styles = createStyles({
 })
 
 export const App = () => (
-  <DashProvider dash={styles}>
+  <DashProvider styles={styles}>
     <Heading />
   </DashProvider>
 )
@@ -114,9 +114,9 @@ in its Dash hooks/components.
 
 #### Props
 
-| Prop | Type                                    | Required? | Description                                                                                                                                                   |
-| ---- | --------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| dash | `Styles<DashVariables, DashThemeNames>` | No        | The Dash context provider. Use this to control the `styles()` instance your app is using. Defaults to the default `styles()` instance from `@dash-ui/styles`. |
+| Prop   | Type                                    | Required? | Description                                                                                                                                                   |
+| ------ | --------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| styles | `Styles<DashVariables, DashThemeNames>` | No        | The Dash context provider. Use this to control the `styles()` instance your app is using. Defaults to the default `styles()` instance from `@dash-ui/styles`. |
 
 ---
 
@@ -166,7 +166,7 @@ import * as React from 'react'
 import {DashProvider, useDash} from '@dash-ui/react'
 
 const Component = () => {
-  const styles = useDash()
+  const {styles} = useDash()
   return <div className={styles.cls`background-color: #000;`} />
 }
 
@@ -180,8 +180,12 @@ export const App = () => (
 #### Returns
 
 ```typescript
-// A styles() instance
-Styles<DashVariables, DashThemeNames>
+export interface DashContextValue {
+  /**
+   * A `styles()` instance
+   */
+  styles: Styles
+}
 ```
 
 ---
@@ -227,7 +231,7 @@ const Component = () => {
 }
 
 export const App = () => (
-  <DashProvider dash={styles}>
+  <DashProvider styles={styles}>
     <Component />
   </DashProvider>
 )
@@ -290,7 +294,7 @@ const Component = () => {
 }
 
 export default () => (
-  <DashProvider dash={styles}>
+  <DashProvider styles={styles}>
     <Component />
   </DashProvider>
 )
@@ -404,7 +408,7 @@ const Component = () => {
 }
 
 export default () => (
-  <DashProvider dash={styles}>
+  <DashProvider styles={styles}>
     <Component />
   </DashProvider>
 )
