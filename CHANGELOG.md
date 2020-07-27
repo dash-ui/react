@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/dash-ui/react/compare/v0.8.0...v0.9.0) (2020-07-27)
+
+### ⚠ BREAKING CHANGES
+
+- Drops support for @dash-ui/styles@<0.8.0
+
+- rename "variables" to "tokens" ([4d84fd8](https://github.com/dash-ui/react/commit/4d84fd8e45c23cba9790348d3a8a8963ffe921c3))
+
 ## [0.8.0](https://github.com/dash-ui/react/compare/v0.7.0...v0.8.0) (2020-07-25)
 
 ### ⚠ BREAKING CHANGES
