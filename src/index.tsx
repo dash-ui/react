@@ -5,7 +5,7 @@ import type {
   StyleObject,
   StyleCallback,
   Styles,
-  DashVariables,
+  DashTokens,
   DashThemes,
   Falsy,
 } from '@dash-ui/styles'
@@ -118,39 +118,36 @@ export function useGlobal(
 }
 
 /**
- * A hook for inserting transient CSS variables into the DOM. These variables
+ * A hook for inserting transient CSS tokens into the DOM. These tokens
  * will be injected when the hook mounts and flushed when the hook unmounts.
  *
- * @param value CSS variables to inject into the DOM and flush when the hook unmounts
- * @param deps A dependency array that will force the hook to re-insert variables
+ * @param value CSS tokens to inject into the DOM and flush when the hook unmounts
+ * @param deps A dependency array that will force the hook to re-insert tokens
  *
  * @example
  * const Component = () => {
  *   const [userFontSize, setUserFontSize] = React.useState('100%')
  *
- *   useVariables(
+ *   useTokens(
  *     {fontSize: userFontSize},
  *     [userFontSize]
  *   )
  * }
  */
-export function useVariables(
-  value: DeepPartial<DashVariables> | Falsy,
+export function useTokens(
+  value: DeepPartial<DashTokens> | Falsy,
   deps?: React.DependencyList
 ) {
   const {styles} = useDash()
   useLayoutEffect(
-    () => (value ? styles.insertVariables(value) : noop),
+    () => (value ? styles.insertTokens(value) : noop),
     (deps = deps && deps.concat(styles))
   )
-  React.useMemo(
-    () => !IS_BROWSER && value && styles.insertVariables(value),
-    deps
-  )
+  React.useMemo(() => !IS_BROWSER && value && styles.insertTokens(value), deps)
 }
 
 /**
- * A hook for inserting transient CSS theme variables into the DOM. These variables
+ * A hook for inserting transient CSS theme tokens into the DOM. These tokens
  * will be injected when the hook mounts and flushed when the hook unmounts.
  *
  * @param value Themes to inject into the DOM and flush when the hook unmounts

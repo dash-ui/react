@@ -10,7 +10,7 @@ import {
   useDash,
   useGlobal,
   useThemes,
-  useVariables,
+  useTokens,
 } from './index'
 
 afterEach(() => {
@@ -28,7 +28,7 @@ const renderFragment = (children = null, props = {}, options = {}) =>
   }).asFragment()
 
 declare module '@dash-ui/styles' {
-  interface DashVariables {
+  interface DashTokens {
     color: {
       primary: string
       secondary?: string
@@ -36,8 +36,8 @@ declare module '@dash-ui/styles' {
   }
 
   interface DashThemes {
-    light: DashVariables
-    dark: DashVariables
+    light: DashTokens
+    dark: DashTokens
   }
 }
 
@@ -100,7 +100,7 @@ describe('<Inline>', () => {
   })
 
   it('writes css callback', () => {
-    const myStyles = createStyles({variables: {color: {primary: '#000'}}})
+    const myStyles = createStyles({tokens: {color: {primary: '#000'}}})
 
     expect(
       renderFragment(<Inline css={({color}) => `color: ${color.primary};`} />, {
@@ -111,7 +111,7 @@ describe('<Inline>', () => {
 
   it(`doesn't write falsy css callback`, () => {
     const myStyles = createStyles()
-    myStyles.insertVariables({color: {primary: '#000'}})
+    myStyles.insertTokens({color: {primary: '#000'}})
 
     expect(
       renderFragment(<Inline css={''} />, {
@@ -141,7 +141,7 @@ describe('useGlobal()', () => {
 
   it('sets global styles with a function value', async () => {
     const myStyles = createStyles()
-    myStyles.insertVariables({color: {primary: '#000', secondary: '#fff'}})
+    myStyles.insertTokens({color: {primary: '#000', secondary: '#fff'}})
     const {unmount, rerender} = renderHook(
       () => useGlobal(({color}) => `body { background: ${color.primary}; }`),
       opt({styles: myStyles})
@@ -150,7 +150,7 @@ describe('useGlobal()', () => {
     rerender()
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(2)
     expect(document.querySelectorAll(`style[data-dash]`)[0]).toMatchSnapshot(
-      'variables'
+      'tokens'
     )
     expect(document.querySelectorAll(`style[data-dash]`)[1]).toMatchSnapshot(
       'global'
@@ -177,14 +177,14 @@ describe('useGlobal()', () => {
   })
 })
 
-describe('useVariables()', () => {
+describe('useTokens()', () => {
   afterEach(cleanup)
 
-  it('adds variables then cleans up', async () => {
+  it('adds tokens then cleans up', async () => {
     const myStyles = createStyles()
     const {unmount, rerender} = renderHook(
       () =>
-        useVariables({
+        useTokens({
           color: {primary: '#000', secondary: '#fff'},
         }),
       opt({styles: myStyles})
@@ -204,7 +204,7 @@ describe('useVariables()', () => {
 describe('useThemes()', () => {
   afterEach(cleanup)
 
-  it('adds variables then cleans up', async () => {
+  it('adds tokens then cleans up', async () => {
     const {unmount, rerender} = renderHook(
       () =>
         useThemes({

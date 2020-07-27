@@ -48,7 +48,7 @@ exports[`useGlobal() sets global styles with a function value: global 1`] = `
 </style>
 `;
 
-exports[`useGlobal() sets global styles with a function value: variables 1`] = `
+exports[`useGlobal() sets global styles with a function value: tokens 1`] = `
 <style
   data-dash="ui"
 >
@@ -64,7 +64,7 @@ exports[`useGlobal() sets global styles with a string value: :root 1`] = `
 </style>
 `;
 
-exports[`useThemes() adds variables then cleans up 1`] = `
+exports[`useThemes() adds tokens then cleans up 1`] = `
 <style
   data-dash="ui"
 >
@@ -72,7 +72,7 @@ exports[`useThemes() adds variables then cleans up 1`] = `
 </style>
 `;
 
-exports[`useThemes() adds variables then cleans up 2`] = `
+exports[`useThemes() adds tokens then cleans up 2`] = `
 <style
   data-dash="ui"
 >
@@ -80,7 +80,7 @@ exports[`useThemes() adds variables then cleans up 2`] = `
 </style>
 `;
 
-exports[`useVariables() adds variables then cleans up: :root 1`] = `
+exports[`useTokens() adds tokens then cleans up: :root 1`] = `
 <style
   data-dash="ui"
 >

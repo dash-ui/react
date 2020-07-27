@@ -40,7 +40,7 @@ import {createStyles} from '@dash-ui/styles'
 import {DashProvider, useGlobal} from '@dash-ui/react'
 
 const styles = createStyles({
-  variables: {
+  tokens: {
     color: {
       primary: '#ee5b5f',
     },
@@ -80,12 +80,12 @@ const Heading = () => {
 
 ### Hooks
 
-| Hook                              | Description                                                                                                                                                |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`useDash()`](#usedash)           | A hook that returns the Dash `styles()` instance from the nearest provider.                                                                                |
-| [`useGlobal()`](#useglobal)       | A hook for inserting transient global styles into the DOM. These styles will be injected when the hook mounts and flushed when the hook unmounts.          |
-| [`useVariables()`](#usevariables) | A hook for inserting transient CSS variables into the DOM. These variables will be injected when the hook mounts and flushed when the hook unmounts.       |
-| [`useThemes()`](#usethemes)       | A hook for inserting transient CSS theme variables into the DOM. These variables will be injected when the hook mounts and flushed when the hook unmounts. |
+| Hook                        | Description                                                                                                                                          |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`useDash()`](#usedash)     | A hook that returns the Dash `styles()` instance from the nearest provider.                                                                          |
+| [`useGlobal()`](#useglobal) | A hook for inserting transient global styles into the DOM. These styles will be injected when the hook mounts and flushed when the hook unmounts.    |
+| [`useTokens()`](#usetokens) | A hook for inserting transient CSS tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts.       |
+| [`useThemes()`](#usethemes) | A hook for inserting transient CSS theme tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts. |
 
 ### Server rendering
 
@@ -100,10 +100,10 @@ const Heading = () => {
 Dash is written in TypeScript. It's also strongly typed, creating a beautiful IntelliSense
 experience in VSCode and providing solid insurance to your TypeScript application.
 
-|                                                       | Description                                                                |
-| ----------------------------------------------------- | -------------------------------------------------------------------------- |
-| [Strongly typed variables](#strongly-typed-variables) | Learn how to add autocomplete and type safety to your CSS variables.       |
-| [Strongly typed themes](#strongly-typed-variables)    | Learn how to add autocomplete and type safety to your CSS variable themes. |
+|                                                 | Description                                                                |
+| ----------------------------------------------- | -------------------------------------------------------------------------- |
+| [Strongly typed tokens](#strongly-typed-tokens) | Learn how to add autocomplete and type safety to your CSS tokens.          |
+| [Strongly typed themes](#strongly-typed-tokens) | Learn how to add autocomplete and type safety to your CSS variable themes. |
 
 ---
 
@@ -114,9 +114,9 @@ in its Dash hooks/components.
 
 #### Props
 
-| Prop   | Type                                    | Required? | Description                                                                                                                                                   |
-| ------ | --------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| styles | `Styles<DashVariables, DashThemeNames>` | No        | The Dash context provider. Use this to control the `styles()` instance your app is using. Defaults to the default `styles()` instance from `@dash-ui/styles`. |
+| Prop   | Type                                 | Required? | Description                                                                                                                                                   |
+| ------ | ------------------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| styles | `Styles<DashTokens, DashThemeNames>` | No        | The Dash context provider. Use this to control the `styles()` instance your app is using. Defaults to the default `styles()` instance from `@dash-ui/styles`. |
 
 ---
 
@@ -149,9 +149,9 @@ export const App = () => {
 
 #### Props
 
-| Prop | Type                        | Required? | Description                            |
-| ---- | --------------------------- | --------- | -------------------------------------- |
-| css  | `StyleValue<DashVariables>` | Yes       | The CSS you want to inline in the DOM. |
+| Prop | Type                     | Required? | Description                            |
+| ---- | ------------------------ | --------- | -------------------------------------- |
+| css  | `StyleValue<DashTokens>` | Yes       | The CSS you want to inline in the DOM. |
 
 ---
 
@@ -245,14 +245,14 @@ void
 
 ---
 
-### useVariables()
+### useTokens()
 
-A hook for inserting transient CSS variables into the DOM. These variables will be
+A hook for inserting transient CSS tokens into the DOM. These tokens will be
 injected when the hook mounts and flushed when the hook unmounts.
 
 #### Example
 
-[Play with an example on **CodeSandbox**](https://codesandbox.io/s/dash-uireact-usevariables-example-uwegk?file=/src/App.tsx)
+[Play with an example on **CodeSandbox**](https://codesandbox.io/s/dash-uireact-usetokens-example-uwegk?file=/src/App.tsx)
 
 ```tsx
 import * as React from 'react'
@@ -260,7 +260,7 @@ import {createStyles} from '@dash-ui/styles'
 import {DashProvider, useThemes} from '@dash-ui/react'
 
 const styles = createStyles({
-  variables: {
+  tokens: {
     primaryColor: '#ee5b5f',
   },
 })
@@ -268,7 +268,7 @@ const styles = createStyles({
 const Component = () => {
   const [primaryColor, setPrimaryColor] = React.useState('#ee5b5f')
 
-  useVariables({primaryColor}, [primaryColor])
+  useTokens({primaryColor}, [primaryColor])
 
   return (
     <div>
@@ -303,16 +303,16 @@ export default () => (
 #### Arguments
 
 ```typescript
-function useVariables(
-  value: DeepPartial<DashVariables> | Falsy,
+function useTokens(
+  value: DeepPartial<DashTokens> | Falsy,
   deps?: React.DependencyList
 )
 ```
 
-| Argument | Type                                 | Required? | Description                                                           |
-| -------- | ------------------------------------ | --------- | --------------------------------------------------------------------- |
-| value    | `DeepPartial<DashVariables> | Falsy` | Yes       | CSS variables to inject into the DOM and flush when the hook unmounts |
-| deps     | `React.DependencyList`               | No        | A dependency array that will force the hook to re-insert variables    |
+| Argument | Type                              | Required? | Description                                                        |
+| -------- | --------------------------------- | --------- | ------------------------------------------------------------------ |
+| value    | `DeepPartial<DashTokens> | Falsy` | Yes       | CSS tokens to inject into the DOM and flush when the hook unmounts |
+| deps     | `React.DependencyList`            | No        | A dependency array that will force the hook to re-insert tokens    |
 
 #### Returns
 
@@ -324,7 +324,7 @@ void
 
 ### useThemes()
 
-A hook for inserting transient CSS theme variables into the DOM. These variables
+A hook for inserting transient CSS theme tokens into the DOM. These tokens
 will be injected when the hook mounts and flushed when the hook unmounts.
 
 #### Example
@@ -338,11 +338,11 @@ import {DashProvider, useThemes} from '@dash-ui/react'
 
 const styles = createStyles({
   themes: {
-    // Light mode CSS variables
+    // Light mode CSS tokens
     light: {
       primaryColor: '#ee5b5f',
     },
-    // Dark mode CSS variables
+    // Dark mode CSS tokens
     dark: {
       primaryColor: '#272727',
     },
@@ -472,10 +472,10 @@ export default class MyDocument extends Document {
 
 #### Props
 
-| Prop   | Type                                    | Required? | Description                                                                              |
-| ------ | --------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
-| html   | `string`                                | Yes       | HTML generated by Next.js, `renderToStaticMarkup()` or `renderToString()`                |
-| styles | `Styles<DashVariables, DashThemeNames>` | No        | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Prop   | Type                                 | Required? | Description                                                                              |
+| ------ | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
+| html   | `string`                             | Yes       | HTML generated by Next.js, `renderToStaticMarkup()` or `renderToString()`                |
+| styles | `Styles<DashTokens, DashThemeNames>` | No        | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 ---
 
@@ -518,10 +518,10 @@ function toComponent(
 ): React.ReactElement
 ```
 
-| Argument | Type                                    | Required? | Description                                                                              |
-| -------- | --------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
-| html     | `string`                                | Yes       | The HTML generated by `renderToStaticMarkup()` or `renderToString()`                     |
-| styles   | `Styles<DashVariables, DashThemeNames>` | No        | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Argument | Type                                 | Required? | Description                                                                              |
+| -------- | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
+| html     | `string`                             | Yes       | The HTML generated by `renderToStaticMarkup()` or `renderToString()`                     |
+| styles   | `Styles<DashTokens, DashThemeNames>` | No        | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 #### Returns
 
@@ -553,9 +553,9 @@ exports.replaceRenderer = require('＠dash-ui/react/server').createGatsbyRendere
 function createGatsbyRenderer(styles: Styles = defaultStyles)
 ```
 
-| Argument | Type                                    | Required? | Description                                                                              |
-| -------- | --------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
-| styles   | `Styles<DashVariables, DashThemeNames>` | Yes       | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Argument | Type                                 | Required? | Description                                                                              |
+| -------- | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
+| styles   | `Styles<DashTokens, DashThemeNames>` | Yes       | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 #### Returns
 
@@ -565,29 +565,29 @@ function replaceRenderer<P = any>(props: P): P // A Gatsby replace renderer
 
 ---
 
-## Strongly typed variables
+## Strongly typed tokens
 
 To use variable types with `@dash-ui/react`, you have to use the module declaration
 pattern:
 
-[Play with this example on **CodeSandbox**](https://codesandbox.io/s/dash-uistyles-strongly-typed-variables-example-2-yk9bc?file=/src/App.tsx)
+[Play with this example on **CodeSandbox**](https://codesandbox.io/s/dash-uistyles-strongly-typed-tokens-example-2-yk9bc?file=/src/App.tsx)
 
 ```typescript
-const variables = {
+const tokens = {
   color: {
     red: '#c17',
   },
 }
 
-type AppVariables = typeof variables
+type AppTokens = typeof tokens
 
 declare module '@dash-ui/styles' {
-  export interface DashVariables extends AppVariables {}
+  export interface DashTokens extends AppTokens {}
 }
 
 // OR alternatively
 declare module '@dash-ui/styles' {
-  export interface DashVariables {
+  export interface DashTokens {
     color: {
       red: string
     }
@@ -621,24 +621,24 @@ const themes = {
 }
 
 type AppThemes = typeof themes
-type AppVariables = AppThemes['dark'] & AppThemes['light']
+type AppTokens = AppThemes['dark'] & AppThemes['light']
 
 declare module '@dash-ui/styles' {
-  export interface DashVariables extends AppVariables {}
+  export interface DashTokens extends AppTokens {}
   export interface DashThemes extends AppThemes {}
 }
 
 // OR alternatively
 declare module '@dash-ui/styles' {
-  export interface DashVariables {
+  export interface DashTokens {
     color: {
       bg: string
     }
   }
 
   export interface DashThemes {
-    light: DashVariables
-    dark: DashVariables
+    light: DashTokens
+    dark: DashTokens
   }
 }
 ```
