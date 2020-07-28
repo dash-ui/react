@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.1](https://github.com/dash-ui/react/compare/v0.9.0...v0.9.1) (2020-07-28)
+
+### Bug Fixes
+
+- fix DeepPartial type ([919b0b6](https://github.com/dash-ui/react/commit/919b0b6311434acf16e4c67076270f0a1de95d4f))
+
 ## [0.9.0](https://github.com/dash-ui/react/compare/v0.8.0...v0.9.0) (2020-07-27)
 
 ### ⚠ BREAKING CHANGES

@@ -123,7 +123,7 @@ export declare function useThemes(
 ): void
 declare type DeepPartial<T> = T extends (...args: any[]) => any
   ? T
-  : T extends Record<string, unknown>
+  : T extends Record<string, any>
   ? {
       [P in keyof T]?: DeepPartial<T[P]>
     }
