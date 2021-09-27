@@ -166,8 +166,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-test-renderer": "latest",
-    "standard-version": "^8.0.2",
-    "typescript": "latest"
+    "typescript": "^4.4.3"
   },
   "peerDependencies": {
     "@dash-ui/styles": ">=0.6.1",
