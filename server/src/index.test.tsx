@@ -1,61 +1,61 @@
 /**
  * @jest-environment node
  */
-import * as React from 'react'
-import {renderToStaticMarkup} from 'react-dom/server'
-import {styles, createStyles, createDash} from '@dash-ui/styles'
-import {Style} from './index'
+import { createDash, createStyles, styles } from "@dash-ui/styles";
+import * as React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { Style } from "./index";
 
-describe('<Style>', () => {
-  it('creates <style> tag based on html string', () => {
-    const styles = createStyles()
+describe("<Style>", () => {
+  it("creates <style> tag based on html string", () => {
+    const styles = createStyles();
     const style = styles({
-      default: 'display: block;',
-    })
-    const Component = () => <div className={style()} />
+      default: "display: block;",
+    });
+    const Component = () => <div className={style()} />;
 
     const result = renderToStaticMarkup(
       <Style html={renderToStaticMarkup(<Component />)} styles={styles} />
-    )
+    );
 
-    expect(result).toMatchSnapshot()
-  })
+    expect(result).toMatchSnapshot();
+  });
 
-  it('creates <style> tag with nonce', () => {
-    const styles = createStyles({dash: createDash({nonce: 'abc'})})
+  it("creates <style> tag with nonce", () => {
+    const styles = createStyles({ dash: createDash({ nonce: "abc" }) });
     const style = styles({
-      default: 'display: block;',
-    })
-    const Component = () => <div className={style()} />
+      default: "display: block;",
+    });
+    const Component = () => <div className={style()} />;
     const result = renderToStaticMarkup(
       <Style html={renderToStaticMarkup(<Component />)} styles={styles} />
-    )
+    );
 
-    expect(result).toMatchSnapshot()
-  })
+    expect(result).toMatchSnapshot();
+  });
 
-  it('creates <style> tag with cache key', () => {
-    const styles = createStyles({dash: createDash({key: 'abc'})})
+  it("creates <style> tag with cache key", () => {
+    const styles = createStyles({ dash: createDash({ key: "abc" }) });
     const style = styles({
-      default: 'display: block;',
-    })
-    const Component = () => <div className={style()} />
+      default: "display: block;",
+    });
+    const Component = () => <div className={style()} />;
     const result = renderToStaticMarkup(
       <Style html={renderToStaticMarkup(<Component />)} styles={styles} />
-    )
+    );
 
-    expect(result).toMatchSnapshot()
-  })
+    expect(result).toMatchSnapshot();
+  });
 
-  it('creates <style> tag with default styles function', () => {
+  it("creates <style> tag with default styles function", () => {
     const style = styles({
-      default: 'display: block;',
-    })
-    const Component = () => <div className={style()} />
+      default: "display: block;",
+    });
+    const Component = () => <div className={style()} />;
     const result = renderToStaticMarkup(
       <Style html={renderToStaticMarkup(<Component />)} />
-    )
+    );
 
-    expect(result).toMatchSnapshot()
-  })
-})
+    expect(result).toMatchSnapshot();
+  });
+});

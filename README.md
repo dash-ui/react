@@ -1,10 +1,7 @@
 <hr>
-  <br/>
-  <img src='https://github.com/dash-ui/styles/raw/master/assets/logo.png'/>
+  <img src='https://github.com/dash-ui/styles/raw/main/assets/logo.png'/>
   <blockquote>React components and hooks for <a href="https://github.com/dash-ui/styles">dash-ui</a></blockquote>
-  
   <pre>npm i @dash-ui/react</pre>
-  <br/>
   
   <a href="https://bundlephobia.com/result?p=@dash-ui/react">
     <img alt="Bundlephobia" src="https://img.shields.io/bundlephobia/minzip/@dash-ui/react?style=for-the-badge&labelColor=24292e">
@@ -16,8 +13,8 @@
   <a aria-label="Code coverage report" href="https://codecov.io/gh/dash-ui/react">
     <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/dash-ui/react?style=for-the-badge&labelColor=24292e">
   </a>
-  <a aria-label="Build status" href="https://travis-ci.com/dash-ui/react">
-    <img alt="Build status" src="https://img.shields.io/travis/com/dash-ui/react?style=for-the-badge&labelColor=24292e">
+  <a aria-label="Build status" href="https://github.com/dash-ui/react/actions/workflows/release.yml">
+    <img alt="Build status" src="https://img.shields.io/github/workflow/status/dash-ui/react/release/main?style=for-the-badge&labelColor=24292e">
   </a>
   <a aria-label="NPM version" href="https://www.npmjs.com/package/@dash-ui/react">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/@dash-ui/react?style=for-the-badge&labelColor=24292e">
@@ -36,26 +33,26 @@
 [Check out an example on **CodeSandbox**](https://codesandbox.io/s/dash-uireact-example-tkly3?file=/src/App.tsx)
 
 ```jsx harmony
-import {createStyles} from '@dash-ui/styles'
-import {DashProvider, useGlobal} from '@dash-ui/react'
+import { createStyles } from "@dash-ui/styles";
+import { DashProvider, useGlobal } from "@dash-ui/react";
 
 const styles = createStyles({
   tokens: {
     color: {
-      primary: '#ee5b5f',
+      primary: "#ee5b5f",
     },
   },
-})
+});
 
 export const App = () => (
   <DashProvider styles={styles}>
     <Heading />
   </DashProvider>
-)
+);
 
 const Heading = () => {
   useGlobal(
-    ({color}) => `
+    ({ color }) => `
       h1 {
         font-size: 2rem;
         font-family: -apple-system, sans-serif;
@@ -63,10 +60,10 @@ const Heading = () => {
       }
     `,
     []
-  )
+  );
 
-  return <h1>Hello world</h1>
-}
+  return <h1>Hello world</h1>;
+};
 ```
 
 ## API docs
@@ -162,19 +159,19 @@ A hook that returns the Dash `styles()` instance from the nearest provider.
 #### Example
 
 ```tsx
-import * as React from 'react'
-import {DashProvider, useDash} from '@dash-ui/react'
+import * as React from "react";
+import { DashProvider, useDash } from "@dash-ui/react";
 
 const Component = () => {
-  const {styles} = useDash()
-  return <div className={styles.cls`background-color: #000;`} />
-}
+  const { styles } = useDash();
+  return <div className={styles.cls`background-color: #000;`} />;
+};
 
 export const App = () => (
   <DashProvider>
     <Component />
   </DashProvider>
-)
+);
 ```
 
 #### Returns
@@ -184,7 +181,7 @@ export interface DashContextValue {
   /**
    * A `styles()` instance
    */
-  styles: Styles
+  styles: Styles;
 }
 ```
 
@@ -200,41 +197,41 @@ injected when the hook mounts and flushed when the hook unmounts.
 [Play with an example on **CodeSandbox**](https://codesandbox.io/s/dash-uireact-useglobal-example-u0urr?file=/src/App.tsx)
 
 ```tsx
-import * as React from 'react'
-import {createStyles} from '@dash-ui/styles'
-import {DashProvider, useGlobal} from '@dash-ui/react'
+import * as React from "react";
+import { createStyles } from "@dash-ui/styles";
+import { DashProvider, useGlobal } from "@dash-ui/react";
 
-const styles = createStyles()
+const styles = createStyles();
 
 const Component = () => {
   useGlobal(
     {
       body: {
-        minHeight: '100vh',
-        backgroundColor: '#ee5b5f',
-        color: '#fff',
-        fontFamily: 'Inter, -apple-system, sans-serif',
+        minHeight: "100vh",
+        backgroundColor: "#ee5b5f",
+        color: "#fff",
+        fontFamily: "Inter, -apple-system, sans-serif",
       },
       h1: {
-        margin: '1rem',
-        fontSize: '3rem',
+        margin: "1rem",
+        fontSize: "3rem",
       },
     },
     []
-  )
+  );
 
   return (
     <div>
       <h1>Hello world</h1>
     </div>
-  )
-}
+  );
+};
 
 export const App = () => (
   <DashProvider styles={styles}>
     <Component />
   </DashProvider>
-)
+);
 ```
 
 #### Returns
@@ -255,26 +252,26 @@ injected when the hook mounts and flushed when the hook unmounts.
 [Play with an example on **CodeSandbox**](https://codesandbox.io/s/dash-uireact-usetokens-example-uwegk?file=/src/App.tsx)
 
 ```tsx
-import * as React from 'react'
-import {createStyles} from '@dash-ui/styles'
-import {DashProvider, useThemes} from '@dash-ui/react'
+import * as React from "react";
+import { createStyles } from "@dash-ui/styles";
+import { DashProvider, useThemes } from "@dash-ui/react";
 
 const styles = createStyles({
   tokens: {
-    primaryColor: '#ee5b5f',
+    primaryColor: "#ee5b5f",
   },
-})
+});
 
 const Component = () => {
-  const [primaryColor, setPrimaryColor] = React.useState('#ee5b5f')
+  const [primaryColor, setPrimaryColor] = React.useState("#ee5b5f");
 
-  useTokens({primaryColor}, [primaryColor])
+  useTokens({ primaryColor }, [primaryColor]);
 
   return (
     <div>
       <div
         className={styles.cls(
-          ({primaryColor}) => `
+          ({ primaryColor }) => `
             width: 200px;
             height: 200px;
             background-color: ${primaryColor};
@@ -290,14 +287,14 @@ const Component = () => {
         />
       </label>
     </div>
-  )
-}
+  );
+};
 
 export default () => (
   <DashProvider styles={styles}>
     <Component />
   </DashProvider>
-)
+);
 ```
 
 #### Arguments
@@ -306,13 +303,13 @@ export default () => (
 function useTokens(
   value: DeepPartial<DashTokens> | Falsy,
   deps?: React.DependencyList
-)
+);
 ```
 
-| Argument | Type                              | Required? | Description                                                        |
-| -------- | --------------------------------- | --------- | ------------------------------------------------------------------ |
-| value    | `DeepPartial<DashTokens> | Falsy` | Yes       | CSS tokens to inject into the DOM and flush when the hook unmounts |
-| deps     | `React.DependencyList`            | No        | A dependency array that will force the hook to re-insert tokens    |
+| Argument | Type                     | Required? | Description                                                     |
+| -------- | ------------------------ | --------- | --------------------------------------------------------------- | ------------------------------------------------------------------ |
+| value    | `DeepPartial<DashTokens> | Falsy`    | Yes                                                             | CSS tokens to inject into the DOM and flush when the hook unmounts |
+| deps     | `React.DependencyList`   | No        | A dependency array that will force the hook to re-insert tokens |
 
 #### Returns
 
@@ -332,27 +329,27 @@ will be injected when the hook mounts and flushed when the hook unmounts.
 [Play with an example on **CodeSandbox**](https://codesandbox.io/s/dash-uireact-usethemes-example-cdb0d?file=/src/App.tsx)
 
 ```jsx
-import * as React from 'react'
-import {createStyles} from '@dash-ui/styles'
-import {DashProvider, useThemes} from '@dash-ui/react'
+import * as React from "react";
+import { createStyles } from "@dash-ui/styles";
+import { DashProvider, useThemes } from "@dash-ui/react";
 
 const styles = createStyles({
   themes: {
     // Light mode CSS tokens
     light: {
-      primaryColor: '#ee5b5f',
+      primaryColor: "#ee5b5f",
     },
     // Dark mode CSS tokens
     dark: {
-      primaryColor: '#272727',
+      primaryColor: "#272727",
     },
   },
-})
+});
 
 const Component = () => {
-  const [mode, setMode] = React.useState('light')
-  const [darkModePrimary, setDarkModePrimary] = React.useState('#272727')
-  const [lightModePrimary, setLightModePrimary] = React.useState('#ee5b5f')
+  const [mode, setMode] = React.useState("light");
+  const [darkModePrimary, setDarkModePrimary] = React.useState("#272727");
+  const [lightModePrimary, setLightModePrimary] = React.useState("#ee5b5f");
 
   useThemes(
     {
@@ -364,13 +361,13 @@ const Component = () => {
       },
     },
     [darkModePrimary, lightModePrimary]
-  )
+  );
 
   return (
     <body className={styles.theme(mode)}>
       <div
         className={styles.cls(
-          ({primaryColor}) => `
+          ({ primaryColor }) => `
             width: 200px;
             height: 200px;
             background-color: ${primaryColor};
@@ -381,10 +378,10 @@ const Component = () => {
       <div>
         <button
           onClick={() =>
-            setMode((mode) => (mode === 'light' ? 'dark' : 'light'))
+            setMode((mode) => (mode === "light" ? "dark" : "light"))
           }
         >
-          Switch to {mode === 'light' ? 'dark' : 'light'} mode
+          Switch to {mode === "light" ? "dark" : "light"} mode
         </button>
       </div>
 
@@ -404,14 +401,14 @@ const Component = () => {
         />
       </label>
     </body>
-  )
-}
+  );
+};
 
 export default () => (
   <DashProvider styles={styles}>
     <Component />
   </DashProvider>
-)
+);
 ```
 
 #### Arguments
@@ -419,14 +416,12 @@ export default () => (
 ```typescript
 function useThemes(
   value:
-    | DeepPartial<
-        {
-          [Name in keyof DashThemes]: DashThemes[Name]
-        }
-      >
+    | DeepPartial<{
+        [Name in keyof DashThemes]: DashThemes[Name];
+      }>
     | Falsy,
   deps?: React.DependencyList
-)
+);
 ```
 
 | Argument | Type                                                                  | Required? | Description                                                     |
@@ -448,14 +443,14 @@ A React component for injecting SSR CSS styles into Next.js documents.
 
 ```tsx
 // _document.js
-import React from 'react'
-import Document from 'next/document'
-import {styles} from '@dash-ui/styles'
-import {Style} from '＠dash-ui/react/server'
+import React from "react";
+import Document from "next/document";
+import { styles } from "@dash-ui/styles";
+import { Style } from "＠dash-ui/react/server";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
+    const initialProps = await Document.getInitialProps(ctx);
 
     return {
       ...initialProps,
@@ -465,7 +460,7 @@ export default class MyDocument extends Document {
           <Style html={initialProps.html} styles={styles} />
         </React.Fragment>
       ),
-    }
+    };
   }
 }
 ```
@@ -487,14 +482,14 @@ A function for creating a React `<style>` component for inserting Dash styles in
 
 ```tsx
 // _document.js
-import React from 'react'
-import Document from 'next/document'
-import {styles} from '@dash-ui/styles'
-import {toComponent} from '＠dash-ui/react/server'
+import React from "react";
+import Document from "next/document";
+import { styles } from "@dash-ui/styles";
+import { toComponent } from "＠dash-ui/react/server";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
+    const initialProps = await Document.getInitialProps(ctx);
 
     return {
       ...initialProps,
@@ -504,7 +499,7 @@ export default class MyDocument extends Document {
           {toComponent(initialProps.html, styles)}
         </React.Fragment>
       ),
-    }
+    };
   }
 }
 ```
@@ -515,7 +510,7 @@ export default class MyDocument extends Document {
 function toComponent(
   html: string,
   styles: Styles = defaultStyles
-): React.ReactElement
+): React.ReactElement;
 ```
 
 | Argument | Type                                 | Required? | Description                                                                              |
@@ -526,7 +521,7 @@ function toComponent(
 #### Returns
 
 ```typescript
-React.ReactElement // A <style> element
+React.ReactElement; // A <style> element
 ```
 
 ---
@@ -540,17 +535,16 @@ injecting styles generated by Dash on the server into the Gatsby `<head>` compon
 
 ```js
 // gatsby-ssr.js
-const {styles} = require('@dash-ui/styles')
+const { styles } = require("@dash-ui/styles");
 
-exports.replaceRenderer = require('＠dash-ui/react/server').createGatsbyRenderer(
-  styles
-)
+exports.replaceRenderer =
+  require("＠dash-ui/react/server").createGatsbyRenderer(styles);
 ```
 
 #### Arguments
 
 ```typescript
-function createGatsbyRenderer(styles: Styles = defaultStyles)
+function createGatsbyRenderer(styles: Styles = defaultStyles);
 ```
 
 | Argument | Type                                 | Required? | Description                                                                              |
@@ -560,7 +554,7 @@ function createGatsbyRenderer(styles: Styles = defaultStyles)
 #### Returns
 
 ```typescript
-function replaceRenderer<P = any>(props: P): P // A Gatsby replace renderer
+function replaceRenderer<P = any>(props: P): P; // A Gatsby replace renderer
 ```
 
 ---
@@ -575,22 +569,22 @@ pattern:
 ```typescript
 const tokens = {
   color: {
-    red: '#c17',
+    red: "#c17",
   },
-}
+};
 
-type AppTokens = typeof tokens
+type AppTokens = typeof tokens;
 
-declare module '@dash-ui/styles' {
+declare module "@dash-ui/styles" {
   export interface DashTokens extends AppTokens {}
 }
 
 // OR alternatively
-declare module '@dash-ui/styles' {
+declare module "@dash-ui/styles" {
   export interface DashTokens {
     color: {
-      red: string
-    }
+      red: string;
+    };
   }
 }
 ```
@@ -609,36 +603,36 @@ const themes = {
   light: {
     color: {
       // var(--color-bg)
-      bg: '#fafafa',
+      bg: "#fafafa",
     },
   },
   dark: {
     color: {
       // var(--color-bg)
-      bg: '#1a1a1a',
+      bg: "#1a1a1a",
     },
   },
-}
+};
 
-type AppThemes = typeof themes
-type AppTokens = AppThemes['dark'] & AppThemes['light']
+type AppThemes = typeof themes;
+type AppTokens = AppThemes["dark"] & AppThemes["light"];
 
-declare module '@dash-ui/styles' {
+declare module "@dash-ui/styles" {
   export interface DashTokens extends AppTokens {}
   export interface DashThemes extends AppThemes {}
 }
 
 // OR alternatively
-declare module '@dash-ui/styles' {
+declare module "@dash-ui/styles" {
   export interface DashTokens {
     color: {
-      bg: string
-    }
+      bg: string;
+    };
   }
 
   export interface DashThemes {
-    light: DashTokens
-    dark: DashTokens
+    light: DashTokens;
+    dark: DashTokens;
   }
 }
 ```

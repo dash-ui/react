@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from "react";
 import type {
   StyleObject,
   StyleCallback,
@@ -6,16 +6,16 @@ import type {
   DashTokens,
   DashThemes,
   Falsy,
-} from '@dash-ui/styles'
+} from "@dash-ui/styles";
 /**
  * A hook for consuming dash context from the provider
  */
-export declare function useDash(): DashContextValue
+export declare function useDash(): DashContextValue;
 export interface DashContextValue {
   /**
    * A `styles()` instance
    */
-  styles: Styles
+  styles: Styles;
 }
 /**
  * The Dash context provider. Use this to control the `styles()` instance
@@ -24,19 +24,19 @@ export interface DashContextValue {
 export declare function DashProvider({
   styles,
   children,
-}: DashProviderProps): JSX.Element
+}: DashProviderProps): JSX.Element;
 export interface DashProviderProps {
   /**
    * A `styles()` instance. Defaults to the default instance in `@dash-ui/styles`
    */
-  styles?: Styles
-  children?: React.ReactNode
+  styles?: Styles;
+  children?: React.ReactNode;
 }
 /**
  * A component for creating an inline `<style>` tag that is unmounted when
  * the component unmounts.
  */
-export declare function Inline({css: input}: InlineProps): JSX.Element | null
+export declare function Inline({ css: input }: InlineProps): JSX.Element | null;
 export interface InlineProps {
   /**
    * The CSS you want to inline in the DOM.
@@ -44,7 +44,7 @@ export interface InlineProps {
    * @example
    * const Component => <Inline css={({color}) => `html { color: ${color.text}; }`}/>
    */
-  css: string | StyleCallback | StyleObject
+  css: string | StyleCallback | StyleObject;
 }
 /**
  * A hook for inserting transient global styles into the DOM. These styles
@@ -70,7 +70,7 @@ export interface InlineProps {
 export declare function useGlobal(
   value: string | StyleCallback | StyleObject | null | 0 | undefined | false,
   deps?: React.DependencyList
-): void
+): void;
 /**
  * A hook for inserting transient CSS tokens into the DOM. These tokens
  * will be injected when the hook mounts and flushed when the hook unmounts.
@@ -91,7 +91,7 @@ export declare function useGlobal(
 export declare function useTokens(
   value: DeepPartial<DashTokens> | Falsy,
   deps?: React.DependencyList
-): void
+): void;
 /**
  * A hook for inserting transient CSS theme tokens into the DOM. These tokens
  * will be injected when the hook mounts and flushed when the hook unmounts.
@@ -113,19 +113,17 @@ export declare function useTokens(
  */
 export declare function useThemes(
   value:
-    | DeepPartial<
-        {
-          [Name in keyof DashThemes]: DashThemes[Name]
-        }
-      >
+    | DeepPartial<{
+        [Name in keyof DashThemes]: DashThemes[Name];
+      }>
     | Falsy,
   deps?: React.DependencyList
-): void
+): void;
 declare type DeepPartial<T> = T extends (...args: any[]) => any
   ? T
   : T extends Record<string, any>
   ? {
-      [P in keyof T]?: DeepPartial<T[P]>
+      [P in keyof T]?: DeepPartial<T[P]>;
     }
-  : T
-export {}
+  : T;
+export {};
