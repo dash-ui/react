@@ -1,3 +1,13 @@
+# [1.0.0-alpha.1](https://github.com/dash-ui/react/compare/v0.9.1...v1.0.0-alpha.1) (2021-10-29)
+
+### Features
+
+- make it compatible with styles alpha ([d24e556](https://github.com/dash-ui/react/commit/d24e556d6dbf98fa402bb6bb4c37838679a95baf))
+
+### BREAKING CHANGES
+
+- Updates some types to be compatible with the latest alpha of Dash
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.

@@ -1,12 +1,12 @@
-import * as React from "react";
 import type {
-  StyleObject,
-  StyleCallback,
-  Styles,
-  DashTokens,
   DashThemes,
+  DashTokens,
   Falsy,
+  StyleCallback,
+  StyleObject,
+  Styles,
 } from "@dash-ui/styles";
+import * as React from "react";
 /**
  * A hook for consuming dash context from the provider
  */
@@ -20,6 +20,10 @@ export interface DashContextValue {
 /**
  * The Dash context provider. Use this to control the `styles()` instance
  * your app is using.
+ *
+ * @param root0
+ * @param root0.styles
+ * @param root0.children
  */
 export declare function DashProvider({
   styles,
@@ -35,6 +39,9 @@ export interface DashProviderProps {
 /**
  * A component for creating an inline `<style>` tag that is unmounted when
  * the component unmounts.
+ *
+ * @param root0
+ * @param root0.css
  */
 export declare function Inline({ css: input }: InlineProps): JSX.Element | null;
 export interface InlineProps {
@@ -50,9 +57,8 @@ export interface InlineProps {
  * A hook for inserting transient global styles into the DOM. These styles
  * will be injected when the hook mounts and flushed when the hook unmounts.
  *
- * @param value Global CSS to inject into the DOM and flush when the hook unmounts
- * @param deps A dependency array that will force the hook to re-insert global styles
- *
+ * @param value - Global CSS to inject into the DOM and flush when the hook unmounts
+ * @param deps - A dependency array that will force the hook to re-insert global styles
  * @example
  * const Component = () => {
  *   const [userFontSize, setUserFontSize] = React.useState('100%')
@@ -75,9 +81,8 @@ export declare function useGlobal(
  * A hook for inserting transient CSS tokens into the DOM. These tokens
  * will be injected when the hook mounts and flushed when the hook unmounts.
  *
- * @param value CSS tokens to inject into the DOM and flush when the hook unmounts
- * @param deps A dependency array that will force the hook to re-insert tokens
- *
+ * @param value - CSS tokens to inject into the DOM and flush when the hook unmounts
+ * @param deps - A dependency array that will force the hook to re-insert tokens
  * @example
  * const Component = () => {
  *   const [userFontSize, setUserFontSize] = React.useState('100%')
@@ -96,9 +101,8 @@ export declare function useTokens(
  * A hook for inserting transient CSS theme tokens into the DOM. These tokens
  * will be injected when the hook mounts and flushed when the hook unmounts.
  *
- * @param value Themes to inject into the DOM and flush when the hook unmounts
- * @param deps A dependency array that will force the hook to re-insert themes
- *
+ * @param value - Themes to inject into the DOM and flush when the hook unmounts
+ * @param deps - A dependency array that will force the hook to re-insert themes
  * @example
  * const Component = () => {
  *   const [color, setColor] = React.useState('aliceblue')
@@ -112,11 +116,7 @@ export declare function useTokens(
  * }
  */
 export declare function useThemes(
-  value:
-    | DeepPartial<{
-        [Name in keyof DashThemes]: DashThemes[Name];
-      }>
-    | Falsy,
+  value: DeepPartial<DashThemes> | Falsy,
   deps?: React.DependencyList
 ): void;
 declare type DeepPartial<T> = T extends (...args: any[]) => any
