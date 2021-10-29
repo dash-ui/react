@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@commitlint/cli': ^9.0.1
   '@commitlint/config-conventional': ^9.0.1
-  '@dash-ui/styles': ^1.0.0-alpha.1
+  '@dash-ui/styles': ^1.0.0-alpha.3
   '@react-hook/passive-layout-effect': ^1.2.0
   '@semantic-release/changelog': ^6.0.0
   '@semantic-release/git': ^10.0.0
@@ -36,7 +36,7 @@ dependencies:
 devDependencies:
   '@commitlint/cli': 9.1.2
   '@commitlint/config-conventional': 9.1.2
-  '@dash-ui/styles': 1.0.0-alpha.1
+  '@dash-ui/styles': 1.0.0-alpha.3
   '@semantic-release/changelog': 6.0.0
   '@semantic-release/git': 10.0.0
   '@swc-node/core': 1.6.0
@@ -1688,8 +1688,8 @@ packages:
     engines: {node: '>=v8.17.0'}
     dev: true
 
-  /@dash-ui/styles/1.0.0-alpha.1:
-    resolution: {integrity: sha512-5l2hybUY70ORI4EJGnmhoEa6PD5eIPKZZ5ajNykL3ThWPfxkbEEt0n8hNFxKAjj5mJ4GrmUWOT4TL7Xx/JUGbw==}
+  /@dash-ui/styles/1.0.0-alpha.3:
+    resolution: {integrity: sha512-u28q/mjJCPuuLvKFqYd8/4d67BSGFze01OlG+n93TE0ykPJ5ShEsYOr9i6TE5QPxMhp9R9g+wjqDobIZ8t12uQ==}
     dependencies:
       '@dash-ui/stylis': 1.0.5
       '@dash-ui/unitless': 2.0.0
