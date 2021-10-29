@@ -170,11 +170,7 @@ export function useTokens(
  * }
  */
 export function useThemes(
-  value:
-    | DeepPartial<{
-        [Name in keyof DashThemes]: DashThemes[Name];
-      }>
-    | Falsy,
+  value: DeepPartial<DashThemes> | Falsy,
   deps?: React.DependencyList
 ) {
   const { styles } = useDash();

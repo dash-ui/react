@@ -57,8 +57,9 @@ export function toComponent(
  *   }
  * }
  */
-export const Style: React.FC<StyleProps> = ({ html, styles }) =>
-  toComponent(html, styles);
+export function Style({ html, styles }: StyleProps) {
+  return toComponent(html, styles);
+}
 
 export interface StyleProps {
   /**

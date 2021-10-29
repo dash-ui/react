@@ -70,16 +70,16 @@ const Heading = () => {
 
 ### Components
 
-| Component                         | Description                                                                                                          |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| [`<DashProvider>`](#dashprovider) | A Dash context provider. Use this to control the `styles()` instance your app is using in its Dash hooks/components. |
-| [`<Inline>`](#inline)             | A component for creating an inline `<style>` tag that is unmounted when the component unmounts.                      |
+| Component                         | Description                                                                                                        |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [`<DashProvider>`](#dashprovider) | A Dash context provider. Use this to control the `styles` instance your app is using in its Dash hooks/components. |
+| [`<Inline>`](#inline)             | A component for creating an inline `<style>` tag that is unmounted when the component unmounts.                    |
 
 ### Hooks
 
 | Hook                        | Description                                                                                                                                          |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`useDash()`](#usedash)     | A hook that returns the Dash `styles()` instance from the nearest provider.                                                                          |
+| [`useDash()`](#usedash)     | A hook that returns the Dash `styles` instance from the nearest provider.                                                                            |
 | [`useGlobal()`](#useglobal) | A hook for inserting transient global styles into the DOM. These styles will be injected when the hook mounts and flushed when the hook unmounts.    |
 | [`useTokens()`](#usetokens) | A hook for inserting transient CSS tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts.       |
 | [`useThemes()`](#usethemes) | A hook for inserting transient CSS theme tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts. |
@@ -106,14 +106,14 @@ experience in VSCode and providing solid insurance to your TypeScript applicatio
 
 ### &lt;DashProvider&gt;
 
-A Dash context provider. Use this to control the `styles()` instance your app is using
+A Dash context provider. Use this to control the `styles` instance your app is using
 in its Dash hooks/components.
 
 #### Props
 
-| Prop   | Type                                 | Required? | Description                                                                                                                                                   |
-| ------ | ------------------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| styles | `Styles<DashTokens, DashThemeNames>` | No        | The Dash context provider. Use this to control the `styles()` instance your app is using. Defaults to the default `styles()` instance from `@dash-ui/styles`. |
+| Prop   | Type                                 | Required? | Description                                                                                                                                               |
+| ------ | ------------------------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| styles | `Styles<DashTokens, DashThemeNames>` | No        | The Dash context provider. Use this to control the `styles` instance your app is using. Defaults to the default `styles` instance from `@dash-ui/styles`. |
 
 ---
 
@@ -154,7 +154,7 @@ export const App = () => {
 
 ### useDash()
 
-A hook that returns the Dash `styles()` instance from the nearest provider.
+A hook that returns the Dash `styles` instance from the nearest provider.
 
 #### Example
 
@@ -179,7 +179,7 @@ export const App = () => (
 ```typescript
 export interface DashContextValue {
   /**
-   * A `styles()` instance
+   * A `styles` instance
    */
   styles: Styles;
 }
@@ -467,10 +467,10 @@ export default class MyDocument extends Document {
 
 #### Props
 
-| Prop   | Type                                 | Required? | Description                                                                              |
-| ------ | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
-| html   | `string`                             | Yes       | HTML generated by Next.js, `renderToStaticMarkup()` or `renderToString()`                |
-| styles | `Styles<DashTokens, DashThemeNames>` | No        | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Prop   | Type                                 | Required? | Description                                                                            |
+| ------ | ------------------------------------ | --------- | -------------------------------------------------------------------------------------- |
+| html   | `string`                             | Yes       | HTML generated by Next.js, `renderToStaticMarkup()` or `renderToString()`              |
+| styles | `Styles<DashTokens, DashThemeNames>` | No        | An instance of `styles`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 ---
 
@@ -513,10 +513,10 @@ function toComponent(
 ): React.ReactElement;
 ```
 
-| Argument | Type                                 | Required? | Description                                                                              |
-| -------- | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
-| html     | `string`                             | Yes       | The HTML generated by `renderToStaticMarkup()` or `renderToString()`                     |
-| styles   | `Styles<DashTokens, DashThemeNames>` | No        | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Argument | Type                                 | Required? | Description                                                                            |
+| -------- | ------------------------------------ | --------- | -------------------------------------------------------------------------------------- |
+| html     | `string`                             | Yes       | The HTML generated by `renderToStaticMarkup()` or `renderToString()`                   |
+| styles   | `Styles<DashTokens, DashThemeNames>` | No        | An instance of `styles`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 #### Returns
 
@@ -547,9 +547,9 @@ exports.replaceRenderer =
 function createGatsbyRenderer(styles: Styles = defaultStyles);
 ```
 
-| Argument | Type                                 | Required? | Description                                                                              |
-| -------- | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
-| styles   | `Styles<DashTokens, DashThemeNames>` | Yes       | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Argument | Type                                 | Required? | Description                                                                            |
+| -------- | ------------------------------------ | --------- | -------------------------------------------------------------------------------------- |
+| styles   | `Styles<DashTokens, DashThemeNames>` | Yes       | An instance of `styles`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 #### Returns
 
