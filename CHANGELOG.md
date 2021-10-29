@@ -1,3 +1,18 @@
+# [1.0.0-alpha.2](https://github.com/dash-ui/react/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-10-29)
+
+### Bug Fixes
+
+- fix broken tests ([0a015eb](https://github.com/dash-ui/react/commit/0a015ebe934b3d4f3b2aa1df916acdd45dd1c892))
+
+### Features
+
+- require a styles instance as the first argument for hookks ([254bf73](https://github.com/dash-ui/react/commit/254bf73790e74c43b6a882e283cd356bb9c5c163))
+
+### BREAKING CHANGES
+
+- Requires that the user provide a style instance as the first argument for hooks.
+  Also removes `DashProvider` and `useDash` utilities.
+
 # [1.0.0-alpha.1](https://github.com/dash-ui/react/compare/v0.9.1...v1.0.0-alpha.1) (2021-10-29)
 
 ### Features
