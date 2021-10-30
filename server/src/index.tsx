@@ -14,7 +14,7 @@ import { renderToStaticMarkup } from "react-dom/server";
  */
 export function toComponent(
   html: string,
-  styles: Styles = defaultStyles
+  styles: Styles<any, any> = defaultStyles
 ): React.ReactElement {
   const { dash } = styles;
   const { names, css } = createStylesFromString(html, styles);
@@ -69,7 +69,7 @@ export interface StyleProps {
   /**
    * An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`.
    */
-  styles?: Styles;
+  styles?: Styles<any, any>;
 }
 
 /**
@@ -82,7 +82,7 @@ export interface StyleProps {
  * // gatsby-ssr.js
  * exports.replaceRenderer = require('＠dash-ui/react/server').createGatsbyRenderer()
  */
-export function createGatsbyRenderer(styles: Styles = defaultStyles) {
+export function createGatsbyRenderer(styles: Styles<any, any> = defaultStyles) {
   /* istanbul ignore next */
   return function replaceRenderer<P = any>(props: P): P {
     // @ts-expect-error
