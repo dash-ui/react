@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/dash-ui/react/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-10-30)
+
+
+### Bug Fixes
+
+* make server types more generalized ([874b7f8](https://github.com/dash-ui/react/commit/874b7f8593f27f33ff6789ba5bdc1575d9207483))
+
 # [1.0.0-alpha.2](https://github.com/dash-ui/react/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-10-29)
 
 ### Bug Fixes
