@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { styles as defaultStyles } from "@dash-ui/styles";
 import type { Styles } from "@dash-ui/styles";
 import { createStylesFromString } from "@dash-ui/styles/server";
 import * as React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 
 /**
  * A function for creating a React `<style>` component for
@@ -85,8 +85,10 @@ export interface StyleProps {
 export function createGatsbyRenderer(styles: Styles<any, any> = defaultStyles) {
   /* istanbul ignore next */
   return function replaceRenderer<P = any>(props: P): P {
-    // @ts-expect-error
-    const bodyString = renderToStaticMarkup(props.bodyComponent);
+    const bodyString = require("react-dom/server").renderToStaticMarkup(
+      // @ts-expect-error
+      props.bodyComponent
+    );
     // @ts-expect-error
     props.setHeadComponents([toComponent(bodyString, styles)]);
     return props;
