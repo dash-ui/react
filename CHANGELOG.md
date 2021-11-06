@@ -1,3 +1,10 @@
+# [1.0.0-alpha.4](https://github.com/dash-ui/react/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-11-06)
+
+
+### Bug Fixes
+
+* dont import react-dom/server directly ([c48eb5f](https://github.com/dash-ui/react/commit/c48eb5fad5d0153951e35610f027739d1b9f234d))
+
 # [1.0.0-alpha.3](https://github.com/dash-ui/react/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-10-30)
 
 
