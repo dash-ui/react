@@ -58,4 +58,16 @@ describe("<Style>", () => {
 
     expect(result).toMatchSnapshot();
   });
+
+  it("add a nonce to the <style> tag", () => {
+    const style = styles.variants({
+      default: "display: block;",
+    });
+    const Component = () => <div className={style()} />;
+    const result = renderToStaticMarkup(
+      <Style html={renderToStaticMarkup(<Component />)} nonce="abc" />
+    );
+
+    expect(result).toMatchSnapshot();
+  });
 });
