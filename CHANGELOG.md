@@ -1,3 +1,10 @@
+# [1.0.0-alpha.5](https://github.com/dash-ui/react/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-11-07)
+
+
+### Features
+
+* allow nonce on server style tag ([92e527a](https://github.com/dash-ui/react/commit/92e527a05eb4e07423faf04b1cd0b29ce3a28b95))
+
 # [1.0.0-alpha.4](https://github.com/dash-ui/react/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-11-06)
 
 
