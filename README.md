@@ -34,7 +34,7 @@
 
 ```jsx harmony
 import { createStyles } from "@dash-ui/styles";
-import { DashProvider, useGlobal } from "@dash-ui/react";
+import { useGlobal } from "@dash-ui/react";
 
 const styles = createStyles({
   tokens: {
@@ -44,14 +44,9 @@ const styles = createStyles({
   },
 });
 
-export const App = () => (
-  <DashProvider styles={styles}>
-    <Heading />
-  </DashProvider>
-);
-
 const Heading = () => {
   useGlobal(
+    styles,
     ({ color }) => `
       h1 {
         font-size: 2rem;
@@ -70,16 +65,14 @@ const Heading = () => {
 
 ### Components
 
-| Component                         | Description                                                                                                          |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| [`<DashProvider>`](#dashprovider) | A Dash context provider. Use this to control the `styles()` instance your app is using in its Dash hooks/components. |
-| [`<Inline>`](#inline)             | A component for creating an inline `<style>` tag that is unmounted when the component unmounts.                      |
+| Component             | Description                                                                                     |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| [`<Inline>`](#inline) | A component for creating an inline `<style>` tag that is unmounted when the component unmounts. |
 
 ### Hooks
 
 | Hook                        | Description                                                                                                                                          |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`useDash()`](#usedash)     | A hook that returns the Dash `styles()` instance from the nearest provider.                                                                          |
 | [`useGlobal()`](#useglobal) | A hook for inserting transient global styles into the DOM. These styles will be injected when the hook mounts and flushed when the hook unmounts.    |
 | [`useTokens()`](#usetokens) | A hook for inserting transient CSS tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts.       |
 | [`useThemes()`](#usethemes) | A hook for inserting transient CSS theme tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts. |
@@ -104,19 +97,6 @@ experience in VSCode and providing solid insurance to your TypeScript applicatio
 
 ---
 
-### &lt;DashProvider&gt;
-
-A Dash context provider. Use this to control the `styles()` instance your app is using
-in its Dash hooks/components.
-
-#### Props
-
-| Prop   | Type                                 | Required? | Description                                                                                                                                                   |
-| ------ | ------------------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| styles | `Styles<DashTokens, DashThemeNames>` | No        | The Dash context provider. Use this to control the `styles()` instance your app is using. Defaults to the default `styles()` instance from `@dash-ui/styles`. |
-
----
-
 ### &lt;Inline&gt;
 
 A component for creating an inline `<style>` tag that is unmounted when the component unmounts.
@@ -127,12 +107,13 @@ A component for creating an inline `<style>` tag that is unmounted when the comp
 
 ```tsx
 import * as React from 'react'
+import {styles} from '@dash-ui/styles'
 import {Inline} from '@dash-ui/react'
 
 export const App = () => {
   return (
     <React.Fragment>
-      <Inline css={`
+      <Inline styles={styles} css={`
         .heading {
           font-size: 2rem;
           font-family: -apple-system, sans-serif;
@@ -146,44 +127,10 @@ export const App = () => {
 
 #### Props
 
-| Prop | Type                     | Required? | Description                            |
-| ---- | ------------------------ | --------- | -------------------------------------- |
-| css  | `StyleValue<DashTokens>` | Yes       | The CSS you want to inline in the DOM. |
-
----
-
-### useDash()
-
-A hook that returns the Dash `styles()` instance from the nearest provider.
-
-#### Example
-
-```tsx
-import * as React from "react";
-import { DashProvider, useDash } from "@dash-ui/react";
-
-const Component = () => {
-  const { styles } = useDash();
-  return <div className={styles.cls`background-color: #000;`} />;
-};
-
-export const App = () => (
-  <DashProvider>
-    <Component />
-  </DashProvider>
-);
-```
-
-#### Returns
-
-```typescript
-export interface DashContextValue {
-  /**
-   * A `styles()` instance
-   */
-  styles: Styles;
-}
-```
+| Prop   | Type                             | Required? | Description                            |
+| ------ | -------------------------------- | --------- | -------------------------------------- |
+| styles | `Styles<DashTokens, DashThemes>` | Yes       | A `styles` instance.                   |
+| css    | `StyleValue<DashTokens>`         | Yes       | The CSS you want to inline in the DOM. |
 
 ---
 
@@ -199,12 +146,13 @@ injected when the hook mounts and flushed when the hook unmounts.
 ```tsx
 import * as React from "react";
 import { createStyles } from "@dash-ui/styles";
-import { DashProvider, useGlobal } from "@dash-ui/react";
+import { useGlobal } from "@dash-ui/react";
 
 const styles = createStyles();
 
 const Component = () => {
   useGlobal(
+    styles,
     {
       body: {
         minHeight: "100vh",
@@ -226,18 +174,12 @@ const Component = () => {
     </div>
   );
 };
-
-export const App = () => (
-  <DashProvider styles={styles}>
-    <Component />
-  </DashProvider>
-);
 ```
 
 #### Returns
 
 ```typescript
-void
+null;
 ```
 
 ---
@@ -254,7 +196,7 @@ injected when the hook mounts and flushed when the hook unmounts.
 ```tsx
 import * as React from "react";
 import { createStyles } from "@dash-ui/styles";
-import { DashProvider, useThemes } from "@dash-ui/react";
+import { useThemes } from "@dash-ui/react";
 
 const styles = createStyles({
   tokens: {
@@ -265,7 +207,7 @@ const styles = createStyles({
 const Component = () => {
   const [primaryColor, setPrimaryColor] = React.useState("#ee5b5f");
 
-  useTokens({ primaryColor }, [primaryColor]);
+  useTokens(styles, { primaryColor }, [primaryColor]);
 
   return (
     <div>
@@ -289,32 +231,27 @@ const Component = () => {
     </div>
   );
 };
-
-export default () => (
-  <DashProvider styles={styles}>
-    <Component />
-  </DashProvider>
-);
 ```
 
 #### Arguments
 
 ```typescript
 function useTokens(
-  value: DeepPartial<DashTokens> | Falsy,
+  value: PartialDeep<DashTokens> | Falsy,
   deps?: React.DependencyList
 );
 ```
 
-| Argument | Type                     | Required? | Description                                                     |
-| -------- | ------------------------ | --------- | --------------------------------------------------------------- | ------------------------------------------------------------------ |
-| value    | `DeepPartial<DashTokens> | Falsy`    | Yes                                                             | CSS tokens to inject into the DOM and flush when the hook unmounts |
-| deps     | `React.DependencyList`   | No        | A dependency array that will force the hook to re-insert tokens |
+| Argument | Type                             | Required? | Description                                                     |
+| -------- | -------------------------------- | --------- | --------------------------------------------------------------- | ------------------------------------------------------------------ |
+| styles   | `Styles<DashTokens, DashThemes>` | Yes       | A `styles` instance.                                            |
+| value    | `PartialDeep<DashTokens>         | Falsy`    | Yes                                                             | CSS tokens to inject into the DOM and flush when the hook unmounts |
+| deps     | `React.DependencyList`           | No        | A dependency array that will force the hook to re-insert tokens |
 
 #### Returns
 
 ```typescript
-void
+null;
 ```
 
 ---
@@ -331,7 +268,7 @@ will be injected when the hook mounts and flushed when the hook unmounts.
 ```jsx
 import * as React from "react";
 import { createStyles } from "@dash-ui/styles";
-import { DashProvider, useThemes } from "@dash-ui/react";
+import { useThemes } from "@dash-ui/react";
 
 const styles = createStyles({
   themes: {
@@ -403,36 +340,28 @@ const Component = () => {
     </body>
   );
 };
-
-export default () => (
-  <DashProvider styles={styles}>
-    <Component />
-  </DashProvider>
-);
 ```
 
 #### Arguments
 
 ```typescript
 function useThemes(
-  value:
-    | DeepPartial<{
-        [Name in keyof DashThemes]: DashThemes[Name];
-      }>
-    | Falsy,
+  styles,
+  value: PartialDeep<DashThemes> | Falsy,
   deps?: React.DependencyList
 );
 ```
 
-| Argument | Type                                                                  | Required? | Description                                                     |
-| -------- | --------------------------------------------------------------------- | --------- | --------------------------------------------------------------- |
-| value    | `DeepPartial<{[Name in keyof DashThemes]: DashThemes[Name]}>\| Falsy` | Yes       | Themes to inject into the DOM and flush when the hook unmounts  |
-| deps     | `React.DependencyList`                                                | No        | A dependency array that will force the hook to re-insert themes |
+| Argument | Type                              | Required? | Description                                                     |
+| -------- | --------------------------------- | --------- | --------------------------------------------------------------- |
+| styles   | `Styles<DashTokens, DashThemes>`  | Yes       | A `styles` instance.                                            |
+| value    | `PartialDeep<DashThemes>\| Falsy` | Yes       | Themes to inject into the DOM and flush when the hook unmounts  |
+| deps     | `React.DependencyList`            | No        | A dependency array that will force the hook to re-insert themes |
 
 #### Returns
 
 ```typescript
-void
+null;
 ```
 
 ### &lt;Style&gt;
@@ -467,10 +396,10 @@ export default class MyDocument extends Document {
 
 #### Props
 
-| Prop   | Type                                 | Required? | Description                                                                              |
-| ------ | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
-| html   | `string`                             | Yes       | HTML generated by Next.js, `renderToStaticMarkup()` or `renderToString()`                |
-| styles | `Styles<DashTokens, DashThemeNames>` | No        | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Prop   | Type                             | Required? | Description                                                                            |
+| ------ | -------------------------------- | --------- | -------------------------------------------------------------------------------------- |
+| html   | `string`                         | Yes       | HTML generated by Next.js, `renderToStaticMarkup()` or `renderToString()`              |
+| styles | `Styles<DashTokens, DashThemes>` | No        | An instance of `styles`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 ---
 
@@ -513,10 +442,10 @@ function toComponent(
 ): React.ReactElement;
 ```
 
-| Argument | Type                                 | Required? | Description                                                                              |
-| -------- | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
-| html     | `string`                             | Yes       | The HTML generated by `renderToStaticMarkup()` or `renderToString()`                     |
-| styles   | `Styles<DashTokens, DashThemeNames>` | No        | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Argument | Type                             | Required? | Description                                                                            |
+| -------- | -------------------------------- | --------- | -------------------------------------------------------------------------------------- |
+| html     | `string`                         | Yes       | The HTML generated by `renderToStaticMarkup()` or `renderToString()`                   |
+| styles   | `Styles<DashTokens, DashThemes>` | No        | An instance of `styles`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 #### Returns
 
@@ -547,9 +476,9 @@ exports.replaceRenderer =
 function createGatsbyRenderer(styles: Styles = defaultStyles);
 ```
 
-| Argument | Type                                 | Required? | Description                                                                              |
-| -------- | ------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
-| styles   | `Styles<DashTokens, DashThemeNames>` | Yes       | An instance of `styles()`. Defaults to the default styles instance in `@dash-ui/styles`. |
+| Argument | Type                             | Required? | Description                                                                            |
+| -------- | -------------------------------- | --------- | -------------------------------------------------------------------------------------- |
+| styles   | `Styles<DashTokens, DashThemes>` | Yes       | An instance of `styles`. Defaults to the default styles instance in `@dash-ui/styles`. |
 
 #### Returns
 

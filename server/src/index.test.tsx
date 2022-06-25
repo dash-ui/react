@@ -9,7 +9,7 @@ import { Style } from "./index";
 describe("<Style>", () => {
   it("creates <style> tag based on html string", () => {
     const styles = createStyles();
-    const style = styles({
+    const style = styles.variants({
       default: "display: block;",
     });
     const Component = () => <div className={style()} />;
@@ -23,7 +23,7 @@ describe("<Style>", () => {
 
   it("creates <style> tag with nonce", () => {
     const styles = createStyles({ dash: createDash({ nonce: "abc" }) });
-    const style = styles({
+    const style = styles.variants({
       default: "display: block;",
     });
     const Component = () => <div className={style()} />;
@@ -36,7 +36,7 @@ describe("<Style>", () => {
 
   it("creates <style> tag with cache key", () => {
     const styles = createStyles({ dash: createDash({ key: "abc" }) });
-    const style = styles({
+    const style = styles.variants({
       default: "display: block;",
     });
     const Component = () => <div className={style()} />;
@@ -48,12 +48,24 @@ describe("<Style>", () => {
   });
 
   it("creates <style> tag with default styles function", () => {
-    const style = styles({
+    const style = styles.variants({
       default: "display: block;",
     });
     const Component = () => <div className={style()} />;
     const result = renderToStaticMarkup(
       <Style html={renderToStaticMarkup(<Component />)} />
+    );
+
+    expect(result).toMatchSnapshot();
+  });
+
+  it("add a nonce to the <style> tag", () => {
+    const style = styles.variants({
+      default: "display: block;",
+    });
+    const Component = () => <div className={style()} />;
+    const result = renderToStaticMarkup(
+      <Style html={renderToStaticMarkup(<Component />)} nonce="abc" />
     );
 
     expect(result).toMatchSnapshot();

@@ -4,26 +4,14 @@ import { createDash, createStyles, styles } from "@dash-ui/styles";
 import { render as renderComponent } from "@testing-library/react";
 import { cleanup, renderHook } from "@testing-library/react-hooks";
 import * as React from "react";
-import {
-  DashProvider,
-  Inline,
-  useDash,
-  useGlobal,
-  useThemes,
-  useTokens,
-} from "./index";
+import { Inline, useGlobal, useThemes, useTokens } from "./index";
 
 afterEach(() => {
   document.getElementsByTagName("html")[0].innerHTML = "";
 });
 
-const opt = (props = {}) => ({
-  wrapper: (other) => <DashProvider {...props} {...other} />,
-});
-
-const renderFragment = (children = null, props = {}, options = {}) =>
+const renderFragment = (children = null, options = {}) =>
   renderComponent(children, {
-    wrapper: ({ children }) => <DashProvider {...props} children={children} />,
     ...options,
   }).asFragment();
 
@@ -41,26 +29,6 @@ declare module "@dash-ui/styles" {
   }
 }
 
-describe("<DashProvider>", () => {
-  afterEach(cleanup);
-
-  it("provides the default styles() configuration", () => {
-    const { result } = renderHook(() => useDash(), opt());
-    expect(result.current.styles).toBe(styles);
-  });
-
-  it("provides a custom styles() configuration", () => {
-    const myStyles = createStyles();
-    const { result } = renderHook(() => useDash(), opt({ styles: myStyles }));
-    expect(result.current.styles).toBe(myStyles);
-  });
-
-  it("works without a provider", () => {
-    const { result } = renderHook(() => useDash());
-    expect(result.current.styles).toBe(styles);
-  });
-});
-
 describe("<Inline>", () => {
   afterEach(cleanup);
 
@@ -68,11 +36,11 @@ describe("<Inline>", () => {
     expect(
       renderFragment(
         <Inline
+          styles={styles}
           css={`
             display: block;
           `}
-        />,
-        { styles }
+        />
       )
     ).toMatchSnapshot();
   });
@@ -84,18 +52,18 @@ describe("<Inline>", () => {
     expect(
       renderFragment(
         <Inline
+          styles={myStyles}
           css={`
             display: block;
           `}
-        />,
-        { styles: myStyles }
+        />
       )
     ).toMatchSnapshot();
   });
 
   it("writes css object", () => {
     expect(
-      renderFragment(<Inline css={{ display: "block" }} />, { styles })
+      renderFragment(<Inline styles={styles} css={{ display: "block" }} />)
     ).toMatchSnapshot();
   });
 
@@ -104,10 +72,10 @@ describe("<Inline>", () => {
 
     expect(
       renderFragment(
-        <Inline css={({ color }) => `color: ${color.primary};`} />,
-        {
-          styles: myStyles,
-        }
+        <Inline
+          styles={myStyles}
+          css={({ color }) => `color: ${color.primary};`}
+        />
       )
     ).toMatchSnapshot();
   });
@@ -117,9 +85,7 @@ describe("<Inline>", () => {
     myStyles.insertTokens({ color: { primary: "#000" } });
 
     expect(
-      renderFragment(<Inline css={""} />, {
-        styles: myStyles,
-      })
+      renderFragment(<Inline styles={myStyles} css={""} />)
     ).toMatchSnapshot();
   });
 });
@@ -127,9 +93,8 @@ describe("<Inline>", () => {
 describe("useGlobal()", () => {
   it("sets global styles with a string value", async () => {
     const myStyles = createStyles();
-    const { unmount, rerender } = renderHook(
-      () => useGlobal(`:root { --blue: #09a; }`),
-      opt({ styles: myStyles })
+    const { unmount, rerender } = renderHook(() =>
+      useGlobal(myStyles, `:root { --blue: #09a; }`)
     );
 
     rerender();
@@ -145,9 +110,11 @@ describe("useGlobal()", () => {
   it("sets global styles with a function value", async () => {
     const myStyles = createStyles();
     myStyles.insertTokens({ color: { primary: "#000", secondary: "#fff" } });
-    const { unmount, rerender } = renderHook(
-      () => useGlobal(({ color }) => `body { background: ${color.primary}; }`),
-      opt({ styles: myStyles })
+    const { unmount, rerender } = renderHook(() =>
+      useGlobal(
+        myStyles,
+        ({ color }) => `body { background: ${color.primary}; }`
+      )
     );
 
     rerender();
@@ -165,16 +132,16 @@ describe("useGlobal()", () => {
 
   it("handles falsy values", async () => {
     const myStyles = createStyles();
-    renderHook(() => useGlobal(false), opt({ styles: myStyles }));
+    renderHook(() => useGlobal(myStyles, false));
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0);
 
-    renderHook(() => useGlobal(0), opt({ styles: myStyles }));
+    renderHook(() => useGlobal(myStyles, 0));
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0);
 
-    renderHook(() => useGlobal(null), opt({ styles: myStyles }));
+    renderHook(() => useGlobal(myStyles, null));
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0);
 
-    renderHook(() => useGlobal(""), opt({ styles: myStyles }));
+    renderHook(() => useGlobal(myStyles, ""));
     expect(document.querySelectorAll(`style[data-dash]`).length).toBe(0);
     await cleanup();
   });
@@ -185,12 +152,10 @@ describe("useTokens()", () => {
 
   it("adds tokens then cleans up", async () => {
     const myStyles = createStyles();
-    const { unmount, rerender } = renderHook(
-      () =>
-        useTokens({
-          color: { primary: "#000", secondary: "#fff" },
-        }),
-      opt({ styles: myStyles })
+    const { unmount, rerender } = renderHook(() =>
+      useTokens(myStyles, {
+        color: { primary: "#000", secondary: "#fff" },
+      })
     );
 
     rerender();
@@ -208,17 +173,15 @@ describe("useThemes()", () => {
   afterEach(cleanup);
 
   it("adds tokens then cleans up", async () => {
-    const { unmount, rerender } = renderHook(
-      () =>
-        useThemes({
-          dark: {
-            color: { primary: "#000", secondary: "#fff" },
-          },
-          light: {
-            color: { primary: "#fff", secondary: "#000" },
-          },
-        }),
-      opt({ styles: createStyles() })
+    const { unmount, rerender } = renderHook(() =>
+      useThemes(createStyles(), {
+        dark: {
+          color: { primary: "#000", secondary: "#fff" },
+        },
+        light: {
+          color: { primary: "#fff", secondary: "#000" },
+        },
+      })
     );
 
     rerender();

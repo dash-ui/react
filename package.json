@@ -1,58 +1,19 @@
 {
   "name": "@dash-ui/react",
-  "version": "0.9.1",
+  "version": "1.0.0-alpha.6",
   "description": "React components and hooks for dash-ui",
-  "keywords": [
-    "react",
-    "react hook",
-    "react component",
-    "css-in-js",
-    "css-in-react",
-    "dash-ui",
-    "dash",
-    "react css library",
-    "react styles",
-    "react themes",
-    "react ssr",
-    "react css variables"
-  ],
-  "homepage": "https://github.com/dash-ui/react#readme",
-  "bugs": "https://github.com/dash-ui/react/issues",
-  "repository": "github:dash-ui/react",
   "license": "MIT",
   "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "browser": "./dist/module/index.js",
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/main/index.js",
-      "umd": "./dist/umd/dash-react.js",
-      "source": "./src/index.tsx",
-      "types": "./types/index.d.ts",
-      "default": "./dist/main/index.js"
-    },
-    "./server": {
-      "browser": "./server/dist/module/index.js",
-      "import": "./server/dist/esm/index.mjs",
-      "require": "./server/dist/main/index.js",
-      "source": "./server/src/index.tsx",
-      "types": "./server/types/index.d.ts",
-      "default": "./server/dist/main/index.js"
-    },
-    "./package.json": "./package.json",
-    "./": "./"
-  },
+  "homepage": "https://github.com/dash-ui/react#readme",
+  "repository": "github:dash-ui/react",
+  "bugs": "https://github.com/dash-ui/react/issues",
   "main": "dist/main/index.js",
-  "unpkg": "dist/umd/dash-react.js",
   "module": "dist/module/index.js",
-  "source": "src/index.tsx",
-  "types": "types/index.d.ts",
   "files": [
     "/dist",
+    "/server",
     "/src",
-    "/types",
-    "/server"
+    "/types"
   ],
   "scripts": {
     "build": "lundle build",
@@ -64,24 +25,69 @@
     "test": "jest",
     "validate": "lundle check-types && npm run lint && jest --coverage"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx,js,jsx}": [
-      "eslint --ext .js,.jsx,.ts,.tsx --fix",
-      "prettier --write"
-    ],
-    "**/*.{md,yml,json}": [
-      "prettier --write"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "sideEffects": false,
+  "types": "types/index.d.ts",
+  "dependencies": {
+    "@react-hook/passive-layout-effect": "^1.2.0"
+  },
+  "peerDependencies": {
+    "@dash-ui/styles": ">=1.0.1",
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
+    "@dash-ui/styles": "^1.0.1",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@swc-node/core": "^1.6.0",
+    "@swc-node/jest": "^1.3.2",
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/react-hooks": "latest",
+    "@testing-library/user-event": "latest",
+    "@types/jest": "latest",
+    "@types/node": "^18.0.0",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "babel-jest": "latest",
+    "cz-conventional-changelog": "^3.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-lunde": "^0.5.0",
+    "husky": "^7.0.2",
+    "jest": "27",
+    "lint-staged": "latest",
+    "lundle": "^0.4.9",
+    "prettier": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-test-renderer": "latest",
+    "typescript": "^4.4.3"
+  },
+  "keywords": [
+    "css-in-js",
+    "css-in-react",
+    "dash",
+    "dash-ui",
+    "react",
+    "react component",
+    "react css library",
+    "react css variables",
+    "react hook",
+    "react ssr",
+    "react styles",
+    "react themes"
+  ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -104,6 +110,27 @@
     "*.config.js",
     "*.d.ts"
   ],
+  "exports": {
+    ".": {
+      "browser": "./dist/module/index.js",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/main/index.js",
+      "umd": "./dist/umd/dash-react.js",
+      "source": "./src/index.tsx",
+      "types": "./types/index.d.ts",
+      "default": "./dist/main/index.js"
+    },
+    "./server": {
+      "browser": "./server/dist/module/index.js",
+      "import": "./server/dist/esm/index.mjs",
+      "require": "./server/dist/main/index.js",
+      "source": "./server/src/index.tsx",
+      "types": "./server/types/index.d.ts",
+      "default": "./server/dist/main/index.js"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
   "jest": {
     "collectCoverageFrom": [
       "**/src/**/*.{ts,tsx}"
@@ -138,48 +165,29 @@
       ]
     }
   },
-  "dependencies": {
-    "@react-hook/passive-layout-effect": "^1.2.0"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^9.0.1",
-    "@commitlint/config-conventional": "^9.0.1",
-    "@dash-ui/styles": "^0.8.0",
-    "@semantic-release/changelog": "^6.0.0",
-    "@semantic-release/git": "^10.0.0",
-    "@swc-node/core": "^1.6.0",
-    "@swc-node/jest": "^1.3.2",
-    "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
-    "@testing-library/react-hooks": "latest",
-    "@testing-library/user-event": "latest",
-    "@types/jest": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "babel-jest": "latest",
-    "cz-conventional-changelog": "^3.2.0",
-    "eslint": "latest",
-    "eslint-config-lunde": "^0.5.0",
-    "husky": "^7.0.2",
-    "jest": "latest",
-    "lint-staged": "latest",
-    "lundle": "^0.4.9",
-    "prettier": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-test-renderer": "latest",
-    "typescript": "^4.4.3"
-  },
-  "peerDependencies": {
-    "@dash-ui/styles": ">=0.6.1",
-    "react": ">=16.8",
-    "react-dom": ">=16.8"
+  "lint-staged": {
+    "package.json": [
+      "pnpm dlx prettier-package-json --write"
+    ],
+    "**/*.{ts,tsx,js,jsx}": [
+      "eslint --ext .js,.jsx,.ts,.tsx --fix",
+      "prettier --write"
+    ],
+    "**/*.{md,yml,json}": [
+      "prettier --write"
+    ]
   },
   "release": {
     "branches": [
       "main",
-      "next",
-      "alpha"
+      {
+        "name": "next",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
     ],
     "plugins": [
       "@semantic-release/commit-analyzer",
@@ -199,5 +207,7 @@
       ],
       "@semantic-release/github"
     ]
-  }
+  },
+  "source": "src/index.tsx",
+  "unpkg": "dist/umd/dash-react.js"
 }
