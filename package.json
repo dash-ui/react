@@ -1,6 +1,6 @@
 {
   "name": "@dash-ui/react",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0",
   "description": "React components and hooks for dash-ui",
   "license": "MIT",
   "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
