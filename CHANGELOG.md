@@ -1,23 +1,26 @@
-# [1.0.0-alpha.5](https://github.com/dash-ui/react/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-11-07)
-
+# [1.0.0-alpha.6](https://github.com/dash-ui/react/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-06-25)
 
 ### Features
 
-* allow nonce on server style tag ([92e527a](https://github.com/dash-ui/react/commit/92e527a05eb4e07423faf04b1cd0b29ce3a28b95))
+- remove alpha peers ([4d99dcd](https://github.com/dash-ui/react/commit/4d99dcdeedd243428d81cf79b66640f7ea1f9f7b))
+
+# [1.0.0-alpha.5](https://github.com/dash-ui/react/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-11-07)
+
+### Features
+
+- allow nonce on server style tag ([92e527a](https://github.com/dash-ui/react/commit/92e527a05eb4e07423faf04b1cd0b29ce3a28b95))
 
 # [1.0.0-alpha.4](https://github.com/dash-ui/react/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-11-06)
 
-
 ### Bug Fixes
 
-* dont import react-dom/server directly ([c48eb5f](https://github.com/dash-ui/react/commit/c48eb5fad5d0153951e35610f027739d1b9f234d))
+- dont import react-dom/server directly ([c48eb5f](https://github.com/dash-ui/react/commit/c48eb5fad5d0153951e35610f027739d1b9f234d))
 
 # [1.0.0-alpha.3](https://github.com/dash-ui/react/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-10-30)
 
-
 ### Bug Fixes
 
-* make server types more generalized ([874b7f8](https://github.com/dash-ui/react/commit/874b7f8593f27f33ff6789ba5bdc1575d9207483))
+- make server types more generalized ([874b7f8](https://github.com/dash-ui/react/commit/874b7f8593f27f33ff6789ba5bdc1575d9207483))
 
 # [1.0.0-alpha.2](https://github.com/dash-ui/react/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-10-29)
 
