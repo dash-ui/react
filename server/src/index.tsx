@@ -20,7 +20,7 @@ export function toComponent(
   options: {
     nonce?: string;
   } = {}
-): React.ReactElement {
+): JSX.Element {
   const { dash } = styles;
   const { names, css } = createStylesFromString(html, styles);
 
@@ -63,7 +63,7 @@ export function toComponent(
  *   }
  * }
  */
-export function Style({ html, styles, nonce }: StyleProps) {
+export function Style({ html, styles, nonce }: StyleProps): JSX.Element {
   return toComponent(html, styles, { nonce });
 }
 

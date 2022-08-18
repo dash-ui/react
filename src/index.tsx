@@ -22,7 +22,7 @@ const IS_BROWSER = typeof document !== "undefined";
 export function Inline<Tokens extends DashTokens, Themes extends DashThemes>({
   styles,
   css: input,
-}: InlineProps<Tokens, Themes>) {
+}: InlineProps<Tokens, Themes>): JSX.Element | null {
   const css = styles.one(input).css();
 
   return !css ? null : (
@@ -85,7 +85,7 @@ export function useGlobal<Tokens extends DashTokens, Themes extends DashThemes>(
     | undefined
     | false,
   deps?: React.DependencyList
-) {
+): void {
   // inserts global styles into the dom and cleans up its
   // styles when the component is unmounted
   useLayoutEffect(
@@ -117,7 +117,7 @@ export function useTokens<Tokens extends DashTokens, Themes extends DashThemes>(
   styles: Styles<Tokens, Themes>,
   value: Parameters<Styles<Tokens, Themes>["insertTokens"]>[0] | Falsy,
   deps?: React.DependencyList
-) {
+): void {
   useLayoutEffect(
     () => (value ? styles.insertTokens(value) : noop),
     (deps = deps && deps.concat(styles))
@@ -149,7 +149,7 @@ export function useThemes<Tokens extends DashTokens, Themes extends DashThemes>(
   styles: Styles<Tokens, Themes>,
   value: Parameters<Styles<Tokens, Themes>["insertThemes"]>[0] | Falsy,
   deps?: React.DependencyList
-) {
+): void {
   useLayoutEffect(
     () => (value ? styles.insertThemes(value) : noop),
     (deps = deps && deps.concat(styles))
@@ -157,4 +157,4 @@ export function useThemes<Tokens extends DashTokens, Themes extends DashThemes>(
   React.useMemo(() => !IS_BROWSER && value && styles.insertThemes(value), deps);
 }
 
-function noop() {}
+function noop(): void {}
