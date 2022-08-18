@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/dash-ui/react/compare/v1.0.0...v1.0.1) (2022-08-18)
+
+### Bug Fixes
+
+- add explicit function return types ([#12](https://github.com/dash-ui/react/issues/12)) ([6de89ee](https://github.com/dash-ui/react/commit/6de89eeddaa848a4d5bbbe39f00c72cf6b8b0a9d))
+
 # [1.0.0](https://github.com/dash-ui/react/compare/v0.9.1...v1.0.0) (2022-06-25)
 
 ### Bug Fixes
