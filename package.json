@@ -94,6 +94,7 @@
       "lunde"
     ],
     "rules": {
+      "@typescript-eslint/explicit-function-return-type": "warn",
       "import/no-extraneous-dependencies": [
         "error",
         {
