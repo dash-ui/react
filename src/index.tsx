@@ -5,11 +5,17 @@ import type {
   StyleCallback,
   StyleObject,
   Styles,
+  StyleValue,
 } from "@dash-ui/styles";
+import { compileStyles } from "@dash-ui/styles";
 import useLayoutEffect from "@react-hook/passive-layout-effect";
 import * as React from "react";
 
 const IS_BROWSER = typeof document !== "undefined";
+const useInsertionEffect =
+  typeof React.useInsertionEffect === "function"
+    ? React.useInsertionEffect
+    : useLayoutEffect;
 
 /**
  * A component for creating an inline `<style>` tag that is unmounted when
@@ -88,11 +94,14 @@ export function useGlobal<Tokens extends DashTokens, Themes extends DashThemes>(
 ): void {
   // inserts global styles into the dom and cleans up its
   // styles when the component is unmounted
-  useLayoutEffect(
+  useInsertionEffect(
     () => (value ? styles.insertGlobal(value) : noop),
     (deps = deps && deps.concat(styles))
   );
-  React.useMemo(() => !IS_BROWSER && value && styles.insertGlobal(value), deps);
+
+  if (!IS_BROWSER && value) {
+    styles.insertGlobal(value);
+  }
 }
 
 /**
@@ -118,11 +127,14 @@ export function useTokens<Tokens extends DashTokens, Themes extends DashThemes>(
   value: Parameters<Styles<Tokens, Themes>["insertTokens"]>[0] | Falsy,
   deps?: React.DependencyList
 ): void {
-  useLayoutEffect(
+  useInsertionEffect(
     () => (value ? styles.insertTokens(value) : noop),
     (deps = deps && deps.concat(styles))
   );
-  React.useMemo(() => !IS_BROWSER && value && styles.insertTokens(value), deps);
+
+  if (!IS_BROWSER && value) {
+    styles.insertTokens(value);
+  }
 }
 
 /**
@@ -150,11 +162,91 @@ export function useThemes<Tokens extends DashTokens, Themes extends DashThemes>(
   value: Parameters<Styles<Tokens, Themes>["insertThemes"]>[0] | Falsy,
   deps?: React.DependencyList
 ): void {
-  useLayoutEffect(
+  useInsertionEffect(
     () => (value ? styles.insertThemes(value) : noop),
     (deps = deps && deps.concat(styles))
   );
-  React.useMemo(() => !IS_BROWSER && value && styles.insertThemes(value), deps);
+
+  if (!IS_BROWSER && value) {
+    styles.insertThemes(value);
+  }
 }
+
+/**
+ * A hook for performantly and reliably inserting CSS into the DOM in React 18 using the
+ * `useInsertionEffect` hook.
+ *
+ * @param styles - A Dash `styles` instance
+ * @param classNames - A map of class names to CSS generators
+ * @see https://github.com/reactwg/react-18/discussions/110
+ * @example
+ * ```tsx
+ * const classes = useCSS(styles, {
+ *  root: styles.one({ display: 'flex' })
+ * })
+ *
+ * return <div className={classes.root}/>
+ * ```
+ */
+export function useCSS<
+  ClassNames extends string,
+  Tokens extends DashTokens,
+  Themes extends DashThemes
+>(
+  styles: Styles<Tokens, Themes>,
+  classNames: ClassNamesStyleMap<ClassNames, Tokens, Themes>
+): UseCSSResult<ClassNames> {
+  function insertClasses(): void {
+    for (const className in classNames) {
+      const style = classNames[className];
+
+      if (typeof style === "function" && "css" in style) {
+        style();
+      } else {
+        styles.cls(style);
+      }
+    }
+  }
+
+  useInsertionEffect(insertClasses);
+
+  if (!IS_BROWSER) {
+    insertClasses();
+  }
+
+  const classes = {} as Record<ClassNames, string>;
+
+  for (const className in classNames) {
+    const style = classNames[className];
+    classes[className] =
+      styles.dash.key +
+      "-" +
+      styles.hash(
+        typeof style === "function" && "css" in style
+          ? style.css()
+          : compileStyles(style, styles.tokens)
+      );
+  }
+
+  return classes;
+}
+
+export type ClassNamesStyleMap<
+  ClassNames extends string,
+  Tokens extends DashTokens,
+  Themes extends DashThemes
+> = Record<
+  ClassNames,
+  | {
+      (): string;
+      css(): string;
+    }
+  | StyleValue<Tokens, Themes>
+>;
+
+export type UseCSSResult<ClassNames extends string> = Record<
+  ClassNames,
+  string
+>;
 
 function noop(): void {}
