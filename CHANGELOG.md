@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/dash-ui/react/compare/v1.0.1...v1.1.0) (2022-09-02)
+
+### Features
+
+- add a useCSS hook ([#13](https://github.com/dash-ui/react/issues/13)) ([5fd1ed9](https://github.com/dash-ui/react/commit/5fd1ed9790ad1828fda2bc963814713563b5f950))
+
 ## [1.0.1](https://github.com/dash-ui/react/compare/v1.0.0...v1.0.1) (2022-08-18)
 
 ### Bug Fixes
