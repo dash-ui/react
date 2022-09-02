@@ -40,50 +40,14 @@ exports[`<Inline> writes css w/ nonce 1`] = `
 </DocumentFragment>
 `;
 
-exports[`useGlobal() sets global styles with a function value: global 1`] = `
-<style
-  data-dash="ui"
->
-  body{background:var(--color-primary);}
-</style>
-`;
+exports[`useGlobal() sets global styles with a function value: global 1`] = `"body {background: var(--color-primary);}"`;
 
-exports[`useGlobal() sets global styles with a function value: tokens 1`] = `
-<style
-  data-dash="ui"
->
-  :root{--color-primary:#000;--color-secondary:#fff;}
-</style>
-`;
+exports[`useGlobal() sets global styles with a function value: tokens 1`] = `":root {--color-primary: #000; --color-secondary: #fff;}"`;
 
-exports[`useGlobal() sets global styles with a string value: :root 1`] = `
-<style
-  data-dash="ui"
->
-  :root{--blue:#09a;}
-</style>
-`;
+exports[`useGlobal() sets global styles with a string value: :root 1`] = `":root {--blue: #09a;}"`;
 
-exports[`useThemes() adds tokens then cleans up 1`] = `
-<style
-  data-dash="ui"
->
-  .ui-dark-theme{--color-primary:#000;--color-secondary:#fff;}
-</style>
-`;
+exports[`useThemes() adds tokens then cleans up 1`] = `".ui-dark-theme {--color-primary: #000; --color-secondary: #fff;}"`;
 
-exports[`useThemes() adds tokens then cleans up 2`] = `
-<style
-  data-dash="ui"
->
-  .ui-light-theme{--color-primary:#fff;--color-secondary:#000;}
-</style>
-`;
+exports[`useThemes() adds tokens then cleans up 2`] = `".ui-light-theme {--color-primary: #fff; --color-secondary: #000;}"`;
 
-exports[`useTokens() adds tokens then cleans up: :root 1`] = `
-<style
-  data-dash="ui"
->
-  :root{--color-primary:#000;--color-secondary:#fff;}
-</style>
-`;
+exports[`useTokens() adds tokens then cleans up: :root 1`] = `":root {--color-primary: #000; --color-secondary: #fff;}"`;

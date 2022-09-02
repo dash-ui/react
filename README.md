@@ -71,11 +71,12 @@ const Heading = () => {
 
 ### Hooks
 
-| Hook                        | Description                                                                                                                                          |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`useGlobal()`](#useglobal) | A hook for inserting transient global styles into the DOM. These styles will be injected when the hook mounts and flushed when the hook unmounts.    |
-| [`useTokens()`](#usetokens) | A hook for inserting transient CSS tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts.       |
-| [`useThemes()`](#usethemes) | A hook for inserting transient CSS theme tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts. |
+| Hook                        | Description                                                                                                                                                             |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`useCSS()`](#usecss)       | A hook for [performantly and reliably](https://github.com/reactwg/react-18/discussions/110) inserting CSS into the DOM in React 18 using the `useInsertionEffect` hook. |
+| [`useGlobal()`](#useglobal) | A hook for inserting transient global styles into the DOM. These styles will be injected when the hook mounts and flushed when the hook unmounts.                       |
+| [`useTokens()`](#usetokens) | A hook for inserting transient CSS tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts.                          |
+| [`useThemes()`](#usethemes) | A hook for inserting transient CSS theme tokens into the DOM. These tokens will be injected when the hook mounts and flushed when the hook unmounts.                    |
 
 ### Server rendering
 
@@ -131,6 +132,44 @@ export const App = () => {
 | ------ | -------------------------------- | --------- | -------------------------------------- |
 | styles | `Styles<DashTokens, DashThemes>` | Yes       | A `styles` instance.                   |
 | css    | `StyleValue<DashTokens>`         | Yes       | The CSS you want to inline in the DOM. |
+
+---
+
+### useCSS()
+
+A hook for performantly and reliably inserting CSS into the DOM in React 18 using the
+`useInsertionEffect` hook.
+
+#### Example
+
+[Play with an example on **CodeSandbox**](https://codesandbox.io/s/dash-ui-react-usecss-example-gi3o6o)
+
+```tsx
+import * as React from "react";
+import { createStyles } from "@dash-ui/styles";
+import { useGlobal } from "@dash-ui/react";
+
+const styles = createStyles();
+
+const Component = () => {
+  const classes = useCSS(styles, {
+    root: styles.one({ display: "flex", gap: "2rem" }),
+  });
+
+  return (
+    <div className={classes.root}>
+      <div>Hello</div>
+      <div>World</div>
+    </div>
+  );
+};
+```
+
+#### Returns
+
+```typescript
+Record<ClassNames, string>;
+```
 
 ---
 
