@@ -137,7 +137,7 @@ export const App = () => {
 
 ### useCSS()
 
-A hook for performantly and reliably inserting CSS into the DOM in React 18 using the
+A hook for [performantly and reliably](https://github.com/reactwg/react-18/discussions/110) inserting CSS into the DOM in React 18 using the
 `useInsertionEffect` hook.
 
 #### Example
